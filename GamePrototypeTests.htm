@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Game Prototype Tests</title>
+  <script src="Game.js">
+  </script>
+</head>
+<body>
+
+<h2>Game Prototype Tests</h2>
+
+<h3>Test 1:</h3>
+<p>Object sucessfully instatiates and has all of its requisite properties.</p>
+<div id="Test1">
+</div>
+<script>
+  function arraysIdentical(a, b) {
+    var i = a.length;
+    if (i != b.length) return false;
+    while (i--) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }; 
+  var Test = new Game();
+  var Instantiates = (Test instanceof Game);
+  var HasAttributeList;
+  var AttributeListCorrect;    
+
+  if (Test.AttributeList){
+    HasAttributeList = true;
+    AttributeListCorrect = arraysIdentical(Test.AttributeList, ["STR", "CON", "DEX", "INT", "WIS", "CHA"]);
+  }
+  else {
+    HasAttributeList = false;
+    AttributeListCorrect = false;
+  }
+  
+  document.getElementById("Test1").innerHTML = "Instantiates: " + Instantiates//
+      + "<br> Has AttributeList: " + HasAttributeList +"<br> Is the correct attribute list: " + AttributeListCorrect;
+</script>
+
+<h3>Test 2:</h3>
+<p>CreateNewCharacter method executes and creates the appropriate object:</p>
+<table>
+  <tr>                        
+    <td>
+      The method executes cleanly:
+    </td>
+    <td id = "Test2MethodExecutes">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      An object is created:       
+    </td>
+    <td id = "Test2ObjectCreated">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Object type:
+    </td>
+    <td id = "Test2ObjectType">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Object has all requisite properties:
+    </td>
+    <td id = "Test2CharChecksOut">
+    </td>
+  </tr>
+</table>
+<script>
+var Test2MethodExecutes;
+var Test2ObjectCreated;
+var Test2ObjectType;
+var Test2CharChecksOut;
+
+var Test = new Game();
+var Char;
+
+
+try{
+  Char = Test.CreateNewCharacter();
+  Test2MethodExecutes = true;
+}
+catch(e){
+  alert("name: " + e.name + "\nmessage: " + e.message);
+  Test2MethodExecutes = false;
+}
+
+Test2ObjectCreated = (Char != undefined);
+
+Test2ObjectType = typeof(Char);
+
+try{
+  Test2CharChecksOut = true;
+  Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.STR == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.DEX == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.CON == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.INT == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.WIS == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.CHA == 10);
+  
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.STR == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.DEX == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.CON == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.INT == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.WIS == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.CHA == 10);
+  
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.STR == 0);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.DEX == 0);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.CON == 0);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.INT == 0);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.WIS == 0);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.CHA == 0);
+}
+catch(e){
+Test2CharChecksOut = false;
+}
+
+document.getElementById("Test2MethodExecutes").innerHTML = Test2MethodExecutes;
+document.getElementById("Test2ObjectCreated").innerHTML = Test2ObjectCreated;
+document.getElementById("Test2ObjectType").innerHTML = Test2ObjectType;
+document.getElementById("Test2CharChecksOut").innerHTML = Test2CharChecksOut;
+</script>    
+</body>
+</html>

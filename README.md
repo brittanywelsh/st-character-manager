@@ -1,27 +1,38 @@
-# startraveller character manager app.
+# Startraveller Character Manager
 
-June 19, 2015 (MIKE): Base Attribute Buyer view and controller added.  The jQuery library
-is now accessed by the project.
+## What is Startraveller?
 
-June 20, 2015 (MIKE): The 'controller' which was added last time was actually 
-an amalgam of controller and model as I understand those terms.  The Game.js 
-file is my initial step in separating those two.  My plan is as follows:
-1) Web app loads
-2) Controller instantiates Game (ideally I'd prefer if Game could behave like
-a static class and never instantiate).
-3) Controller asks Game to create a character object.
-4) Game returns a blank-slate character object
-5) The controller ties the information from said character object to the view
-6) As the user generates input the controller feeds this information back into 
-the character object, which in turn then asks Game for help in updating itself.
-7) Once the character object has been updated the controller updates View 
-accordingly.
-8) Repeat from step 6.
+Startraveller is a tabletop RPG created by Alastair Jaimeson-Lane and friends.
 
-The above algorithm can, as far as I am aware, see 'Game' everywhere replaced
-by 'a database' with minimal hassle.  Our previous discussion favoured using
-databases but, as I am unfamiliar with them, I am using the approach now with
-full understanding that re-conceptualization and re-implementation may result.
+## What is the Startraveller Character Manager?
 
-In addition a web page for the testing and debugging of the 'Game' prototype
-has been added to the project.
+This project is a collection of tools for use by DMs and players in Startraveller campaigns.
+
+## Project Plan/To-Do List
+
+### Stage 1 - Basic Setup
+
+* ~~(B) Initialize git repo~~
+* (B) Build a front-end (HTML) scaffolding
+* ~~(M) Build a scaffold for primary controller~~
+
+### Stage 2 - Project Modules
+
+(Each project module has both a backend/JS controller as well as a corresponding frontend widget.)
+
+* (B) Demographic info section (name, gender, alignment, etc.)
+* (M) Section for filling out basic stats (based on points allocation scheme).
+* (B) Section for picking race (note that race influences stats)
+* (M/B) Section to choose (3) classes:
+  - (B) Build logic for choosing classes
+  - Implementing specific classes:
+    + (M) Cybertech
+    + (B) Biotech
+    + (M) Other classes
+* (M) Section to choose starting abilities/feats (based on classes)
+* Inventory (?) - may not be included in final project; re-evaluate at a later date
+
+### Stage 3 - Polishing and Refactoring
+
+* Increase user-friendliness with explanations and perhaps 'walkthoughs'
+* Plan a refactoring scheme for final project deliverables and re-organization of code

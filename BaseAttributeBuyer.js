@@ -27,6 +27,7 @@ $(document).ready(function(){
                                                                                               
   lCharacters.forEach(AddToViewList); //Adds existing characters to the list of viewable characters
   BindCharacterToView(lCharacters[0]);//Makes the screen display data for the first character
+  
 });
 
 function AddToViewList(Character){
@@ -83,32 +84,18 @@ function ChangeAttributePoints(event){
     case '+':
       modifier = 1;
       break
+  }  
+  
+  try{
+    gInstance.BuyAttributePointsForChar(Character, attribute, modifier);
   }
-  
-  if (Character.BaseAttributeScore[attribute] == 7 && modifier == -1){
-    $("#message").text("Value already at min");
-    return;
-  }                                
-
-  
-  if (Character.BaseAttributeScore[attribute] == 18 && modifier == 1){
-    $("#message").text("Value already at max");
-    return;
-  }                         
-  
-
-  var pointsNeeded = gInstance.PointsCost[Character.BaseAttributeScore[attribute] + modifier]//
-   - gInstance.PointsCost[Character.BaseAttributeScore[attribute]];
-    
-  if (pointsNeeded > Character.RemainingAttributeBuyPoints){
-    $("#message").text("Not enough points remaining")
-  }
-  else{                                  
-    Character.RemainingAttributeBuyPoints -= pointsNeeded;
-    Character.BaseAttributeScore[attribute] += modifier;
+  catch(e){
+    $('#message').text(e.message);  
+  }                              
+  finally{
     $("#PTS").text(Character.RemainingAttributeBuyPoints);
-    $("#"+attribute).text(Character.AttributeScore(attribute));
-  }     
+    $("#"+attribute).text(Character.AttributeScore(attribute));  
+  }
 }
 
 function ClearOldMessage(){

@@ -22,31 +22,44 @@ function Game(){
   }
                       
   this.CreateNewCharacter = function() {
-    var ret = new Object();
-    ret.BaseAttributeScore =
-    {                                   
-      STR: this.BaseAttributeBuy.StartingAttributeScore,
-      CON: this.BaseAttributeBuy.StartingAttributeScore,
-      DEX: this.BaseAttributeBuy.StartingAttributeScore,
-      INT: this.BaseAttributeBuy.StartingAttributeScore,
-      WIS: this.BaseAttributeBuy.StartingAttributeScore,
-      CHA: this.BaseAttributeBuy.StartingAttributeScore
-    };
-    ret.AttributeModifier = {
-      STR: 0,
-      CON: 0,
-      DEX: 0,
-      INT: 0,
-      WIS: 0,
-      CHA: 0
-    }; 
-    ret.AttributeScore = function(sAttribute){
-      return this.BaseAttributeScore[sAttribute] + this.AttributeModifier[sAttribute];
-    };
+    var ret = new Character(); 
+    var self = this;
     ret.RemainingAttributeBuyPoints = this.BaseAttributeBuy.StartingPoints;
-    return ret;
+    this.AttributeList.forEach(
+      function(sAttributeName){
+        ret.BaseAttributeScore[sAttributeName] = self.BaseAttributeBuy.StartingAttributeScore;
+        ret.AttributeModifier[sAttributeName] = 0;
+      }
+    );
+    return ret;      
   };
-}
- 
+  
+  this.BuyAttributePointsForChar = function(cCharacter, sAttribute, nPoints) {
+  
+    if (cCharacter.BaseAttributeScore[sAttribute] == 7 && nPoints < 0){
+    throw new Error("Value already at min!");
+    return;
+    }                                
 
-//Game.AttributeList = ["STR", "CON", "DEX", "INT", "WIS", "CHA"]; 
+  
+    if (cCharacter.BaseAttributeScore[sAttribute] == 18 && nPoints > 0){
+      throw new Error("Value already at max!");
+      return;
+    }                         
+  
+
+    var pointsNeeded = this.PointsCost[cCharacter.BaseAttributeScore[sAttribute]//
+      + nPoints] - this.PointsCost[cCharacter.BaseAttributeScore[sAttribute]];
+    
+    if (pointsNeeded > cCharacter.RemainingAttributeBuyPoints){
+      throw new Error("Not enough points remaining");
+    }
+    else{                                  
+      cCharacter.RemainingAttributeBuyPoints -= pointsNeeded;
+      cCharacter.BaseAttributeScore[sAttribute] += nPoints;
+    }     
+  }
+
+}
+
+ 

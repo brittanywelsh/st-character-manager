@@ -3,8 +3,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Game Prototype Tests</title>
+  <script src="Character.js"></script>
   <script src="Game.js">
-  </script>
+  </script> 
 </head>
 <body>
 
@@ -64,6 +65,12 @@
     </td>
     <td id = "Test2ObjectType">
     </td>
+  </tr>                            
+  <tr> 
+    <td>
+      Object instance of 'Character':        
+    </td>
+    <td id = "Test2ObjectInstanceOfCharacter"></td>
   </tr>
   <tr>
     <td>
@@ -77,6 +84,7 @@
 var Test2MethodExecutes;
 var Test2ObjectCreated;
 var Test2ObjectType;
+var Test2ObjectInstanceOfCharacter;
 var Test2CharChecksOut;
 
 var Test = new Game();
@@ -94,10 +102,11 @@ catch(e){
 
 Test2ObjectCreated = (Char != undefined);
 
-Test2ObjectType = typeof(Char);
+Test2ObjectType = typeof(Char);                   
+Test2ObjectInstanceOfCharacter = (Char instanceof Character);
 
 try{
-  Test2CharChecksOut = true;
+  Test2CharChecksOut = true;                                                    
   Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.STR == 10);
   Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.DEX == 10);
   Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.CON == 10);
@@ -105,12 +114,12 @@ try{
   Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.WIS == 10);
   Test2CharChecksOut = Test2CharChecksOut && (Char.BaseAttributeScore.CHA == 10);
   
-  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.STR == 10);
-  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.DEX == 10);
-  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.CON == 10);
-  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.INT == 10);
-  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.WIS == 10);
-  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore.CHA == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore("STR") == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore("DEX") == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore("CON") == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore("INT") == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore("WIS") == 10);
+  Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeScore("CHA") == 10);
   
   Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.STR == 0);
   Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.DEX == 0);
@@ -118,6 +127,8 @@ try{
   Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.INT == 0);
   Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.WIS == 0);
   Test2CharChecksOut = Test2CharChecksOut && (Char.AttributeModifier.CHA == 0);
+  
+  Test2CharChecksOut = Test2CharChecksOut && (Char.RemainingAttributeBuyPoints == 15);
 }
 catch(e){
 Test2CharChecksOut = false;
@@ -126,6 +137,7 @@ Test2CharChecksOut = false;
 document.getElementById("Test2MethodExecutes").innerHTML = Test2MethodExecutes;
 document.getElementById("Test2ObjectCreated").innerHTML = Test2ObjectCreated;
 document.getElementById("Test2ObjectType").innerHTML = Test2ObjectType;
+document.getElementById("Test2ObjectInstanceOfCharacter").innerHTML = Test2ObjectInstanceOfCharacter;
 document.getElementById("Test2CharChecksOut").innerHTML = Test2CharChecksOut;
 </script>    
 </body>

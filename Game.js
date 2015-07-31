@@ -1,12 +1,26 @@
 function Game(){
 
-//  this.ListOfCharacters =[];
   this.AttributeList = ["STR", "CON", "DEX", "INT", "WIS", "CHA"];
   this.BaseAttributeBuy =
-  {
-    StartingPoints: 15,
-    StartingAttributeScore: 10
-  };                      
+    {
+      StartingPoints: 15,
+      StartingAttributeScore: 10
+    };
+  this.PointsCost = {
+    "7":-4,
+    "8":-2,
+    "9":-1,
+    "10":0,
+    "11":1,
+    "12":2,
+    "13":3,
+    "14":5,
+    "15":7,
+    "16":10,
+    "17":13,
+    "18":17
+  }
+                      
   this.CreateNewCharacter = function() {
     var ret = new Object();
     ret.BaseAttributeScore =
@@ -25,16 +39,14 @@ function Game(){
       INT: 0,
       WIS: 0,
       CHA: 0
+    }; 
+    ret.AttributeScore = function(sAttribute){
+      return this.BaseAttributeScore[sAttribute] + this.AttributeModifier[sAttribute];
     };
-    ret.AttributeScore = { 
-      STR: ret.BaseAttributeScore.STR + ret.AttributeModifier.STR,
-      CON: ret.BaseAttributeScore.CON + ret.AttributeModifier.CON,
-      DEX: ret.BaseAttributeScore.DEX + ret.AttributeModifier.DEX,
-      INT: ret.BaseAttributeScore.INT + ret.AttributeModifier.INT,
-      WIS: ret.BaseAttributeScore.WIS + ret.AttributeModifier.WIS,
-      CHA: ret.BaseAttributeScore.CHA + ret.AttributeModifier.CHA
-    };  
+    ret.RemainingAttributeBuyPoints = this.BaseAttributeBuy.StartingPoints;
     return ret;
   };
-  
 }
+ 
+
+//Game.AttributeList = ["STR", "CON", "DEX", "INT", "WIS", "CHA"]; 

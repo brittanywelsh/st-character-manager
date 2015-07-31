@@ -11,31 +11,33 @@
     <script src="BaseAttributeBuyer.js"></script>
   </head>
   <body>
-  <div>
-    <!-- Page Heading -->
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>Startraveller Character Manager</h1>
-        <p>
-          <a href="#" class="medium success button">Save Character</a>
-          <a href="#" class="medium button">Load Character</a>
-          <a href="#" class="medium button">Print Character Sheet</a>
-          *note: buttons currently not functional.
-        </p>
+
+  <!-- Page Header Space -->
+  <div class="top">
+    <div class="large-12 columns">
+      <h1>Startraveller Character Manager</h1>
+      <p>
+        <a href="#" class="medium success button">Save Character</a>
+        <a href="#" class="medium button">Load Character</a>
+        <a href="#" class="medium button">Print Character Sheet</a>
+        *note: buttons currently not functional.
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Content Space -->
+  <div class="main-container">
+    <!-- Left Side - Character Sheet Preview -->
+    <div class="left">
+      <div class="panel">
+        <h2>New Character</h2>
+          <p>
+            Here goes the character sheet with current stats.<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>
+          </p>
       </div>
     </div>
-    
-    <!-- Main Container -->
-    <div class="row" data-equalizer>
-      <!-- Left Side - Character Sheet Preview -->
-      <div class="large-4 columns panel" data-equalizer-watch>
-      <h2>New Character</h2>
-        <p>
-          Here goes the character sheet with current stats.<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>
-        </p>
-      </div>
       <!-- Right Side - working space -->
-      <div class="large-8 columns panel" data-equalizer-watch>
+      <div class="right">
         <!-- Tab navigation -->
         <ul class="tabs" data-tab>
           <li class="tab-title active"><a href="#panel1">Character Info</a></li>
@@ -44,7 +46,7 @@
           <li class="tab-title"><a href="#panel4">Classes & Feats</a></li>
         </ul>
         <!-- Tab content -->
-        <div class="tabs-content">
+        <div class="tabs-content panel">
           <!-- TAB 1: Character Info -->
           <div class="content active" id="panel1">
             <p>Character info panel.</p>
@@ -203,7 +205,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
   <script src="js/vendor/jquery.js"></script>
   <script src="js/foundation.min.js"></script>

@@ -30,18 +30,19 @@ This project is a collection of tools for use by DMs and players in Startravelle
     + (B) Biotech
     + (M) Other classes
 * (M) Section to choose starting abilities/feats (based on classes)
-* Companion
+* Companions
+* Leveling system
 * Inventory (?) - may not be included in final project; re-evaluate at a later date
 
-### Stage 2B - Utilities
-
-* Write methods for saving/loading character data to/from a file
-* Write a method to print out well-formatted, filled character sheets
-
-### Stage 2C - Input/Output File Specifications
+### Stage 2B - Input/Output File Specifications
 
 * Define JSON format for wrapping up all game logic/fixed data
 * Define JSON format for character storage
+
+### Stage 2C - Utilities
+
+* Write methods for saving/loading character data to/from a file
+* Write a method to print out well-formatted, filled character sheets
 
 ### Stage 3 - Polishing and Refactoring
 

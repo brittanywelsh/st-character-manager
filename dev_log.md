@@ -1,5 +1,12 @@
 # Dev Log for Startraveller Character Manager
 
+This log is a tool for the collaborators to make notes, expand on details for
+various commits, and track progress.
+
+## July 31, 2015 (BRITTANY)
+- Set up basic page layout with frame-like scrolling behaviour in divs. It
+still needs some attention though, not quite there yet.
+
 ## July 31, 2015 (MIKE)
 - The 8-step plan outlined in my log from June 20, 2015 has now more or less
 been completed.  The current infrastructure actually has Game generate 2 blank 

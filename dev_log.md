@@ -1,5 +1,16 @@
 # Dev Log for Startraveller Character Manager
 
+## June 31, 2015 (MIKE)
+-The 8-step plan outlined in my log from June 20, 2015 has now more or less been
+completed.  The current infrastructure actually has Game generate 2 blank 
+character objects and the user is free to switch between them and can create 
+more.  This current state of affairs is for testing/demonstration purposes.
+
+NOTE: On investigating the classes for Star Traveller I've discovered that not 
+all classes have feat trees, further the character creation document is perhaps 
+less informative than I might like... perhaps contacting Alistair to get some
+input/clarification would be helpful?
+
 ## June 29, 2015 (BRITTANY)
 - Added dev_log.md to separate logs from README/tasks.
 - 
@@ -9,7 +20,10 @@
 - The jQuery library is now accessed by the project.
 
 ## June 20, 2015 (MIKE)
-- The 'controller' which was added last time was actually an amalgam of controller and model as I understand those terms.  The Game.js file is my initial step in separating those two.  My plan is as follows:
+- The 'controller' which was added last time was actually an amalgam of 
+controller and model as I understand those terms.  The Game.js file is my 
+initial step in separating those two.  My plan is as follows:
+
 1. Web app loads
 2. Controller instantiates Game (ideally I'd prefer if Game could behave like a static class and never instantiate).
 3. Controller asks Game to create a character object.

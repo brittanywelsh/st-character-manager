@@ -1,26 +1,82 @@
+var gInstance = new Game();
+var lCharacters = [];
+
+lCharacters.push(gInstance.CreateNewCharacter());
+lCharacters.push(gInstance.CreateNewCharacter());
+
+lCharacters[0].index = 0;
+lCharacters[1].index = 1;
+
 $(document).ready(function(){                    
   $("button").on('click', ClearOldMessage);//Pushing any button clears message box
-  ["STR", "CON", "DEX", "INT", "WIS", "CHA", "PTS"].forEach(AssignAttribute);     
-  //The above builds the infrastucture between the view and this controller
+  $("#add-char").on('click', function(){
+    lCharacters.push(gInstance.CreateNewCharacter());
+    lCharacters[lCharacters.length - 1].index = lCharacters.length - 1;
+    AddToViewList(lCharacters[lCharacters.length - 1]);
+  }); 
+  
+  $("#char-list").on('click', 'td', BindCharacterToView);//Sets up the infrastructure for switching characters
+   
+  $('#Character0').css('background', 'lightgray');//Sets selected character to gray
+    
+  gInstance.AttributeList.forEach(function(sAttributeName){
+  //Attaches a click event listener to the + and - buttons that changes attribute values appropriately 
+    $("#"+sAttributeName + "+").on('click', ChangeAttributePoints);
+    $("#"+sAttributeName + "-").on('click', ChangeAttributePoints);
+  });
+                                                                                              
+  lCharacters.forEach(AddToViewList); //Adds existing characters to the list of viewable characters
+  BindCharacterToView(lCharacters[0]);//Makes the screen display data for the first character
+  
 });
 
+function AddToViewList(Character){
+  var CharViewList = document.getElementById("char-list");
+  var newRow = CharViewList.insertRow(Character.index);
+  var newCell = newRow.insertCell(0);
+  newCell.innerHTML = Character.Name || "Character " + Character.index; 
+  newCell.className = "char";
+  newCell.id = "Character" + Character.index;   
+  $("#" + newCell.id).data("character-index", Character.index);
 
-function AssignAttribute(sAttributeName){
-  var val = 10;
-  if (sAttributeName == "PTS") val = 15;
-  $("#"+sAttributeName).data("value", val);
-  $("#"+sAttributeName).text($("#"+sAttributeName).data("value"));
-  $("#"+sAttributeName + "+").on('click', ChangeAttributePoints);
-  $("#"+sAttributeName + "-").on('click', ChangeAttributePoints); 
-}                
+}
+
+function BindCharacterToView(Character){
+  var id;
+  if (Character.target){
+    id = Character.target.id;
+    Character = lCharacters[$('#' + id).data("character-index")];
+  }
+  else{
+    id = "Character" + Character.index;
+  }
+  
+  $('.char').css('background', 'white');
+  $('#' + id).css('background', 'lightgray');
+
+  gInstance.AttributeList.forEach(AssignAttribute, Character);
+    
+  
+  $("#PTS").data("character-index", Character.index);
+  $("#PTS").text(Character.RemainingAttributeBuyPoints);
+};
   
 
-function ChangeAttributePoints(){
+function AssignAttribute(sAttributeName){
+
+  $("#"+sAttributeName).data("character-index", this.index);
+  $("#"+sAttributeName).text(this.AttributeScore(sAttributeName));
+  
+}            
+  
+
+function ChangeAttributePoints(event){
 
   var buttonID = event.target.id;
   var attribute = buttonID.substr(0, 3);// string.substr(start, length)
-  var modifier;         
-  
+  var modifier;
+  var Character = lCharacters[$("#"+attribute).data("character-index")];
+    
   switch(buttonID.slice(-1)){
     case '-':
       modifier = -1;
@@ -28,75 +84,17 @@ function ChangeAttributePoints(){
     case '+':
       modifier = 1;
       break
+  }  
+  
+  try{
+    gInstance.BuyAttributePointsForChar(Character, attribute, modifier);
   }
-  
-  var attributeValue = $("#"+attribute).data("value");
-
-  if (attributeValue == 7 && modifier == -1){
-    $("#message").text("Value already at min");
-    return;
-  }                                
-
-  
-  if (attributeValue == 18 && modifier == 1){
-    $("#message").text("Value already at max");
-    return;
-  }                         
-  
-
-  var PTS = $("#PTS").data("value");                                   
-  var pointsNeeded = PointsCost(attributeValue + modifier)//
-   - PointsCost(attributeValue);
-    
-  if (pointsNeeded > PTS){
-    $("#message").text("Not enough points remaining")
-  }
-  else{
-    $("#PTS").data("value", PTS - pointsNeeded);
-    $("#PTS").text($("#PTS").data("value"));
-    $("#"+attribute).data("value", attributeValue + modifier);
-    $("#"+attribute).text($("#"+attribute).data("value"));
-  }     
-}
-
-function PointsCost(attributeValue){
-  
-    switch(attributeValue){
-    case 7:
-      return -4;
-       
-    case 8:    
-      return -2;  
-      
-    case 9:
-      return -1;        
-      
-    case 10:
-      return 0;        
-      
-    case 11:
-      return 1;        
-      
-    case 12:
-      return 2;        
-      
-    case 13:
-      return 3;        
-      
-    case 14:
-      return 5;         
-      
-    case 15:
-      return 7;        
-      
-    case 16:
-      return 10;        
-      
-    case 17:
-      return 13;
-      
-    case 18:
-      return 17;        
+  catch(e){
+    $('#message').text(e.message);  
+  }                              
+  finally{
+    $("#PTS").text(Character.RemainingAttributeBuyPoints);
+    $("#"+attribute).text(Character.AttributeScore(attribute));  
   }
 }
 

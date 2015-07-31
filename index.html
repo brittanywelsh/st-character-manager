@@ -1,0 +1,214 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Startraveller Character Manager</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="BaseAttributeBuyer.js"></script>
+  </head>
+  <body>
+  <div>
+    <!-- Page Heading -->
+    <div class="row">
+      <div class="large-12 columns">
+        <h1>Startraveller Character Manager</h1>
+        <p>
+          <a href="#" class="medium success button">Save Character</a>
+          <a href="#" class="medium button">Load Character</a>
+          <a href="#" class="medium button">Print Character Sheet</a>
+          *note: buttons currently not functional.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="row" data-equalizer>
+      <!-- Left Side - Character Sheet Preview -->
+      <div class="large-4 columns panel" data-equalizer-watch>
+      <h2>New Character</h2>
+        <p>
+          Here goes the character sheet with current stats.<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>
+        </p>
+      </div>
+      <!-- Right Side - working space -->
+      <div class="large-8 columns panel" data-equalizer-watch>
+        <!-- Tab navigation -->
+        <ul class="tabs" data-tab>
+          <li class="tab-title active"><a href="#panel1">Character Info</a></li>
+          <li class="tab-title"><a href="#panel2">Stats</a></li>
+          <li class="tab-title"><a href="#panel3">Race</a></li>
+          <li class="tab-title"><a href="#panel4">Classes & Feats</a></li>
+        </ul>
+        <!-- Tab content -->
+        <div class="tabs-content">
+          <!-- TAB 1: Character Info -->
+          <div class="content active" id="panel1">
+            <p>Character info panel.</p>
+          </div>
+          <!-- TAB 2: Stats -->
+          <div class="content" id="panel2">
+            <table>
+              <!-- This is the table which formats the page -->
+              <!-- Title Row -->
+              <tr>
+                <th colspan = "4">
+                  Attributes
+                </th>
+              </tr>
+              <!-- Strength -->
+              <tr>  
+                <!-- Down button-->
+                <td>               
+                  <button id = "STR-">
+                    -
+                  </button>
+                </td>
+                <td>
+                  Strength:
+                </td>
+                <td id = "STR" align = "right">
+                </td>       
+                <!-- Increase Button -->
+                <td>
+                  <button id="STR+">
+                    +
+                  </button>
+              </tr>
+                <!-- Dexterity -->
+              <tr>  
+                <!-- Down button-->
+                <td>               
+                  <button id = "DEX-" >
+                    -
+                  </button>
+                </td>
+                <td>
+                  Dexterity: 
+                </td>
+                <td id = "DEX" align = "right">
+                </td>
+                <!-- Increase Button -->
+                <td>
+                  <button id="DEX+" >
+                    +
+                  </button>
+              </tr>
+                <!-- Constitution -->
+              <tr>  
+                <!-- Down button-->
+                <td>               
+                  <button id = "CON-" >
+                    -
+                  </button>
+                </td>    
+                <td>
+                  Constitution:
+                </td>
+                <td id = "CON" align = "right">
+                </td>
+                <!-- Increase Button -->
+                <td>
+                  <button id="CON+" >
+                    +
+                  </button>
+              </tr>
+                <!-- Wisdom -->
+              <tr>  
+                <!-- Down button-->
+                <td>               
+                  <button id = "WIS-" >
+                    -
+                  </button>
+                </td>   
+                <td>
+                  Wisdom:
+                </td> 
+                <td id = "WIS" align = "right">
+                  
+                </td>
+                <!-- Increase Button -->
+                <td>
+                  <button id="WIS+" >
+                    +
+                  </button>
+              </tr>
+                <!-- Intelligence -->
+              <tr>  
+                <!-- Down button-->
+                <td>               
+                  <button id = "INT-" >
+                    -
+                  </button>
+                </td>
+                <td>
+                  Intelligence:
+                </td>
+                <td id = "INT" align = "right">
+                  
+                </td>
+                <!-- Increase Button -->
+                <td>
+                  <button id="INT+" >
+                    +
+                  </button>
+              </tr>
+                <!-- Charisma -->
+              <tr>  
+                <!-- Down button-->
+                <td>               
+                  <button id = "CHA-" >
+                    -
+                  </button>
+                </td>      
+                <td>
+                  Charisma:
+                </td>
+                <td id = "CHA" align = "right">
+                  
+                </td>
+                <!-- Increase Button -->
+                <td>
+                  <button id="CHA+" >
+                    +
+                  </button>
+              </tr>
+              <!-- Points -->
+              <tr>
+                <td></td>
+                <td>
+                  Points Remaining:
+                </td>   
+                <!-- Points available for buy -->
+                <td id = "PTS" align = "right"> 
+                </td>    
+                <td></td>
+              </tr>
+              <!-- Message -->
+              <tr>
+                <td colspan = "4" id = "message" align = "center"></td>
+              </tr>
+            </table>            
+          </div>
+          <!-- TAB 3: Race -->
+          <div class="content" id="panel3">
+            <p>Races and stuff.</p>
+          </div>
+          <!-- TAB 4: Class -->
+          <div class="content" id="panel4">
+            <p>Classes and feats go here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script>
+      $(document).foundation();
+  </script>
+  </body>
+</html>

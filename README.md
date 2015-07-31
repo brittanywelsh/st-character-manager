@@ -16,7 +16,7 @@ This project is a collection of tools for use by DMs and players in Startravelle
 * (B) Build a front-end (HTML) scaffolding
 * ~~(M) Build a scaffold for primary controller~~
 
-### Stage 2 - Project Modules
+### Stage 2A - Project Modules
 
 (Each project module has both a backend/JS controller as well as a corresponding frontend widget.)
 
@@ -31,6 +31,16 @@ This project is a collection of tools for use by DMs and players in Startravelle
     + (M) Other classes
 * (M) Section to choose starting abilities/feats (based on classes)
 * Inventory (?) - may not be included in final project; re-evaluate at a later date
+
+### Stage 2B - Utilities
+
+* Write methods for saving/loading character data to/from a file
+* Write a method to print out well-formatted, filled character sheets
+
+### Stage 2C - Input/Output File Specifications
+
+* JSON format for wrapping up all game logic/fixed data
+* JSON format for character storage
 
 ### Stage 3 - Polishing and Refactoring
 

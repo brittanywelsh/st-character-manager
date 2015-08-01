@@ -1,11 +1,10 @@
 function Game(){
 
   this.AttributeList = ["STR", "CON", "DEX", "INT", "WIS", "CHA"];
-  this.BaseAttributeBuy =
-    {
+  this.BaseAttributeBuy = {
       StartingPoints: 15,
       StartingAttributeScore: 10
-    };
+  };
   this.PointsCost = {
     "7":-4,
     "8":-2,
@@ -19,7 +18,7 @@ function Game(){
     "16":10,
     "17":13,
     "18":17
-  }
+  };
   
   this.BaseClassStatsList = ["HitDice", "SkillsPerLevel", "BaseAttack",// 
     "BaseDefence", "BaseInitiative", "Charges", "BaseMutations", "BaseWill",//
@@ -35,11 +34,11 @@ function Game(){
       function(sAttributeName){
         ret.BaseAttributeScore[sAttributeName] = self.BaseAttributeBuy.StartingAttributeScore;
         ret.AttributeModifier[sAttributeName] = 0;
-      }                  
+      });                  
     this.BaseClassStatsList.forEach(
       function (sStatName){
-        ret.BaseClassStat[sStatName] = this.BaseClassStatsInitialScore;
-        ret.ClassStatModifier[sStatName] = 0;
+        ret.BaseClassStat[sStatName] = self.BaseClassStatsInitialScore;
+        ret.ClassStatsModifier[sStatName] = 0;
       }
     );
     return ret;      

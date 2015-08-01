@@ -20,6 +20,12 @@ function Game(){
     "17":13,
     "18":17
   }
+  
+  this.BaseClassStatsList = ["HitDice", "SkillsPerLevel", "BaseAttack",// 
+    "BaseDefence", "BaseInitiative", "Charges", "BaseMutations", "BaseWill",//
+    "BaseFortitude", "BaseReflex"];
+  this.BaseClassStatsInitialScore = 0;
+  this.Classes = new Object();
                       
   this.CreateNewCharacter = function() {
     var ret = new Character(); 
@@ -29,6 +35,11 @@ function Game(){
       function(sAttributeName){
         ret.BaseAttributeScore[sAttributeName] = self.BaseAttributeBuy.StartingAttributeScore;
         ret.AttributeModifier[sAttributeName] = 0;
+      }                  
+    this.BaseClassStatsList.forEach(
+      function (sStatName){
+        ret.BaseClassStat[sStatName] = this.BaseClassStatsInitialScore;
+        ret.ClassStatModifier[sStatName] = 0;
       }
     );
     return ret;      

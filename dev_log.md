@@ -8,7 +8,7 @@ various commits, and track progress.
 still needs some attention though, not quite there yet.
 
 ## July 31, 2015 (MIKE)
-- The 8-step plan outlined in my log from June 20, 2015 has now more or less
+- The 8-step plan outlined in my log from July 20, 2015 has now more or less
 been completed.  The current infrastructure actually has Game generate 2 blank 
 character objects and the user is free to switch between them and can create 
 more.  This current state of affairs is for testing/demonstration purposes.

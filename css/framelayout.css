@@ -1,0 +1,90 @@
+/* Styles for 'container' layout.
+   hat tip: http://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/ */
+
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Prevent horizontal scrolling: */
+body {
+	overflow-x: hidden;
+}
+
+/* Clear default padding/margin */
+html,
+body {
+	padding: 0;
+	margin: 0;
+}
+
+.top-container {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	position: relative;
+	z-index: 10;
+	height: 150px;
+}
+
+.upper-container {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 0rem;
+	position: relative;
+	z-index: 5;
+	height: 55px;
+}
+
+.main-container {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	overflow: hidden;
+	height: 100vh;
+	margin-top: -205px;
+	padding-top: 205px;
+	position: relative;
+	width: 100%;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	will-change: overflow;
+}
+
+.lower-container {
+	overflow: auto;
+	height: auto;
+	padding: .5rem;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: none;
+	z-index: 10;
+}
+
+/* Remove the scrollbar on WebKit browsers */
+.lower-container::-webkit-scrollbar {
+	display: none;
+}
+
+.left { 
+	width: 45%;
+	max-width: 400px;
+}
+
+.right {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}

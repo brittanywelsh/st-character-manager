@@ -8,6 +8,14 @@ Startraveller is a tabletop RPG created by Alastair Jaimeson-Lane and friends.
 
 This project is a collection of tools for use by DMs and players in Startraveller campaigns.
 
+## Code Ref/Notes
+
+Following the [W3Schools recommendations](http://www.w3schools.com/js/js_conventions.asp), we use the following conventions in our JavaScript:
+
+* Variables and functions all use **camelCase**
+* Indentation = 4 spaces
+* (more to be added later)
+
 ## Project Plan/To-Do List
 
 ### Stage 1 - Basic Setup

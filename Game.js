@@ -1,11 +1,11 @@
-var Feats = new Object(); //I don't know where to declare this...
+var Feats = new Object(); //I don't know where to declare ..
 var Game = {
-  this.AttributeList = ["STR", "CON", "DEX", "INT", "WIS", "CHA"];
-  this.BaseAttributeBuy = {
+  AttributeList : ["STR", "CON", "DEX", "INT", "WIS", "CHA"],
+  BaseAttributeBuy : {
       StartingPoints: 15,
       StartingAttributeScore: 10
-  };
-  this.PointsCost = {
+  },
+  PointsCost : {
     "7":-4,
     "8":-2,
     "9":-1,
@@ -18,33 +18,31 @@ var Game = {
     "16":10,
     "17":13,
     "18":17
-  };
+  },
   
-  this.BaseClassStatsList = ["HitDice", "SkillsPerLevel", "BaseAttack",// 
+  BaseClassStatsList : ["HitDice", "SkillsPerLevel", "BaseAttack",// 
     "BaseDefence", "BaseInitiative", "Charges", "BaseMutations", "BaseWill",//
-    "BaseFortitude", "BaseReflex"];
-  this.BaseClassStatsInitialScore = 0;
-  this.Classes;
+    "BaseFortitude", "BaseReflex"],
+  BaseClassStatsInitialScore : 0,
                       
-  this.CreateNewCharacter = function() {
+  CreateNewCharacter : function() {
     var ret = new Character(); 
-    var self = this;
-    ret.RemainingAttributeBuyPoints = this.BaseAttributeBuy.StartingPoints;
-    this.AttributeList.forEach(
+    ret.RemainingAttributeBuyPoints = Game.BaseAttributeBuy.StartingPoints;
+    Game.AttributeList.forEach(
       function(sAttributeName){
-        ret.BaseAttributeScore[sAttributeName] = self.BaseAttributeBuy.StartingAttributeScore;
+        ret.BaseAttributeScore[sAttributeName] = Game.BaseAttributeBuy.StartingAttributeScore;
         ret.AttributeModifier[sAttributeName] = 0;
       });                  
-    this.BaseClassStatsList.forEach(
+    Game.BaseClassStatsList.forEach(
       function (sStatName){
-        ret.BaseClassStat[sStatName] = self.BaseClassStatsInitialScore;
+        ret.BaseClassStat[sStatName] = Game.BaseClassStatsInitialScore;
         ret.ClassStatsModifier[sStatName] = 0;
       }
     );
     return ret;      
-  };
+  },
   
-  this.BuyAttributePointsForChar = function(cCharacter, sAttribute, nPoints) {
+  BuyAttributePointsForChar : function(cCharacter, sAttribute, nPoints) {
   
     if (cCharacter.BaseAttributeScore[sAttribute] == 7 && nPoints < 0){
     throw new Error("Value already at min!");
@@ -58,8 +56,8 @@ var Game = {
     }                         
   
 
-    var pointsNeeded = this.PointsCost[cCharacter.BaseAttributeScore[sAttribute]//
-      + nPoints] - this.PointsCost[cCharacter.BaseAttributeScore[sAttribute]];
+    var pointsNeeded = Game.PointsCost[cCharacter.BaseAttributeScore[sAttribute]//
+      + nPoints] - Game.PointsCost[cCharacter.BaseAttributeScore[sAttribute]];
     
     if (pointsNeeded > cCharacter.RemainingAttributeBuyPoints){
       throw new Error("Not enough points remaining");

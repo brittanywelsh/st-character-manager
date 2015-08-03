@@ -3,6 +3,15 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## August 3, 2015 (MIKE)
+- Finally committed my work on the class infrastructure.  Lots of new files 
+added and a bunch of edits.  We should discuss the utility of JSON files.  My
+recent experiments with them suggest that they cannot contain functions... which
+is a bit of a problem for my current vision of the class infrastructure.  That 
+having been said, maybe this is a sign that my vision is too complicated.  I've
+also added a handful of comments to the BaseAttributeBuyer.js file so that I can
+have a friend look at the code and give me some "best practices" adivce.
+
 ## July 31, 2015 (BRITTANY)
 - Set up basic page layout with frame-like scrolling behaviour in divs. It
 still needs some attention though, not quite there yet.

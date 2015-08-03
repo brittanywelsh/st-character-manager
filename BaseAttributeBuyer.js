@@ -1,35 +1,45 @@
-var gInstance = new Game();
 var lCharacters = [];
 
-lCharacters.push(gInstance.CreateNewCharacter());
-lCharacters.push(gInstance.CreateNewCharacter());
+//Two characters are made here for testing purposes.
+lCharacters.push(Game.CreateNewCharacter());
+lCharacters.push(Game.CreateNewCharacter());
 
 lCharacters[0].index = 0;
 lCharacters[1].index = 1;
 
-$(document).ready(function(){                    
-  $("button").on('click', ClearOldMessage);//Pushing any button clears message box
+$(document).ready(function(){ 
+                   
+  //Pushing any button clears message box
+  $("button").on('click', ClearOldMessage);  
+  
+  //Adds a new character when the appropriate button is pushed.
   $("#add-char").on('click', function(){
-    lCharacters.push(gInstance.CreateNewCharacter());
+    lCharacters.push(Game.CreateNewCharacter());
     lCharacters[lCharacters.length - 1].index = lCharacters.length - 1;
     AddToViewList(lCharacters[lCharacters.length - 1]);
   }); 
   
-  $("#char-list").on('click', 'td', BindCharacterToView);//Sets up the infrastructure for switching characters
+  //Sets up the infrastructure for switching characters when the character name is pushed
+  $("#char-list").on('click', 'td', BindCharacterToView);
    
-  $('#Character0').css('background', 'lightgray');//Sets selected character to gray
-    
-  gInstance.AttributeList.forEach(function(sAttributeName){
-  //Attaches a click event listener to the + and - buttons that changes attribute values appropriately 
+  //Sets selected character to gray
+  $('#Character0').css('background', 'lightgray');
+  
+  //Attaches a click event listener to the + and - buttons that changes attribute values appropriately   
+  Game.AttributeList.forEach(function(sAttributeName){
     $("#"+sAttributeName + "+").on('click', ChangeAttributePoints);
     $("#"+sAttributeName + "-").on('click', ChangeAttributePoints);
   });
-                                                                                              
-  lCharacters.forEach(AddToViewList); //Adds existing characters to the list of viewable characters
-  BindCharacterToView(lCharacters[0]);//Makes the screen display data for the first character
+  
+  //Adds existing characters to the list of viewable characters                                                                                            
+  lCharacters.forEach(AddToViewList); 
+  
+  //Makes the screen display data for the first character
+  BindCharacterToView(lCharacters[0]);
   
 });
 
+//Adds a character to the list of viewable characters
 function AddToViewList(Character){
   var CharViewList = document.getElementById("char-list");
   var newRow = CharViewList.insertRow(Character.index);
@@ -41,8 +51,15 @@ function AddToViewList(Character){
 
 }
 
+//Takes a given character and displays it.
 function BindCharacterToView(Character){
   var id;
+  /*
+   * This function is actually two rolled into one.  The first changes the viewed
+   * character to the one most recently clicked.  The second is the one which 
+   * initially handles binding a character (i.e. without any clicking having 
+   * occurred.
+   */
   if (Character.target){
     id = Character.target.id;
     Character = lCharacters[$('#' + id).data("character-index")];
@@ -54,7 +71,7 @@ function BindCharacterToView(Character){
   $('.char').css('background', 'white');
   $('#' + id).css('background', 'lightgray');
 
-  gInstance.AttributeList.forEach(AssignAttribute, Character);
+  Game.AttributeList.forEach(AssignAttribute, Character);
     
   
   $("#PTS").data("character-index", Character.index);
@@ -87,7 +104,7 @@ function ChangeAttributePoints(event){
   }  
   
   try{
-    gInstance.BuyAttributePointsForChar(Character, attribute, modifier);
+    Game.BuyAttributePointsForChar(Character, attribute, modifier);
   }
   catch(e){
     $('#message').text(e.message);  

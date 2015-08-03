@@ -1,8 +1,7 @@
-var gInstance = new Game();
 var lCharacters = [];
 
-lCharacters.push(gInstance.CreateNewCharacter());
-lCharacters.push(gInstance.CreateNewCharacter());
+lCharacters.push(Game.CreateNewCharacter());
+lCharacters.push(Game.CreateNewCharacter());
 
 lCharacters[0].index = 0;
 lCharacters[1].index = 1;
@@ -10,7 +9,7 @@ lCharacters[1].index = 1;
 $(document).ready(function(){                    
   $("button").on('click', ClearOldMessage);//Pushing any button clears message box
   $("#add-char").on('click', function(){
-    lCharacters.push(gInstance.CreateNewCharacter());
+    lCharacters.push(Game.CreateNewCharacter());
     lCharacters[lCharacters.length - 1].index = lCharacters.length - 1;
     AddToViewList(lCharacters[lCharacters.length - 1]);
   }); 
@@ -19,7 +18,7 @@ $(document).ready(function(){
    
   $('#Character0').css('background', 'lightgray');//Sets selected character to gray
     
-  gInstance.AttributeList.forEach(function(sAttributeName){
+  Game.AttributeList.forEach(function(sAttributeName){
   //Attaches a click event listener to the + and - buttons that changes attribute values appropriately 
     $("#"+sAttributeName + "+").on('click', ChangeAttributePoints);
     $("#"+sAttributeName + "-").on('click', ChangeAttributePoints);
@@ -54,7 +53,7 @@ function BindCharacterToView(Character){
   $('.char').css('background', 'white');
   $('#' + id).css('background', 'lightgray');
 
-  gInstance.AttributeList.forEach(AssignAttribute, Character);
+  Game.AttributeList.forEach(AssignAttribute, Character);
     
   
   $("#PTS").data("character-index", Character.index);
@@ -87,7 +86,7 @@ function ChangeAttributePoints(event){
   }  
   
   try{
-    gInstance.BuyAttributePointsForChar(Character, attribute, modifier);
+    Game.BuyAttributePointsForChar(Character, attribute, modifier);
   }
   catch(e){
     $('#message').text(e.message);  

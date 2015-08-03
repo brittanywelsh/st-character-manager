@@ -1,5 +1,5 @@
-function Game(){
-
+var Feats = new Object(); //I don't know where to declare this...
+var Game = {
   this.AttributeList = ["STR", "CON", "DEX", "INT", "WIS", "CHA"];
   this.BaseAttributeBuy = {
       StartingPoints: 15,
@@ -24,7 +24,7 @@ function Game(){
     "BaseDefence", "BaseInitiative", "Charges", "BaseMutations", "BaseWill",//
     "BaseFortitude", "BaseReflex"];
   this.BaseClassStatsInitialScore = 0;
-  this.Classes = new Object();
+  this.Classes;
                       
   this.CreateNewCharacter = function() {
     var ret = new Character(); 
@@ -69,7 +69,6 @@ function Game(){
       cCharacter.BaseAttributeScore[sAttribute] += nPoints;
     }     
   }
-
-}
+};
 
  

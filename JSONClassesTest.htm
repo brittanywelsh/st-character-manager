@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Classes.json Tests</title> 
+                                  
+ <script src = "json/classes.js"></script>
+  <script src="Character.js"></script>
+  <script src="Game.js"></script>
+  
+</head>
+<body>
+
+<h2>Classes.json InitialTests</h2>
+
+<h3>Test 1: The JSON file is read and turned into an object properly</h3>
+
+<div>
+  <div>
+    File read?
+  </div>
+  <div id = "JSON read">
+  </div>
+  <div>
+    New object contains Medic property?
+  </div>
+  <div id = "Has Medic Property">
+  </div>                                        
+</div>
+<div>
+  <div>
+    The object:
+  </div>
+  <div id = "The object from the JSON file.">
+  </div>
+</div>
+
+<script>
+  //var Classes = JSON.parse('{"ClassName": {"test": 1}}');
+  //var classes = '{"Medic": {"ClassName": "Medic","PrimeAttribute": "WIS","ClassStats": {"HitDice": 1,"SkillsPerLevel": 1,"BaseAttack": 0,"BaseDefence": 0,"BaseInitiative": 0,"Charges": 1,"BaseMutations": 0,"BaseWill": 1,"BaseFortitude": 1,"BaseReflex": 0},"OtherModifiers": {"Medical": 3}}}';
+  var Classes = JSON.parse(JSONclasses);
+  var bRead = typeof Classes == "object";
+  var bHasMedicProperty = false;
+  if (Classes.Medic){
+    bHasAppropriateProperties = true;
+  }
+  document.getElementById("JSON read").innerHTML = bRead;
+  document.getElementById("Has Medic Property").innerHTML = bHasAppropriateProperties;
+  document.getElementById("The object from the JSON file.").innerHTML = "see console.";
+  console.log(Classes);
+  
+</script>
+
+</body>
+</html>

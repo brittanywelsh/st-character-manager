@@ -1,87 +1,23 @@
-/*
-  ["HitDice", "SkillsPerLevel", "BaseAttack",// 
-    "BaseDefence", "BaseInitiative", "Charges", "BaseMutations", "BaseWill",//
-    "BaseFortitude", "BaseRelfex"
-*/
-
 {
   "Medic": {
-    ClassName: "Medic",
-    PrimeAttribute: "WIS",
-    Feats: {
-      NanotechInfusion: {
-        Name: "NanotechInfusion",
-        BelongsToClass: "Medic", 
-                                            
-        AvailableTo: function (cCharacter){
-          return (cCharacter.hasClass("Medic"));        
-        },
-  
-        PassiveEffects: {
-          //none
-        },
-        
-        GrantsAbilities: {
-           NanotechInfusionAbility: //string describing ability
-        },
-        
-        AddFeatTo: function (Character){
-          //function to modify character to gain feat.
-        }                                            
-        
-        RemoveFeatFrom: function (Character){
-          //function to modify character to lose feat.
-        }
-      },
-      
-      BloodWork: {
-      
-      },
-      
-      Mender: {
-      
-      },
-      
-      Antidote: {
-      
-      },
-      
-      Remedy: {
-      
-      },
-      
-      Restoration: {
-      
-      },
-      
-      Sanctuary: {
-      
-      },
-      
-      BurstHealing: {
-      
-      },
-      
-      LastReserves: {
-      
-      },
-      
+    "ClassName": "Medic",
+    "PrimeAttribute": "WIS",
+    "ClassStats": {
+      "HitDice": 1,                
+      "SkillsPerLevel": 1,
+      "BaseAttack": 0,
+      "BaseDefence": 0,
+      "BaseInitiative": 0,
+      "Charges": 1,
+      "BaseMutations": 0,
+      "BaseWill": 1,
+      "BaseFortitude": 1,
+      "BaseReflex": 0     
     },
-    ClassStats: {
-      HitDice: 1,                
-      SkillsPerLevel: 1,
-      BaseAttack: 0,
-      BaseDefence: 0,
-      BaseInitiative: 0,
-      Charges: 1,
-      BaseMutations: 0,
-      BaseWill: 1,
-      BaseFortitude: 1,
-      BaseReflex: 0     
-    },
-    OtherModifiers: { 
-      Medical: 3,   
-    },
+    
+    "OtherModifiers": { 
+      "Medical": 3   
+    }
   }
 }
     

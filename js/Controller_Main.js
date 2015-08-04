@@ -18,19 +18,7 @@ function Character(sName) {
     this.AttributeModifier[sAttributeName];
 }*/
 
-/*function addToCharacterList(Character, CharacterListIndex){
-  var newTab = document.createElement("li");
-  newTab.innerHTML = '<a href="#charactersheet-' + Character.index + '">' + (Character.Name || 'Character ' + Character.index) + '</a>';
-  newTab.className = "tab-title";
-  newTab.id = "Character" + toString(CharacterListIndex);
-  $("#" + newTab.id).data("character-index", CharacterListIndex);
-  document.getElementById("character-list").appendChild(newTab);
-}*/
 
-/*function removeFromCharacterList(Character, CharacterListIndex){
-  var characterList = document.getElementById("character-list");
-  characterList.removeChild(characterList.childNodes[CharacterListIndex]);
-}*/
 
 
 function encloseInHeadingTags(string) {
@@ -92,42 +80,57 @@ function bindCharacterToView(Character){
 /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ 
 
 
+/* view stuff */
+function addToCharacterList(Character, CharacterListIndex) {
+  var newTab = document.createElement("li");
+  newTab.innerHTML = '<a href="#charactersheet-' + Character.index + '">' + (Character.Name || 'Character ' + CharacterListIndex) + '</a>';
+  newTab.className = "tab-title";
+  newTab.id = "Character" + toString(CharacterListIndex);
+  //$("#" + newTab.id).data("character-index", CharacterListIndex);
+  document.getElementById("character-list").appendChild(newTab);
+}
+
+/*function removeFromCharacterList(Character, CharacterListIndex){
+  var characterList = document.getElementById("character-list");
+  characterList.removeChild(characterList.childNodes[CharacterListIndex]);
+}*/
+
+
+
+
+
+
 
 /* controller vairables */
 var maxNumberOfCharacters = 4;
 var listOfCharacters = [];
 
-/* controller */
-/*function createNewCharacter() {
-  console.log("enter create new character routine...");
+function createNewCharacter(newCharacterName) {
   try {
-    if (listOfCharacters.length > maxNumberOfCharacters)
-      throw "Too many characters. You can only have " + maxNumberOfCharacters + " characters.";
-    var newCharacter = new Character();
-    newCharacter.index = listOfCharacters.length-1;
+    // check whether character list is too big
+    if (listOfCharacters.length >= maxNumberOfCharacters)
+      throw "That's too many characters. You can only have " + maxNumberOfCharacters + " at a time. Try removing one of the active characters.";
+    // create new character object
+    var newCharacter = new Character(newCharacterName);
+    var newCharacterIndex = listOfCharacters.length;
+    newCharacter.index = newCharacterIndex;
     listOfCharacters.push(newCharacter);
+    // append the appropriate view objects.
+    addToCharacterList(newCharacter, newCharacterIndex);
+    // console stuff...
+    console.log("success! new listOfCharacters is:");
+    listOfCharacters.forEach( function(character) {console.log(character.Name, character.index)});
   }
   catch (error) {
-    console.log("error caught...");
     alert(error);
     return null;
   }
-  return newCharacter;      
-}*/
-
-function createNewCharacter() {
-  console.log("enter createNewCharacter function");
-  var newCharacter = new Character();
-  newCharacter.index = listOfCharacters.length-1;
-  listOfCharacters.push(newCharacter);
-  console.log("DONE: createNewCharacter function");
 }
 
 /* controller */
 $(document).ready(function(){ 
-  // Add a new character when the approprite button is pushed.
+  // Adds a new character when 'new character' button is pushed.
   $("#button-new-character").on('click', function() {
-    console.log("test - you pushed the 'create new character' button!");
     createNewCharacter();
   });
 
@@ -137,3 +140,8 @@ $(document).ready(function(){
   //Makes the screen display data for the first character
 //  bindCharacterToView(listOfCharacters[0]);
 });
+
+function initializeApplication() {
+  createNewCharacter("Betty");
+//  addToCharacterList( listOfCharacters[0], 0);
+}

@@ -76,6 +76,12 @@ function BindCharacterToView(Character){
   
   $("#PTS").data("character-index", Character.index);
   $("#PTS").text(Character.RemainingAttributeBuyPoints);
+  
+  //Update Class stats
+  UpdateClassStatsTable();
+  $("#class-list-1").val(Character.Classes[0] || "select");
+  $("#class-list-2").val(Character.Classes[1] || "select");
+  $("#class-list-3").val(Character.Classes[2] || "select");
 };
   
 

@@ -14,8 +14,11 @@
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/foundation.min.js"></script>
-    <!-- Project JS -->
-
+    <!-- Project JS *note: Controller-Main is called-->
+<!--    <script src="js/Model-Character.js"></script>
+    <script src="js/View-Character.js"></script>
+    <script src="js/Controller-Character.js"></script>-->
+    <script src="js/Controller-Main.js"></script>
   </head>
   <body>
 
@@ -25,7 +28,7 @@
       <h1 class="show-for-medium-up">Startraveller Character Manager</h1>
       <h2 class="show-for-small-only">Startraveller Character Manager</h2>
       <p>
-        <a href="#" class="medium success button">New Character</a>
+        <a href="#" id="button-new-character" class="medium success button">New Character</a>
         <a href="#" class="medium success button">Load Character</a>
         <a href="#" class="medium button">About</a>
         <a href="#" class="medium button">Tutorial</a>
@@ -37,7 +40,7 @@
   <div class="upper-container">
     <!-- Tabs for Character Info -->
     <div class="left upper-container">
-    	
+			<ul id="character-list" class="tabs" data-tab></ul>
     </div>
     <!-- Tab for Selector/Work Area -->
     <div class="right upper-container">
@@ -54,16 +57,7 @@
   <!-- MAIN CONTAINER: Primary Content -->
   <div class="main-container">
     <!-- Character Info -->
-    <div class="left lower-container panel">
-      <div align="center">
-	      <a href="#" class="small success button">Save</a>
-	      <a href="#" class="small button">Print</a>
-	      <a href="#" class="small alert button">Delete</a>
-	     </div>
-			<p>
-        Here goes the character sheet with current stats.<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br>#<br><br>lastline
-      </p>
-    </div>
+    <div id="div-character-sheet" class="left lower-container panel"></div>
     <!-- Selector/Work Area -->
     <div class="right lower-container tabs-content panel">
       <!-- Tab: Character Info -->
@@ -72,25 +66,27 @@
       </div>
       <!-- Tab: Stats -->
       <div class="content" id="panel-stats">
-      	<p>stats panels</p>
+      	<p>Stats panel.</p>
       </div>
       <!-- Tab: Race -->
       <div class="content" id="panel-race">
-      	<p>stats race</p>
+      	<p>Race panel.</p>
       </div>
       <!-- Tab: Classes -->
       <div class="content" id="panel-classes">
-      	<p>stats classes</p>
+      	<p>Classes panel.</p>
       </div>
       <!-- Tab: Feats -->
       <div class="content" id="panel-feats">
-      	<p>stats feats</p>
+      	<p>Feats panel.</p>
       </div>
     </div>
   </div>
 
   <script>
-    $(document).foundation();
+    $(document).foundation(); // loads Foundation library
+    console.log("(page loaded)");
+    $(document).ready( initializeApplication() ); // load from MainController
   </script>
 
   </body>

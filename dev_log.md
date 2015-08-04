@@ -8,6 +8,13 @@ various commits, and track progress.
 all suited to mobile devices or any small-width viewing. Considering this
 application is intended as a standalone browser script, I don't see that use
 case coming up in this particular project anyway, so no worries.
+- Incorporates a front-end "tabular" view for adding, removing, and switching
+between characters stored in memory. In order to accomplish this, I also re-
+organized all 'character' methods into the files listed in the **js/** folder.
+- In this new organization, all Controller classes depend on corresponding
+View and Model classes. There is also a 'main' controller for general
+application flow/control. View and Model classes/functions are only ever
+called/instantiated from corresponding Controllers.
 
 ## August 3, 2015 (MIKE)
 - Finally committed my work on the class infrastructure.  Lots of new files 

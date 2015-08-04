@@ -34,6 +34,7 @@ body {
 	position: relative;
 	z-index: 10;
 	height: 150px;
+	overflow: hidden;
 }
 
 .upper-container {
@@ -44,7 +45,8 @@ body {
 	padding: 0rem;
 	position: relative;
 	z-index: 5;
-	height: 55px;
+	height: 40px;
+	overflow: hidden;
 }
 
 .main-container {
@@ -54,8 +56,8 @@ body {
 	display: flex;
 	overflow: hidden;
 	height: 100vh;
-	margin-top: -205px;
-	padding-top: 205px;
+	margin-top: -190px;
+	padding-top: 190px;
 	position: relative;
 	width: 100%;
 	-webkit-backface-visibility: hidden;
@@ -78,8 +80,8 @@ body {
 }
 
 .left { 
-	width: 45%;
-	max-width: 400px;
+	width: 50%;
+	max-width: 450px;
 }
 
 .right {

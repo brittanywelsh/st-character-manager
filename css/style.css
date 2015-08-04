@@ -3,13 +3,18 @@
 .main-container,
 .upper-container,
 .lower-container {
-	background-color: #f2f2f2;
+	background-color: #eee;
 }
 
-/* Editing panel style */
+/* Editing panel styles */
 .panel {
 	background: #fff;
 	border-color: #bbb;
+}
+
+/* Editing button styles */
+.button {
+  padding: 1rem 1.5rem;
 }
 
 /* Editing tab styles */
@@ -19,6 +24,8 @@
   border-style: solid;
   border-width: 1px;
   border-color: #bbb;
+  font-size: 1rem;
+  padding: 0.5rem 0.5rem;
 }
 .tabs dd > a:hover,
 .tabs dd.active a,

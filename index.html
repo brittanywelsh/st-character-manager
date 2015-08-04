@@ -14,36 +14,38 @@
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/foundation.min.js"></script>
-    <!-- Project JS *note: Controller-Main is called-->
-<!--    <script src="js/Model_Character.js"></script>
-    <script src="js/View_Character.js"></script>
-    <script src="js/Controller_Character.js"></script>-->
-    <script src="js/Controller_Main.js"></script>
+    <!-- Project JS -->
+    <script src="js/HTMLShortcuts.js"></script>
+    <script src="js/Character.js"></script>
+    <script src="js/CharacterView.js"></script>
+    <script src="js/CharacterController.js"></script>
+    <script src="js/MainController.js"></script>
   </head>
   <body>
 
   <!-- TOP CONTAINER: Header -->
   <div class="top-container">
     <div class="large-12 columns">
-      <h1 class="show-for-medium-up">Startraveller Character Manager</h1>
-      <h2 class="show-for-small-only">Startraveller Character Manager</h2>
-      <p>
-        <a href="#" id="button-new-character" class="medium success button">New Character</a>
-        <a href="#" class="medium success button">Load Character</a>
-        <a href="#" class="medium button">About</a>
-        <a href="#" class="medium button">Tutorial</a>
-      </p>
+      <h1>Startraveller Character Manager</h1>
+      <ul class="button-group round">
+        <li><a href="#" id="button-new-character" class="medium button">New</a></li>
+        <li><a href="#" class="medium success button">Save</a></li>
+        <li><a href="#" id="#button-remove-character" class="medium alert button">Load</a></li>
+        <li><a href="#" class="button">Tutorial</a></li>
+        <li><a href="#" class="button">About</a></li>
+      </ul>
     </div>
   </div>
 
   <!-- UPPER CONTAINER: Tabs -->
   <div class="upper-container">
     <!-- Tabs for Character Info -->
-    <div class="left upper-container">
-			<ul id="character-list" class="tabs" data-tab></ul>
+    <div class="left">
+    <button href="#" data-dropdown="character-list" aria-controls="character-list" aria-expanded="false" class="button dropdown expand">Choose Character</button>
+      <ul id="character-list" data-dropdown-content class="f-dropdown" aria-hidden="true"></ul>
     </div>
     <!-- Tab for Selector/Work Area -->
-    <div class="right upper-container">
+    <div class="right">
 			<ul class="tabs" data-tab>
         <li class="tab-title active"><a href="#panel-info">Character Info</a></li>
         <li class="tab-title"><a href="#panel-stats">Stats</a></li>
@@ -57,27 +59,28 @@
   <!-- MAIN CONTAINER: Primary Content -->
   <div class="main-container">
     <!-- Character Info -->
-    <div id="div-character-sheet" class="left lower-container panel"></div>
+    <div id="character-sheet" class="left lower-container panel">
+    </div>
     <!-- Selector/Work Area -->
     <div class="right lower-container tabs-content panel">
       <!-- Tab: Character Info -->
-      <div class="content active" id="panel-info">
+      <div id="panel-info" class="content active">
         <p>Character info panel.</p>
       </div>
       <!-- Tab: Stats -->
-      <div class="content" id="panel-stats">
+      <div id="panel-stats" class="content">
       	<p>Stats panel.</p>
       </div>
       <!-- Tab: Race -->
-      <div class="content" id="panel-race">
+      <div id="panel-race" class="content">
       	<p>Race panel.</p>
       </div>
       <!-- Tab: Classes -->
-      <div class="content" id="panel-classes">
+      <div id="panel-classes" class="content">
       	<p>Classes panel.</p>
       </div>
       <!-- Tab: Feats -->
-      <div class="content" id="panel-feats">
+      <div id="panel-feats" class="content">
       	<p>Feats panel.</p>
       </div>
     </div>
@@ -85,8 +88,8 @@
 
   <script>
     $(document).foundation(); // loads Foundation library
-    console.log("(page loaded)");
-    $(document).ready( initializeApplication() ); // load from MainController
+    $(document).ready(initializeApplication()); // load from MainController
+    console.log("! Page loaded.");
   </script>
 
   </body>

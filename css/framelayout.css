@@ -6,72 +6,59 @@
 	box-sizing: border-box;
 }
 
-/* Prevent horizontal scrolling: */
-body {
-	overflow-x: hidden;
-}
-
 /* Clear default padding/margin */
 html,
 body {
-	padding: 0;
-	margin: 0;
+	padding: 0px;
+	margin: 0px;
 }
 
-.top-container {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	position: relative;
-	z-index: 10;
-	height: 150px;
-	overflow: hidden;
-}
-
-.upper-container {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	padding: 0rem;
-	position: relative;
-	z-index: 5;
-	height: 40px;
-	overflow: hidden;
-}
-
+.top-container,
+.upper-container,
 .main-container {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
+}
+
+.top-container {
+	position: relative;
+	overflow: hidden;
+	height: 150px;
+	padding: 0px;
+	z-index: 4;
+}
+
+.upper-container {
+	position: relative;
+	overflow: visible;
+	height: 40px;
+	padding: 0px;
+	z-index: 5;
+}
+
+.main-container {
+	position: relative;
 	overflow: hidden;
 	height: 100vh;
+	width: 100%;
 	margin-top: -190px;
 	padding-top: 190px;
-	position: relative;
-	width: 100%;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 	will-change: overflow;
+	overflow: hidden;
+	z-index: 3;
 }
 
 .lower-container {
 	overflow: auto;
-	height: auto;
 	padding: .5rem;
+	height: auto;
 	-webkit-overflow-scrolling: touch;
 	-ms-overflow-style: none;
-	z-index: 10;
+	z-index: 5;
 }
 
 /* Remove the scrollbar on WebKit browsers */
@@ -82,6 +69,7 @@ body {
 .left { 
 	width: 50%;
 	max-width: 450px;
+	z-index: 10;
 }
 
 .right {
@@ -89,4 +77,5 @@ body {
 	-webkit-flex: 1;
 	-ms-flex: 1;
 	flex: 1;
+	z-index: 10;
 }

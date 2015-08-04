@@ -15,6 +15,10 @@ organized all 'character' methods into the files listed in the **js/** folder.
 View and Model classes. There is also a 'main' controller for general
 application flow/control. View and Model classes/functions are only ever
 called/instantiated from corresponding Controllers.
+- The .js files/modules are organized into groups of three, each group having
+a model, view, and controller. There are some additional 'helper' modules.
+- Used [this blog post](http://toddmotto.com/mastering-the-module-pattern)
+for some inspiration/ideas for how to organize modules.
 
 ## August 3, 2015 (MIKE)
 - Finally committed my work on the class infrastructure.  Lots of new files 

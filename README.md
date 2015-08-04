@@ -10,10 +10,10 @@ This project is a collection of tools for use by DMs and players in Startravelle
 
 ## Code Ref/Notes
 
-Following the [W3Schools recommendations](http://www.w3schools.com/js/js_conventions.asp), we use the following conventions in our JavaScript:
+Following (mostly) the [W3Schools recommendations](http://www.w3schools.com/js/js_conventions.asp), we use the following conventions in our JavaScript:
 
 * Variables and functions all use **camelCase**
-* Indentation = 4 spaces
+* Indentation = 2 spaces
 * (more to be added later)
 
 ## Project Plan/To-Do List
@@ -41,6 +41,7 @@ Following the [W3Schools recommendations](http://www.w3schools.com/js/js_convent
 * Companions
 * Leveling system
 * Inventory (?) - may not be included in final project; re-evaluate at a later date
+* Randomizer? (names, etc)
 
 ### Stage 2B - Input/Output File Specifications
 
@@ -56,3 +57,5 @@ Following the [W3Schools recommendations](http://www.w3schools.com/js/js_convent
 
 * Increase user-friendliness with explanations and perhaps 'walkthoughs'
 * Plan a refactoring scheme for final project deliverables and re-organization of code
+* Error handling?
+* Unit tests

@@ -3,6 +3,17 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## August 4, 2015 (MIKE)
+- Fixed syntactic errors in various files of my code which prevented said code
+from executing. 
+- Added methods to Game to add and remove classes from characters.
+- Added skeletons of the Chronographer, Webmaster, and Supercharger classes to
+GameClasses.js (i.e. Game.Classes).
+- I set up some basic HTML to test and develop code to display modifications to
+the displayed character's base class stats (will, hit dice, etc.).  
+- Embarrassingly my code does accurrately track base class stats between 
+characters, but it fails to properly display classes after character switches.
+
 ## August 3, 2015 (BRITTANY)
 - Redone CSS front-end template. Note: in this design, the screen is not at
 all suited to mobile devices or any small-width viewing. Considering this

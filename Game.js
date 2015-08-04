@@ -35,7 +35,7 @@ var Game = {
       });                  
     Game.BaseClassStatsList.forEach(
       function (sStatName){
-        ret.BaseClassStat[sStatName] = Game.BaseClassStatsInitialScore;
+        ret.BaseClassStats[sStatName] = Game.BaseClassStatsInitialScore;
         ret.ClassStatsModifier[sStatName] = 0;
       }
     );
@@ -66,7 +66,42 @@ var Game = {
       cCharacter.RemainingAttributeBuyPoints -= pointsNeeded;
       cCharacter.BaseAttributeScore[sAttribute] += nPoints;
     }     
-  }
+  },             
+  
+  //Class methods
+  AddClassToChar: function(sClassName, cCharacter){
+    if (cCharacter.HasClass(sClassName)){
+      throw new Error("Cannot choose the same class twice!");
+      return;
+    }        
+    
+    cCharacter.Classes[sClassName] = sClassName;
+    Game.BaseClassStatsList.forEach(function(sStat){
+      cCharacter.BaseClassStats[sStat] += Game.Classes[sClassName].ClassStats[sStat];
+    });
+    Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifiers).forEach(
+      function (sModifier){ 
+        var oModifier = Game.Classes[sClassName].OtherModifiers[sModifier];
+        cCharacter[oModifier.bin][oModifier.target] += oModifier.value;
+      }); 
+  },
+        
+  RemoveClassFromChar: function(sClassName, cCharacter){
+    if (!cCharacter.HasClass(sClassName)){ 
+      return;
+    }  
+    
+    Game.BaseClassStatsList.forEach(function(sStat){
+      cCharacter.BaseClassStats[sStat] -= Game.Classes[sClassName].ClassStats[sStat];;
+    });   
+    
+    Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifiers).forEach(
+      function (sModifier){
+        var oModifier = Game.Classes[sClassName].OtherModifiers[sModifier];           
+        cCharacter[oModifier.bin][oModifier.target] -= oModifier.value;
+      });
+    delete cCharacter.Classes[sClassName];
+  }      
 };
 
  

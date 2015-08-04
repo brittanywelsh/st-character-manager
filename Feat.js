@@ -29,25 +29,25 @@ Feat.AddFeatTo = function(cCharacter){
   }
   cCharacter.PassiveEffects.getProperties().forEach(function (element){
     cCharacter[element.bin][element.TargetOfModification] += element.Modifier;//sketchy!
-  };);
+  });
   cCharacter.GrantsAbilities.getProperties().forEach(function (element){
     cCharacter[element.bin][element.TargetOfModification][element.AbilityName] = element.Ability;
-  };); 
+  }); 
   cCharacter.FeatList[sName];
 };   
 
-Feat.RemoveFeatFrom(cCharacter){
+Feat.RemoveFeatFrom = function(cCharacter){
   if (!cCharacter.HasFeat(this.Name)){
     throw "This character doesn't have this feat!";
     return;
   }
   cCharacter.PassiveEffects.getProperties().forEach(function (element){
     cCharacter[element.bin][element.TargetOfModification] -= element.Modifier;//sketchy!
-  };);    
+  });    
     
   cCharacter.GrantsAbilities.getProperties().forEach(function (element){
     delete cCharacter[element.bin][element.TargetOfModification][element.AbilityName];
-  };); 
+  }); 
   delete cCharacter.FeatList[sName];
   };
 

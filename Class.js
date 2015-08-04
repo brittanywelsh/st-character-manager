@@ -1,4 +1,6 @@
 function Class(sName, sPrimeAttribute, oClassStatModifiers, oOtherModifiers, oFeats) {
+  var self = this;
+  
   this.ClassName = sName || "";
   this.PrimeAttribute = sPrimeAttribute || "";
   this.ClassStats = new Object();
@@ -6,11 +8,11 @@ function Class(sName, sPrimeAttribute, oClassStatModifiers, oOtherModifiers, oFe
   this.Feats = oFeats;
   
   Game.BaseClassStatsList.forEach(function (sStat){
-    this.ClassStats[sStat] = oClassStatModifiers[sStat] || 0;
+    self.ClassStats[sStat] = oClassStatModifiers[sStat] || 0;
   });
   
-  oOtherModifiers.getProperties().forEach(function (sTarget){
-    this.OtherModifiers[sTarget] = oOtherModifiers[sTarget];
+  Object.keys(oOtherModifiers).forEach(function (sTarget){
+    self.OtherModifiers[sTarget] = oOtherModifiers[sTarget];
   });
 
   

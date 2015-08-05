@@ -1,17 +1,25 @@
 function Character(sName, sLevel, sGender, sAlignment) {
-  this.Name = sName || "New Character";
+
   this.Level = sLevel || 1;
+
+  // Personal Info
+  this.Name = sName || "New Character";
   this.Gender = sGender || "queer";
   this.Alignment = sAlignment || "neutral";
+                 
+  // Attribute Properties
+  this.Attributes = new Object();
+  //this.AttributeModifier = new Object(); // this should be a method call. revisit.
+  this.RemainingAttributeBuyPoints = 0;
 
-  this.BaseAttributeScore = new Object();
-  this.AttributeModifier = new Object();
+  // Skills
   this.Skills = new Object();
+
+  // Class Properties
   this.Classes = new Object();
-  this.FeatsList = new Object();
-  this.BaseClassStat = new Object();
-  this.ClassStatsModifier = new Object();                              
-  this.RemainingAttributeBuyPoints = 0;  
+  this.Feats = new Object();
+  this.Stats = new Object();
+
 };
   
 Character.prototype.HasClass = function (sClassName){

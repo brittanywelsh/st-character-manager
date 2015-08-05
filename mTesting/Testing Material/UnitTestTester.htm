@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Unit Test Tester</title>
+  <script src="UnitTest.js"></script>
+</head>
+<body>
+
+<h2>Testing the Unit Tests</h2>
+
+
+<script>
+var uTest = new UnitTest();
+uTest.addTest("Object instantiated and generated HTML", function () {return true});
+uTest.addTest("Will fail tests", function () {return false});
+uTest.addTest("Bad test function", function () {return 2});
+uTest.addTest("Error handling", function() {throw "String thrown!"});
+uTest.addTest("Error handling 2", function() {throw new Error("Error thrown!")});
+uTest.addTest("runTest method works", function(){
+    var res = uTest.runTest("Will fail tests")
+    return res == "Failed!";
+  });
+uTest.addTest("run method works", function() {return true});
+uTest.addTest("If remove method is working you won't see me", function() {return false});
+uTest.addTest("remove method works", function(){
+  uTest.removeTest("If remove method is working you won't see me");
+  return !("If remove method is working you won't see me" in uTest.getTestNames());
+})
+
+uTest.runInHTML();
+</script>
+
+</body>
+</html>

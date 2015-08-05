@@ -9,7 +9,22 @@ paths" for abilities and feats which alter stats, attributes, and other
 such stuff.  
 - Built a modest UnitTest object for us to move in the direction of test
 driven development.  Fully functional, though a bit bare bones.  This material
-has been moved out of my folder and into the general use area.
+has been moved out of my folder and into the general use area in a folder 
+labelled "UnitTest".
+- UnitTest Documentation:
+  - instantiate a UnitTest object
+  - Method addTest(sTestName, fTest) takes a string to name a boolean-valued
+  function.  An exception is thrown when you try to name a test with a name
+  already in use.  The test-function is considered to have passed if it 
+  returns true.  Any unhandled exception the test throws will have its
+  message displayed in lieu of "Passed!" or "Failed!".  Non-boolean outputs
+  are ignored.  In retrospect this may be a design flaw.
+  - Method removeTest(sTestName) removes the named test.
+  - Method: run() will run all tests and return an an object containing the 
+  test results.  Each test's results are indexed by the test's name.
+  - Method runInHTML() will build a table in the local(?) HTML document and 
+  display the test results there.
+  - See UnitTestTester.html for a sample.  
 
 ## August 4, 2015 (MIKE)
 - Fixed syntactic errors in various files of my code which prevented said code

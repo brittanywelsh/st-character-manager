@@ -13,7 +13,7 @@ var CharacterView = (function () {
     generateViews();
   };
 
-	var removeFromCharacterListView = function(Character, CharacterListIndex){
+	var removeFromCharacterListView = function(CharacterListIndex){
 	  var characterList = document.getElementById("character-list");
 	  characterList.removeChild(characterList.childNodes[CharacterListIndex]);
 	};
@@ -37,6 +37,7 @@ var CharacterView = (function () {
   /* Public Methods */
   return {
     addToCharacterListView: addToCharacterListView,
+    removeFromCharacterListView: removeFromCharacterListView,
   };
 
 })();

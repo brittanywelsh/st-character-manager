@@ -14,10 +14,23 @@ var HTMLShortcuts = (function () {
     return outputString;
   };
 
+  var getIndexOfChildNode = function(nodeObject) {
+    var index = 0;
+    var node = nodeObject;
+    while(node.previousSibling) {
+      node = node.previousSibling;
+      if (node.nodeType === 1) {
+        index++;
+      }
+    }
+    return index;
+  };
+
   /* Public Methods */
   return {
     encloseInHeadingTags: encloseInHeadingTags,
     encloseInCenteredDiv: encloseInCenteredDiv,
+    getIndexOfChildNode: getIndexOfChildNode,
   };
 
 })();

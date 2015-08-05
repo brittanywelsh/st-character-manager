@@ -10,11 +10,13 @@ This project is a collection of tools for use by DMs and players in Startravelle
 
 ## Code Ref/Notes
 
-Following (mostly) the [W3Schools recommendations](http://www.w3schools.com/js/js_conventions.asp), we use the following conventions in our JavaScript:
+We use the following conventions in our JavaScript:
 
 * Variables and functions all use **camelCase**
+* Modules are **CapitalizedCamelCase**, with matching filenames
 * Indentation = 2 spaces
 * (more to be added later)
+* see: [W3Schools recommendations](http://www.w3schools.com/js/js_conventions.asp)
 
 ## Project Plan/To-Do List
 

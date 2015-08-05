@@ -3,6 +3,14 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+##August 5, 2015 (MIKE)
+- Added a statModification object constructor to help with following "bin 
+paths" for abilities and feats which alter stats, attributes, and other
+such stuff.  
+- Built a modest UnitTest object for us to move in the direction of test
+driven development.  Fully functional, though a bit bare bones.  This material
+has been moved out of my folder and into the general use area.
+
 ## August 4, 2015 (MIKE)
 - Fixed syntactic errors in various files of my code which prevented said code
 from executing. 

@@ -12,7 +12,7 @@ function StatModification(sPath, sTarget, modificationValue, bIncrementValue){
   if (typeof Path != "string") throw new Error("Path name must be a string.");
   if (typeof Target != "string") throw new Error("Target must be a string.");
   if (IncrementValue && typeof ModificationValue != "number") throw new Error("Can only increment numbers.");
-  if (Path == "" || Path.substr(Path.length - 1) != "."){
+  if (Path == "" || Path.charAt(Path.length - 1) != "."){
     Path += "."
   }
 }
@@ -21,7 +21,7 @@ StatModification.prototype.performModification = function (cCharacter){
   var sNextNode;
   var sPath = this.path();
   var oCurrentBin = cCharacter;
-  
+
   while (sPath != "" && sPath !="."){
     sNextNode = sPath.substr(0, sPath.indexOf("."));
     sPath = sPath.substr(sPath.indexOf(".") + 1, sPath.length - 1);

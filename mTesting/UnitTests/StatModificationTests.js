@@ -80,7 +80,7 @@ var uTester = new UnitTest();
   
   /*
    *
-   * Path following works correctly  
+   * Altering immediate properites works correctly  
    *
   */
   
@@ -157,7 +157,7 @@ var uTester = new UnitTest();
     return !("End" in Object.keys(oBasicBin));
   });
   //UNDOING A REPLACEMENT OF AN IMMEDIATE PROPERTY WITH DELETE DISABLED FAILS
-  uTester.addTest("Can undo a replacement on an immediate properties", function(){
+  uTester.addTest("Attempting to undo a replacement of an immediate property with delete disabled fails", function(){
     sThingToTest = new StatModification("", "End", "is nigh!", false);
     oBasicBin = {
       End: 0
@@ -165,6 +165,84 @@ var uTester = new UnitTest();
     sThingToTest.performModification(oBasicBin);  
     try{
       sThingToTest.undoModification(oBasicBin, false);
+    }
+    catch(e){
+      if (e.message != "Cannot undo!") throw e;
+      else return true;
+    }
+  });           
+  /*
+   *
+   * Altering depth 1 properites works correctly  
+   *
+  */
+  
+  //INCREMENTING A DEPTH 1 PROPERTY
+  
+  uTester.addTest("Can increment depth 1 properties", function(){
+    sThingToTest = new StatModification("Start.", "End", 1);
+    oDepthOneBin = {
+      Start: {End: 0}
+    };
+    sThingToTest.performModification(oDepthOneBin);
+    return oDepthOneBin.Start.End == 1;
+  }); 
+  //REPLACING A DEPTH 1 PROPERTY
+  uTester.addTest("Can replace depth 1 properties", function(){
+    sThingToTest = new StatModification("Start", "End", "is nigh!", false);
+    oDepthOneBin = {
+      Start: {End: 0}
+    };
+    sThingToTest.performModification(oDepthOneBin);
+    return oDepthOneBin.Start.End == "is nigh!";
+  });           
+  //CREATING A DEPTH 1 PROPERTY VIA INCREMENTATION
+  uTester.addTest("Can create depth 1 properties via incrementation", function(){
+    sThingToTest = new StatModification("Start", "Target", 1);
+    oDepthOneBin = {
+      Start: {End: 0}
+    };
+    sThingToTest.performModification(oDepthOneBin); 
+    return oDepthOneBin.Start.End == 0 && oDepthOneBin.Start.Target == 1;
+  }); 
+  //CREATING A DEPTH 1 PROPERTY VIA SETTING
+  uTester.addTest("Can create depth 1 properties and set them", function(){
+    sThingToTest = new StatModification("Start", "Target", "tree", false);
+    oDepthOneBin = {
+      Start: {End: 0}
+    };
+    sThingToTest.performModification(oDepthOneBin);
+    return oDepthOneBin.Start.Target == "tree";
+    });      
+  //UNDOING AN INCREMENTATION
+  uTester.addTest("Can undo an incrementation on depth 1 properties", function(){
+    sThingToTest = new StatModification("Start", "End", 1);
+    oDepthOneBin = {
+      Start: {End: 0}
+    };          
+    sThingToTest.performModification(oDepthOneBin);
+    sThingToTest.undoModification(oDepthOneBin, false);
+    return oDepthOneBin.Start.End == 0;
+  }); 
+  //UNDOING A REPLACEMENT OF AN IMMEDIATE PROPERTY WITH DELETE ENEABLED
+  uTester.addTest("Can delete an depth 1 property", function(){
+    sThingToTest = new StatModification("Start", "End", "is nigh!");
+    oDepthOneBin = {
+      Start: {End: 0}
+    };
+    sThingToTest.performModification(oDepthOneBin);
+    sThingToTest.undoModification(oDepthOneBin, true);
+    return !("End" in Object.keys(oDepthOneBin));
+  });
+  //UNDOING A REPLACEMENT OF AN IMMEDIATE PROPERTY WITH DELETE DISABLED FAILS
+  uTester.addTest("Attempting to undo a replacement with delete disabled fails", function(){
+    sThingToTest = new StatModification("Start", "End", "is nigh!", false);
+    oDepthOneBin = {
+      Start: {End: 0}
+    };
+    sThingToTest.performModification(oDepthOneBin);  
+    try{
+      sThingToTest.undoModification(oDepthOneBin, false);
     }
     catch(e){
       if (e.message != "Cannot undo!") throw e;

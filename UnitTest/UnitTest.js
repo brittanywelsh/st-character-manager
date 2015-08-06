@@ -67,6 +67,8 @@ UnitTest.prototype.runInHTML = function(){
     var nameCell = newRow.insertCell();
     nameCell.innerHTML = sTestName + " result:"
     var displayCell = newRow.insertCell();
-    displayCell.innerHTML = Results[sTestName]; 
+    displayCell.innerHTML = Results[sTestName];
+    if (Results[sTestName] == "Passed!") displayCell.style.backgroundColor = 'LightGreen';
+    if (Results[sTestName] == "Failed!") displayCell.style.backgroundColor = 'Red'; 
   } );
 }

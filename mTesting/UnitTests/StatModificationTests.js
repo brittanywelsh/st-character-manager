@@ -232,10 +232,10 @@ var uTester = new UnitTest();
     };
     sThingToTest.performModification(oDepthOneBin);
     sThingToTest.undoModification(oDepthOneBin, true);
-    return !("End" in Object.keys(oDepthOneBin));
+    return !("End" in Object.keys(oDepthOneBin.Start));
   });
-  //UNDOING A REPLACEMENT OF AN IMMEDIATE PROPERTY WITH DELETE DISABLED FAILS
-  uTester.addTest("Attempting to undo a replacement with delete disabled fails", function(){
+  //UNDOING A REPLACEMENT OF AN DEPTH 1 PROPERTY WITH DELETE DISABLED FAILS
+  uTester.addTest("Attempting to undo a replacement on a depth 1 property with delete disabled fails", function(){
     sThingToTest = new StatModification("Start", "End", "is nigh!", false);
     oDepthOneBin = {
       Start: {End: 0}
@@ -243,6 +243,86 @@ var uTester = new UnitTest();
     sThingToTest.performModification(oDepthOneBin);  
     try{
       sThingToTest.undoModification(oDepthOneBin, false);
+    }
+    catch(e){
+      if (e.message != "Cannot undo!") throw e;
+      else return true;
+    }
+  });             
+  
+  /*
+   *
+   * Altering depth 2 properites works correctly  
+   *
+  */
+  
+  //INCREMENTING A DEPTH 2 PROPERTY
+  
+  uTester.addTest("Can increment depth 2 properties", function(){
+    sThingToTest = new StatModification("Start.Middle", "End", 1);
+    oDepthTwoBin = {
+      Start: {Middle: {End: 1}}
+    };
+    sThingToTest.performModification(oDepthTwoBin);
+    return oDepthTwoBin.Start.Middle.End == 2;
+  }); 
+  //REPLACING A DEPTH 2 PROPERTY
+  uTester.addTest("Can replace depth 2 properties", function(){
+    sThingToTest = new StatModification("Start.Middle.", "End", "is nigh!", false);
+    oDepthTwoBin = {
+      Start: {Middle: {End: 0}}
+    };
+    sThingToTest.performModification(oDepthTwoBin);
+    return oDepthTwoBin.Start.Middle.End == "is nigh!";
+  });           
+  //CREATING A DEPTH 2 PROPERTY VIA INCREMENTATION
+  uTester.addTest("Can create depth 2 properties via incrementation", function(){
+    sThingToTest = new StatModification("Start.Middle", "Target", 1);
+    oDepthTwoBin = {
+      Start: {Middle: {End: 0}}
+    };
+    sThingToTest.performModification(oDepthTwoBin);  
+    return oDepthTwoBin.Start.Middle.End == 0 && oDepthTwoBin.Start.Middle.Target == 1;
+  }); 
+  //CREATING A DEPTH 2 PROPERTY VIA SETTING
+  uTester.addTest("Can create depth 2 properties and set them", function(){
+    sThingToTest = new StatModification("Start.Middle", "Target", "tree", false);
+    oDepthTwoBin = {
+      Start: {Middle: {End: 0}}
+    };
+    sThingToTest.performModification(oDepthTwoBin);
+    return oDepthTwoBin.Start.Middle.Target == "tree";
+    });      
+  //UNDOING AN INCREMENTATION
+  uTester.addTest("Can undo an incrementation on depth 2 properties", function(){
+    sThingToTest = new StatModification("Start.Middle", "End", 1);
+    oDepthTwoBin = {
+      Start: {Middle: {End: 0}}
+    };          
+    sThingToTest.performModification(oDepthTwoBin);
+    sThingToTest.undoModification(oDepthTwoBin
+, false);
+    return oDepthTwoBin.Start.Middle.End == 0;
+  }); 
+  //UNDOING A REPLACEMENT OF AN IMMEDIATE PROPERTY WITH DELETE ENEABLED
+  uTester.addTest("Can delete an depth 2 property", function(){
+    sThingToTest = new StatModification("Start.Middle", "End", "is nigh!");
+    oDepthTwoBin = {
+      Start: {Middle: {End: 0}}
+    };
+    sThingToTest.performModification(oDepthTwoBin);
+    sThingToTest.undoModification(oDepthTwoBin, true);
+    return !("End" in Object.keys(oDepthTwoBin.Start.Middle));
+  });
+  //UNDOING A REPLACEMENT OF AN DEPTH 2 PROPERTY WITH DELETE DISABLED FAILS
+  uTester.addTest("Attempting to undo a replacement on a depth 2 property with delete disabled fails", function(){
+    sThingToTest = new StatModification("Start.Middle", "End", "is nigh!", false);
+    oDepthTwoBin = {
+      Start: {Middle: {End: 0}}
+    };
+    sThingToTest.performModification(oDepthTwoBin);  
+    try{
+      sThingToTest.undoModification(oDepthTwoBin, false);
     }
     catch(e){
       if (e.message != "Cannot undo!") throw e;

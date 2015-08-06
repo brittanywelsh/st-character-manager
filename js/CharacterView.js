@@ -19,12 +19,7 @@ var CharacterView = (function () {
     // Header: name, level, buttons
     var viewName = h.encloseInHeading(character.Name || 'Character ' + character.index);
     var viewLevel = h.encloseInP('Level ' + character.Level);
-    var viewButtons = '\
-      <a href="#" class="medium success button">Save</a>\
-      <a href="#" class="medium button">Print</a>\
-      <a href="#" id="button-remove-character" class="medium alert button">Delete</a>\
-      ';
-    var viewHeader = h.encloseInCenteredDiv( viewName + viewLevel + viewButtons);
+    var viewHeader = h.encloseInCenteredDiv(viewName + viewLevel);
 
     // Summary: info, race, classes
     var infoValues = [
@@ -33,9 +28,7 @@ var CharacterView = (function () {
       h.encloseInB('Race:'), character.Race,
     ];
     var classValues = [
-      h.encloseInB('Classes:'), '[class 1]',
-      '', '[class 2]',
-      '', '[class 2]',      
+      h.encloseInB('Classes:'), '[class 1]', '', '[class 2]', '', '[class 2]',      
     ]
     var viewInfo = h.f_encloseInGrid(3, 2, [6,6], infoValues);
     var viewClasses = h.f_encloseInGrid(3, 2, [5,7], classValues);
@@ -55,10 +48,10 @@ var CharacterView = (function () {
     ]
 
     // Get character's base stats
-    var statList = character.Stats;
+    var stats = character.Stats;
     var baseStatsValues = [];
-    for (var statKey in statList) {
-      if (statList.hasOwnProperty(statKey)) {
+    for (var statKey in stats) {
+      if (stats.hasOwnProperty(statKey)) {
         var statValue = character.Stats[statKey];
         baseStatsValues.push(
           h.encloseInB(statKey)
@@ -73,9 +66,43 @@ var CharacterView = (function () {
     var viewBaseStats = h.f_encloseInGrid(baseStatsValues.length/2, 2, [8,4], baseStatsValues);
     var viewStats =
       h.encloseInSubheading('Stats') +
-      h.f_encloseInGrid(1, 3, [5,1,6], [viewAttributes, '', viewBaseStats]);
+      h.f_encloseInGrid(1, 3, [5,1,6], [viewAttributes, '', viewBaseStats])
+    ;
 
-    $("#character-sheet").html(viewHeader + viewSummary + viewStats);
+    // Skills
+
+    var skillsTestingMuchThanks = '\
+    <ul class="accordion" data-accordion>\
+      <li class="accordion-navigation">\
+        <a href="#panel1c">Accordion 1</a>\
+        <div id="panel1c" class="content active">\
+          Panel 1. Lorem ipsum dolor\
+        </div>\
+      </li>\
+      <li class="accordion-navigation">\
+        <a href="#panel2c">Accordion 2</a>\
+        <div id="panel2c" class="content">\
+          Panel 2. Lorem ipsum dolor\
+        </div>\
+      </li>\
+      <li class="accordion-navigation">\
+        <a href="#panel3c">Accordion 3</a>\
+        <div id="panel3c" class="content">\
+          Panel 3. Lorem ipsum dolor\
+        </div>\
+      </li>\
+    </ul>';
+
+    var viewSkills =
+      h.encloseInSubheading('Skills') + skillsTestingMuchThanks;
+    ;
+
+    $("#character-sheet").html(
+      viewHeader +
+      viewSummary +
+      viewStats +
+      viewSkills
+    );
   };
 
   /* Public Methods */

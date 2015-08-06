@@ -23,6 +23,7 @@
     <script src="js/AttributesView.js"></script>
     <script src="js/AttributesController.js"></script>-->
     <script src="bTesting/MainController.js"></script>
+
   </head>
   <body>
 
@@ -31,9 +32,6 @@
     <div class="large-12 columns">
       <h1>Startraveller Character Manager</h1>
       <ul class="button-group round">
-        <li><a href="#" id="button-new-character" class="medium button">New</a></li>
-        <li><a href="#" id="" class="medium success button">Save</a></li>
-        <li><a href="#" id="" class="medium alert button">Load</a></li>
         <li><a href="#" id="" class="button">Tutorial</a></li>
         <li><a href="#" id="" class="button">About</a></li>
       </ul>
@@ -44,8 +42,12 @@
   <div class="upper-container">
     <!-- Tabs for Character Info -->
     <div class="left">
-    <button href="#" data-dropdown="character-list" aria-controls="character-list" aria-expanded="false" class="button dropdown expand">Choose Character</button>
-      <ul id="character-list" data-dropdown-content class="f-dropdown" aria-hidden="true"></ul>
+    <ul class="button-group expand">
+      <li><a href="#" id="button-new-character" class="medium button">New</a></li>
+      <li><a href="#" id="button-save-character" class="medium success button">Save</a></li>
+      <li><a href="#" id="button-remove-character" class="medium alert button">Remove</a></li>
+      <li><a href="#" data-dropdown="character-list" aria-controls="character-list" aria-expanded="false" class="button dropdown">Choose Character</a><ul id="character-list" data-dropdown-content class="f-dropdown" aria-hidden="true"></ul></li>
+    </ul>
     </div>
     <!-- Tab for Selector/Work Area -->
     <div class="right">
@@ -88,9 +90,10 @@
     </div>
   </div>
 
+  <!--<script src="js/CharacterController.js"></script>-->
   <script>
-    $(document).foundation(); // loads Foundation library
     $(document).ready(initializeApplication()); // load from MainController
+    $(document).foundation(); // loads Foundation library
     console.log("! Page loaded.");
   </script>
 

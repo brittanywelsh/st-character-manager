@@ -93,7 +93,12 @@
   <!--<script src="js/CharacterController.js"></script>-->
   <script>
     $(document).ready(initializeApplication()); // load from MainController
-    $(document).foundation(); // loads Foundation library
+    $(document).foundation({
+      accordion: {
+        // allow multiple accordion panels to be active at the same time
+        multi_expand: true,
+      }
+    });
     console.log("! Page loaded.");
   </script>
 

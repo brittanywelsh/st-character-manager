@@ -3,7 +3,14 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
-##August 5, 2015 (MIKE)
+## August 5, 2015 (BRITTANY)
+- Finalzied CharacterController.js, with methods for adding, removing and
+selecting characters. All works fine.
+- Next steps:
+  - Help implement testing for existing modules
+  - Design/implement project-wide error/exception handling
+
+## August 5, 2015 (MIKE)
 - Added a statModification object constructor to help with following "bin 
 paths" for abilities and feats which alter stats, attributes, and other
 such stuff.  
@@ -97,8 +104,7 @@ like a static class and never instantiate).
 5. The controller ties the information from said character object to the view
 6. As the user generates input the controller feeds this information back into
 the character object, which in turn then asks Game for help in updating itself.
-7. Once the character object has been updated the controller updates View
-accordingly.
+7. Once the character object has been updated the controller updates View accordingly.
 8. Repeat from step 6.
 
 - The above algorithm can, as far as I am aware, see 'Game' everywhere

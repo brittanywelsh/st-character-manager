@@ -14,6 +14,12 @@ body,
 	border-color: #aaa;
 }
 
+/* Editing column [grid] padding */
+.columns {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 /* Editing button styles */
 .button {
   border-style: solid;

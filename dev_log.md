@@ -4,10 +4,15 @@ This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
 ## August 5, 2015 (BRITTANY)
-- Finalzied CharacterController.js, with methods for adding, removing and
+- Finalized CharacterController.js, with methods for adding, removing and
 selecting characters. All works fine.
+- Updated CharacterView.js in order to display basic info onto the 'character
+sheet' section of the page. It now dynamically pulls data from the character
+object. Note; in order to accomplish this I defined a basic data structure for
+base class stats. See the copy of Character.js inside of bTesting/ for more
+details on this.
 - Next steps:
-  - Help implement testing for existing modules
+  - Help implement tests for existing modules
   - Design/implement project-wide error/exception handling
 
 ## August 5, 2015 (MIKE)

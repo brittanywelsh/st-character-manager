@@ -16,7 +16,7 @@
     <script src="js/vendor/foundation.min.js"></script>
     <!-- Project JS -->
     <script src="js/HTMLShortcuts.js"></script>
-    <script src="js/Character.js"></script>
+    <script src="bTesting/Character.js"></script>
     <script src="js/CharacterView.js"></script>
     <script src="js/CharacterController.js"></script>
     <!--<script src="js/Attributes.js"></script>
@@ -32,10 +32,10 @@
       <h1>Startraveller Character Manager</h1>
       <ul class="button-group round">
         <li><a href="#" id="button-new-character" class="medium button">New</a></li>
-        <li><a href="#" class="medium success button">Save</a></li>
-        <li><a href="#" id="button-remove-character" class="medium alert button">Load</a></li>
-        <li><a href="#" class="button">Tutorial</a></li>
-        <li><a href="#" class="button">About</a></li>
+        <li><a href="#" id="" class="medium success button">Save</a></li>
+        <li><a href="#" id="" class="medium alert button">Load</a></li>
+        <li><a href="#" id="" class="button">Tutorial</a></li>
+        <li><a href="#" id="" class="button">About</a></li>
       </ul>
     </div>
   </div>
@@ -50,8 +50,8 @@
     <!-- Tab for Selector/Work Area -->
     <div class="right">
 			<ul class="tabs" data-tab>
-        <li class="tab-title active"><a href="#panel-info">Character Info</a></li>
-        <li class="tab-title"><a href="#panel-attributes">Attributes</a></li>
+        <li class="tab-title active"><a href="#panel-attributes">Character Attributes</a></li>
+        <li class="tab-title"><a href="#panel-skills">Skills</a></li>
         <li class="tab-title"><a href="#panel-race">Race</a></li>
         <li class="tab-title"><a href="#panel-classes">Classes</a></li>
         <li class="tab-title"><a href="#panel-feats">Feats</a></li>
@@ -62,17 +62,16 @@
   <!-- MAIN CONTAINER: Primary Content -->
   <div class="main-container">
     <!-- Character Info -->
-    <div id="character-sheet" class="left lower-container panel">
-    </div>
+    <div id="character-sheet" class="left lower-container panel"></div>
     <!-- Selector/Work Area -->
     <div class="right lower-container tabs-content panel">
       <!-- Tab: Character Info -->
-      <div id="panel-info" class="content active">
-        <p>Character info panel.</p>
+      <div id="panel-attributes" class="content active">
+        <p>Character attribute panel.</p>
       </div>
       <!-- Tab: Attributes -->
-      <div id="panel-attributes" class="content">
-      	<p>Attributes panel.</p>
+      <div id="panel-skills" class="content">
+      	<p>Skills panel.</p>
       </div>
       <!-- Tab: Race -->
       <div id="panel-race" class="content">

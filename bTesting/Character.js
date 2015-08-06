@@ -8,7 +8,13 @@ function Character(sName, sLevel, sGender, sAlignment) {
   this.Alignment = sAlignment || "Neutral";
                  
   // Attribute Properties
-  this.Attributes = new Object();
+  this.Attributes = {
+    'STR': {
+      Tooltip: 'Strength',
+      Primary: 0,
+      AddOns: [],
+    }
+  }
   //this.AttributeModifier = new Object(); // this should be a method call. revisit.
   this.RemainingAttributeBuyPoints = 0;
 
@@ -16,10 +22,21 @@ function Character(sName, sLevel, sGender, sAlignment) {
   this.Skills = new Object();
 
   // Race/Class Properties
-  this.Race = new Object();
+  this.Race = 'Race';
   this.Classes = new Object();
   this.Feats = new Object();
-  this.Stats = new Object();
+  this.Stats = {
+    'Health Dice': 'd6',
+    'Skills per Level': 0,
+    'Base Attack': 0,
+    'Base Defence': 0,
+    'Base Initiative': 0,
+    'Charges per Day': 0,
+    'Base Mutations': 0,
+    'Base Will': 0,
+    'Base Fortitude': 0,
+    'Base Reflex': 0,
+  }
 
 };
   

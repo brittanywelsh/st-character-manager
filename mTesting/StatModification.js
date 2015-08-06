@@ -1,54 +1,55 @@
 function StatModification(sPath, sTarget, modificationValue, bIncrementValue){
-  this.path = sPath;//make read only, string must end in "."
-  this.target = sTarget;//make read only
-  this.modificationValue = modificationValue;//make read only
-
-  if (typeof this.path != "string") throw new Error("Path name must be string.");
-  if (typeof this.target != "string") throw new Error("Target must be string");
-  if (bIncrementValue && typeof this.modificationValue != "Number") throw new Error("Can only increment numbers.");
-  if (this.path == "" || this.path.substr(this.path.length - 1) != "."){
-    throw new Error("Path name must end in '.'");
-  } 
+  var Path = sPath;//make read only, string must end in "."
+  var Target = sTarget;//make read only
+  var ModificationValue = modificationValue;//make read only 
+  var IncrementValue = (bIncrementValue == undefined) ? (typeof ModificationValue == "number"):!!bIncrementValue;
+  
+  this.path = function() {return Path};
+  this.target = function() {return Target};
+  this.modificationValue = function() {return ModificationValue};
+  this.incrementValue = function() {return IncrementValue}; 
+  
+  if (typeof Path != "string") throw new Error("Path name must be a string.");
+  if (typeof Target != "string") throw new Error("Target must be a string.");
+  if (IncrementValue && typeof ModificationValue != "number") throw new Error("Can only increment numbers.");
+  if (Path == "" || Path.substr(Path.length - 1) != "."){
+    Path += "."
+  }
 }
 
 StatModification.prototype.performModification = function (cCharacter){
   var sNextNode;
-  var sPath;
+  var sPath = this.path();
   var oCurrentBin = cCharacter;
   
-  while (sPath != ""){
-    sNextNode = sPath.substr(0, sPath.getFirstIndexOf("."));
-    sPath = sPath.substr(sPath.getFirstIndexOf(".") + 1, sPath.length - 1);
+  while (sPath != "" && sPath !="."){
+    sNextNode = sPath.substr(0, sPath.indexOf("."));
+    sPath = sPath.substr(sPath.indexOf(".") + 1, sPath.length - 1);
     oCurrentBin = oCurrentBin[sNextNode];
   }
-  if (bIncrementValue){
-    oCurrentBin[this.target] += this.modificationValue;
+  if (!this.incrementValue() || !(oCurrentBin[this.target()])){
+    oCurrentBin[this.target()] = this.modificationValue();
   } else {
-    oCurrentBin[sTarget] = this.modificationValue;
+    oCurrentBin[this.target()] += this.modificationValue();
   }
 }
 
 StatModification.prototype.undoModification = function (cCharacter, bDeleteOK){
   var sNextNode;
-  var sPath;
+  var sPath = this.path();
   var oCurrentBin = cCharacter;
-  if (!bDeleteOK) bDeleteOK = false;
-
-  if (!bIncrementValue && ){
-    throw new Error("Cannot undo!");
-    return;
-  }
+  bDeleteOK = !!bDeleteOK; 
   
-  while (sPath != ""){
-    sNextNode = sPath.substr(0, sPath.getFirstIndexOf("."));
-    sPath = sPath.substr(sPath.getFirstIndexOf(".") + 1, sPath.length - 1);
+  while (sPath != "" && sPath != "."){
+    sNextNode = sPath.substr(0, sPath.indexOf("."));
+    sPath = sPath.substr(sPath.indexOf(".") + 1, sPath.length - 1);
     oCurrentBin = oCurrentBin[sNextNode];
   }
 
-  if (bIncrementValue){
-    oCurrentBin[this.target] -= this.modificationValue;
+  if (this.incrementValue()){
+    oCurrentBin[this.target()] -= this.modificationValue();
   } else if (bDeleteOK){
-    delete oCurrentBin[this.target];
+    delete oCurrentBin[this.target()];
   } else {
     throw new Error("Cannot undo!")
   }

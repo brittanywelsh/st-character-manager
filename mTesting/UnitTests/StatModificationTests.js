@@ -76,6 +76,22 @@ var uTester = new UnitTest();
   uTester.addTest("No boolean given, non-number as modification value assumes 'false'", function(){
     sThingToTest = new StatModification("", "target", "self");
     return sThingToTest.incrementValue() == false;
+  }); 
+  
+  //Bad Path of depth 1 (note that you cannot have a bad path of depth 0);
+  uTester.addTest("Bad path given.", function (){
+    sThingToTest = new StatModification("BadStart", "target", "test", false);
+    var oDepthOneBin = {
+      Start: {},
+      }                                              
+      try{
+        sThingToTest.performModification(oDepthOneBin);
+        return false;
+      }
+      catch(e){
+        if (e.message = "Path fails at BadStart.") return true;
+        throw e;  
+      }   
   });
   
   /*
@@ -180,7 +196,7 @@ var uTester = new UnitTest();
   //INCREMENTING A DEPTH 1 PROPERTY
   
   uTester.addTest("Can increment depth 1 properties", function(){
-    sThingToTest = new StatModification("Start.", "End", 1);
+    sThingToTest = new StatModification(".Start.", "End", 1);
     oDepthOneBin = {
       Start: {End: 0}
     };

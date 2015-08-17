@@ -10,13 +10,17 @@ function Character(sName) {
   //Class Properties
   this.Classes = new Object();
   this.FeatsList = new Object();
-  this.BaseClassStats = new Object();
-  this.ClassStatsModifier = new Object();//Modifiers **other** than from classes
+  this.Stats = new Object();
+  this.StatsModifier = new Object();//Modifiers **other** than from classes
   
   //Skills
-  this.Skills = {
-    Medical: 0,
-    };
+  this.Skills = new Object();
+  
+  //Proficiencies
+  this.Proficiencies = new Object(); 
+  
+  //Abilities
+  this.Abilities = new Object();
                                            
 }
 

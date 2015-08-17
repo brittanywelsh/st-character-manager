@@ -15,9 +15,11 @@ function StatModification(sPath, sTarget, modificationValue, bIncrementValue){
   if (Path == "" || Path.charAt(Path.length - 1) != "."){
     Path += "."
   }
+  else if (Path.charAt(0) == '.') Path = Path.substr(1, Path.length - 1);
 }
 
 StatModification.prototype.performModification = function (cCharacter){
+  var sPathToDate;
   var sNextNode;
   var sPath = this.path();
   var oCurrentBin = cCharacter;
@@ -25,7 +27,10 @@ StatModification.prototype.performModification = function (cCharacter){
   while (sPath != "" && sPath !="."){
     sNextNode = sPath.substr(0, sPath.indexOf("."));
     sPath = sPath.substr(sPath.indexOf(".") + 1, sPath.length - 1);
-    oCurrentBin = oCurrentBin[sNextNode];
+    oCurrentBin = oCurrentBin[sNextNode];                          
+    if (oCurrentBin == undefined){
+      throw new Error("Path fails at " + sNextNode + '.' + this.path().substr(0, 2*this.path().length - sPath.length));
+    }
   }
   if (!this.incrementValue() || !(oCurrentBin[this.target()])){
     oCurrentBin[this.target()] = this.modificationValue();

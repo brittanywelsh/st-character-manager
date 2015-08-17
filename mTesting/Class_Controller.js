@@ -18,7 +18,7 @@ $(document).ready(function (){
   } 
   
   var classStatsTable = document.getElementById("ClassStatsTable");
-  Game.BaseClassStatsList.forEach(function (sStat) {
+  Game.StatsList.forEach(function (sStat) {
     var cCurrentCharacter = lCharacters[$('#STR').data('character-index')];
     var newRow = classStatsTable.insertRow();
     var newLabelCell = newRow.insertCell(0);
@@ -54,13 +54,13 @@ function BindClassToChar(event){
 
 function UpdateClassStatsTable(){
   var cCurrentCharacter = lCharacters[$("#STR").data("character-index")];
-  Game.BaseClassStatsList.forEach(function (sStat){
+  Game.StatsList.forEach(function (sStat){
     if (sStat == "HitDice"){ 
-      var nDieValue = 6 + 2*cCurrentCharacter.BaseClassStats.HitDice
+      var nDieValue = 6 + 2*cCurrentCharacter.Stats.HitDice
       $('#HitDice').text('D' + nDieValue);
     }                                                                              
     else{
-      $('#' + sStat).text(cCurrentCharacter.BaseClassStats[sStat]); 
+      $('#' + sStat).text(cCurrentCharacter.Stats[sStat]); 
     } 
   }); 
 }

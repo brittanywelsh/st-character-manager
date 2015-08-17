@@ -1,19 +1,23 @@
-function Class(sName, sPrimeAttribute, oClassStatModifiers, oOtherModifiers, oFeats) {
+function Class(oClassInfo) {
+// oClassInfo Properties sName, sPrimeAttribute, oClassStatModifiers, oOtherModifiers, oFeats
   var self = this;
   
-  this.ClassName = sName || "";
-  this.PrimeAttribute = sPrimeAttribute || "";
+  this.ClassName = oClassInfo.Name || "";
+  this.PrimeAttribute = oClassInfo.PrimeAttribute || "";
   this.ClassStats = new Object();
-  this.OtherModifiers = new Object();
-  this.Feats = oFeats;
+  this.ClassSkills = new Object();
+  this.OtherModifications = new Object();
+  //this.Feats = oClassInfo.Feats;
+  this.Feats = Feats[this.ClassName];
   
-  Game.BaseClassStatsList.forEach(function (sStat){
-    self.ClassStats[sStat] = oClassStatModifiers[sStat] || 0;
-  });
-  
-  Object.keys(oOtherModifiers).forEach(function (sTarget){
-    self.OtherModifiers[sTarget] = oOtherModifiers[sTarget];
-  });
+//  if (oClassInfo.ClassStats){
+    Game.StatsList.forEach(function (sStat){
+      self.ClassStats[sStat] = oClassInfo.ClassStats[sStat] || 0;
+    });                         
+  //}   
 
   
+  Object.keys(this.OtherModifications).forEach(function (sTarget){
+    self.OtherModifications[sTarget] = oClassInfo.OtherModifications[sTarget];
+  });
 };

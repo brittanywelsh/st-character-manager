@@ -2,7 +2,7 @@
 
 ## What is Startraveller?
 
-Startraveller is a tabletop RPG created by Alastair Jaimeson-Lane and friends.
+Startraveller is a tabletop RPG created by Alastair Jamieson-Lane and friends.
 
 ## What is the Startraveller Character Manager?
 

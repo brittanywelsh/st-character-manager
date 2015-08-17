@@ -1,4 +1,4 @@
-var Feats = new Object(); //I don't know where to declare ..
+var Feats = new Object(); //I don't know where to declare this...
 var Game = {
   AttributeList : ["STR", "CON", "DEX", "INT", "WIS", "CHA"],
   BaseAttributeBuy : {
@@ -20,10 +20,10 @@ var Game = {
     "18":17
   },
   
-  BaseClassStatsList : ["HitDice", "SkillsPerLevel", "BaseAttack",// 
-    "BaseDefence", "BaseInitiative", "Charges", "BaseMutations", "BaseWill",//
-    "BaseFortitude", "BaseReflex"],
-  BaseClassStatsInitialScore : 0,
+  StatsList : ["HitDice", "SkillsPerLevel", "Attack",// 
+    "Defence", "Initiative", "Charges", "Mutations", "Will",//
+    "Fortitude", "Reflex"],
+  StatsInitialScore : 0,
                       
   CreateNewCharacter : function() {
     var ret = new Character(); 
@@ -33,10 +33,10 @@ var Game = {
         ret.BaseAttributeScore[sAttributeName] = Game.BaseAttributeBuy.StartingAttributeScore;
         ret.AttributeModifier[sAttributeName] = 0;
       });                  
-    Game.BaseClassStatsList.forEach(
+    Game.StatsList.forEach(
       function (sStatName){
-        ret.BaseClassStats[sStatName] = Game.BaseClassStatsInitialScore;
-        ret.ClassStatsModifier[sStatName] = 0;
+        ret.Stats[sStatName] = Game.StatsInitialScore;
+        ret.StatsModifier[sStatName] = 0;
       }
     );
     return ret;      
@@ -68,40 +68,48 @@ var Game = {
     }     
   },             
   
-  //Class methods
-  AddClassToChar: function(sClassName, cCharacter){
-    if (cCharacter.HasClass(sClassName)){
-      throw new Error("Cannot choose the same class twice!");
-      return;
-    }        
-    
-    cCharacter.Classes[sClassName] = sClassName;
-    Game.BaseClassStatsList.forEach(function(sStat){
-      cCharacter.BaseClassStats[sStat] += Game.Classes[sClassName].ClassStats[sStat];
-    });
-    Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifiers).forEach(
-      function (sModifier){ 
-        var oModifier = Game.Classes[sClassName].OtherModifiers[sModifier];
-        cCharacter[oModifier.bin][oModifier.target] += oModifier.value;
-      }); 
+  //Class methods    
+  ClassAvailableTo: function(sClassName, cCharacter){
+    //TEMPORARY
+    return !(cCharacter.HasClass(sClassName));
   },
-        
+  
+  AddClassToChar: function(sClassName, cCharacter){
+    if (!this.ClassAvailableTo(sClassName, cCharacter)){
+      throw new Error("Cannot choose this class!");
+      return;
+    }
+    cCharacter.Classes[sClassName] = sClassName;
+    Game.StatsList.forEach(function(sStat){
+      cCharacter.Stats[sStat] += Game.Classes[sClassName].ClassStats[sStat];
+    });
+    Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
+      function (sModification){ 
+        var oModification = Game.Classes[sClassName].OtherModifications[sModification];
+        oModification.performModification(cCharacter);
+        //cCharacter[oModification.bin][oModification.target] += oModification.value;
+      });
+  },
   RemoveClassFromChar: function(sClassName, cCharacter){
     if (!cCharacter.HasClass(sClassName)){ 
       return;
     }  
     
-    Game.BaseClassStatsList.forEach(function(sStat){
-      cCharacter.BaseClassStats[sStat] -= Game.Classes[sClassName].ClassStats[sStat];;
-    });   
+    Game.StatsList.forEach(function(sStat){
+      cCharacter.Stats[sStat] -= Game.Classes[sClassName].ClassStats[sStat];;
+    });
+         
+    Object.getOwnPropertyNames(Game.Classes[sClassName].ClassSkills).forEach(
+      function(sSkillName){
+        cCharacter.Skills[sSkillName] = Game.Classes[sClassName].ClassSkills[sSkillName];
+      });   
     
-    Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifiers).forEach(
-      function (sModifier){
-        var oModifier = Game.Classes[sClassName].OtherModifiers[sModifier];           
-        cCharacter[oModifier.bin][oModifier.target] -= oModifier.value;
+    Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
+      function (sModification){
+        var oModification = Game.Classes[sClassName].OtherModifications[sModification];           
+        oModification.undoModification(cCharacter, true);
+        //cCharacter[oModification.bin][oModification.target] -= oModification.value;
       });
     delete cCharacter.Classes[sClassName];
-  }      
+  } 
 };
-
- 

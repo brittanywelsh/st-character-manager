@@ -8,18 +8,16 @@ function Class(oClassInfo) {
   this.ClassSkills = new Object();
   this.OtherModifications = new Object();
   //this.Feats = oClassInfo.Feats;
-  this.Feats = Feats[ClassName];
+  this.Feats = Feats[this.ClassName];
   
 //  if (oClassInfo.ClassStats){
-    Game.BaseClassStatsList.forEach(function (sStat){
+    Game.StatsList.forEach(function (sStat){
       self.ClassStats[sStat] = oClassInfo.ClassStats[sStat] || 0;
     });                         
   //}   
 
   
-  Object.keys(OtherModifiers).forEach(function (sTarget){
+  Object.keys(this.OtherModifications).forEach(function (sTarget){
     self.OtherModifications[sTarget] = oClassInfo.OtherModifications[sTarget];
   });
-
-  
 };

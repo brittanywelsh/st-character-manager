@@ -22,8 +22,8 @@ function Character(sName) {
 }
 
 Character.prototype.AttributeScore = function (sAttributeName){
-  return this.BaseAttributeScore[sAttributeName] + //
-    this.AttributeModifier[sAttributeName];
+  return this.Attributes[sAttributeName].BaseValue + //
+    this.Attributes[sAttributeName].ModificationValue;
 } 
   
 Character.prototype.HasClass = function (sClassName){

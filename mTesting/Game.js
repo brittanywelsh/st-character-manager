@@ -47,8 +47,8 @@ var Game = {
   
   PointsUsed : function(cCharacter){
     var nSum = 0;
-    Game.AttributesList.forEach(function(sAttributeName){
-      nSum += PointsCost[cCharacter[sAttributeName].BaseValue];      
+    Game.AttributeList.forEach(function(sAttributeName){
+      nSum += Game.PointsCost[cCharacter.Attributes[sAttributeName].BaseValue];      
     });                                                        
     return nSum;
   },
@@ -57,52 +57,27 @@ var Game = {
         
     var nSum = 0;
     Game.AttributeList.forEach(function(sAttributeName){
-      if (sAttributeName == sAttribute){                                   
-        try{                                                              
-          nSum += PointsCost[cCharacter[sAttributeName].BaseValue + nPoints];
-        }catch(e){
-          if (nPoints >  0){
-            throw new Error('Value already at max!');
-          }                                          
-          else if ( nPoints < 0){                     
-            thrown new Error('Value already at min!');
-          }
-        } 
-      }           
-      else{
-        nSum += PointsCost[sCharacter[sAttributeName].BaseValue];
-      }                                                          
-      if (nSum > Game.BaseAttributeBuy.TotalPoints){
-        throw new Error('Not enough points!');
-      }
-      else {
-        cCharacter[sAttributeName].BaseValue += nPoints;
-      } 
+      if (sAttributeName == sAttribute){
+        var nNewBaseAttributeValue = cCharacter.Attributes[sAttributeName].BaseValue + nPoints;
+        if (nNewBaseAttributeValue > 18){
+          throw new RangeError('Value already at max!');
+        } else if (nNewBaseAttributeValue < 7){
+          throw new RangeError('Value already at min!');          
+        } else{
+          nSum += Game.PointsCost[nNewBaseAttributeValue];
+        }
+      } else{
+        nSum += Game.PointsCost[cCharacter.Attributes[sAttributeName].BaseValue];
+      }                       
     });
-  
-    nRemainingAttributeBuyPoints = Game.BaseAttributeBuy.TotalPoints - Game.PointsUsed(cCharacter);
-  
-    if (cCharacter.BaseAttributeScore[sAttribute] == 7 && nPoints < 0){
-    throw new Error("Value already at min!");
-    return;
-    }                                
-
-  
-    if (cCharacter.BaseAttributeScore[sAttribute] == 18 && nPoints > 0){
-      throw new Error("Value already at max!");
-      return;
-    }                         
-  
-
-    var pointsNeeded = Game.PointsCost[cCharacter.BaseAttributeScore[sAttribute]//
-      + nPoints] - Game.PointsCost[cCharacter.BaseAttributeScore[sAttribute]];
-    
-    if (pointsNeeded > nRemainingAttributeBuyPoints){
-      throw new Error("Not enough points remaining");
+                                       
+    if (nSum > Game.BaseAttributeBuy.TotalPoints){
+      throw new RangeError('Not enough points!');
     }
-    else{                                  
-      cCharacter.BaseAttributeScore[sAttribute] += nPoints;
-    }     
+    else {
+      cCharacter.Attributes[sAttribute].BaseValue += nPoints;
+    }               
+    return nSum;     
   },             
   
   //Class methods    

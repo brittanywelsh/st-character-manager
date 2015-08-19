@@ -56,11 +56,11 @@ function UpdateClassStatsTable(){
   var cCurrentCharacter = lCharacters[$("#STR").data("character-index")];
   Game.StatsList.forEach(function (sStat){
     if (sStat == "HitDice"){ 
-      var nDieValue = 6 + 2*cCurrentCharacter.Stats.HitDice
+      var nDieValue = 6 + 2*cCurrentCharacter.Stats.HitDice.BaseValue;
       $('#HitDice').text('D' + nDieValue);
     }                                                                              
     else{
-      $('#' + sStat).text(cCurrentCharacter.Stats[sStat]); 
+      $('#' + sStat).text(cCurrentCharacter.Stats[sStat].BaseValue); 
     } 
   }); 
 }

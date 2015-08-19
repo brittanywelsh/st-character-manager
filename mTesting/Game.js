@@ -2,7 +2,7 @@ var Feats = new Object(); //I don't know where to declare this...
 var Game = {
   AttributeList : ["STR", "CON", "DEX", "INT", "WIS", "CHA"],
   BaseAttributeBuy : {
-      StartingPoints: 15,
+      TotalPoints: 15,
       StartingAttributeScore: 10
   },
   PointsCost : {
@@ -27,22 +27,60 @@ var Game = {
                       
   CreateNewCharacter : function() {
     var ret = new Character(); 
-    ret.RemainingAttributeBuyPoints = Game.BaseAttributeBuy.StartingPoints;
     Game.AttributeList.forEach(
       function(sAttributeName){
-        ret.BaseAttributeScore[sAttributeName] = Game.BaseAttributeBuy.StartingAttributeScore;
-        ret.AttributeModifier[sAttributeName] = 0;
-      });                  
+        ret.Attributes[sAttributeName] = {
+          BaseValue: Game.BaseAttributeBuy.StartingAttributeScore,
+          ModificationValue: 0,                                    
+          }
+      });                    
+      
     Game.StatsList.forEach(
       function (sStatName){
-        ret.Stats[sStatName] = Game.StatsInitialScore;
-        ret.StatsModifier[sStatName] = 0;
-      }
-    );
+        ret.Stats[sStatName] = {
+        BaseValue: Game.StatsInitialScore,
+        ModificationValue: 0, 
+        }
+    });
     return ret;      
+  },                                                                                               
+  
+  PointsUsed : function(cCharacter){
+    var nSum = 0;
+    Game.AttributesList.forEach(function(sAttributeName){
+      nSum += PointsCost[cCharacter[sAttributeName].BaseValue];      
+    });                                                        
+    return nSum;
   },
   
   BuyAttributePointsForChar : function(cCharacter, sAttribute, nPoints) {
+        
+    var nSum = 0;
+    Game.AttributeList.forEach(function(sAttributeName){
+      if (sAttributeName == sAttribute){                                   
+        try{                                                              
+          nSum += PointsCost[cCharacter[sAttributeName].BaseValue + nPoints];
+        }catch(e){
+          if (nPoints >  0){
+            throw new Error('Value already at max!');
+          }                                          
+          else if ( nPoints < 0){                     
+            thrown new Error('Value already at min!');
+          }
+        } 
+      }           
+      else{
+        nSum += PointsCost[sCharacter[sAttributeName].BaseValue];
+      }                                                          
+      if (nSum > Game.BaseAttributeBuy.TotalPoints){
+        throw new Error('Not enough points!');
+      }
+      else {
+        cCharacter[sAttributeName].BaseValue += nPoints;
+      } 
+    });
+  
+    nRemainingAttributeBuyPoints = Game.BaseAttributeBuy.TotalPoints - Game.PointsUsed(cCharacter);
   
     if (cCharacter.BaseAttributeScore[sAttribute] == 7 && nPoints < 0){
     throw new Error("Value already at min!");
@@ -59,11 +97,10 @@ var Game = {
     var pointsNeeded = Game.PointsCost[cCharacter.BaseAttributeScore[sAttribute]//
       + nPoints] - Game.PointsCost[cCharacter.BaseAttributeScore[sAttribute]];
     
-    if (pointsNeeded > cCharacter.RemainingAttributeBuyPoints){
+    if (pointsNeeded > nRemainingAttributeBuyPoints){
       throw new Error("Not enough points remaining");
     }
     else{                                  
-      cCharacter.RemainingAttributeBuyPoints -= pointsNeeded;
       cCharacter.BaseAttributeScore[sAttribute] += nPoints;
     }     
   },             

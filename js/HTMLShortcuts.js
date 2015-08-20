@@ -51,6 +51,16 @@ var HTMLShortcuts = (function () {
     return outputString;
   };
 
+  var encloseInForm = function(string) {
+    outputString = '<form>' + string + '</form>';
+    return outputString;
+  }
+
+  var encloseInLabel = function(label, string) {
+    outputString = '<label>' + label + string + '</label>';
+    return outputString;
+  }
+
   /* Methods using Foundation css */
   var f_encloseInDivClassRow = function(string) {
     outputString = '<div class="row">' + string + '</div>';
@@ -64,7 +74,6 @@ var HTMLShortcuts = (function () {
     if (nLarge) { classString = classString + ' small-' + nLarge; };
     classString += ' columns';
     outputString = '<div class="' + classString + '">' + string + '</div>';
-    console.log(outputString);
     return outputString;
   };
 
@@ -93,6 +102,10 @@ var HTMLShortcuts = (function () {
     encloseInCenteredDiv: encloseInCenteredDiv,
     encloseInLeftDiv: encloseInLeftDiv,
     encloseInRightDiv: encloseInRightDiv,
+    encloseInForm: encloseInForm,
+    encloseInLabel: encloseInLabel,
+
+//    asTextInput: asTextInput,
 
     f_encloseInDivClassRow: f_encloseInDivClassRow,
     f_encloseInDivClassColumns: f_encloseInDivClassColumns,

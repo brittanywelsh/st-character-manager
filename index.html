@@ -19,9 +19,9 @@
     <script src="bTesting/Character.js"></script>
     <script src="js/CharacterView.js"></script>
     <script src="js/CharacterController.js"></script>
-    <!--<script src="js/Attributes.js"></script>
+    <script src="js/Attributes.js"></script>
     <script src="js/AttributesView.js"></script>
-    <script src="js/AttributesController.js"></script>-->
+    <!--<script src="js/AttributesController.js"></script>-->
     <script src="bTesting/MainController.js"></script>
 
   </head>
@@ -46,13 +46,13 @@
       <li><a href="#" id="button-new-character" class="medium button">New</a></li>
       <li><a href="#" id="button-save-character" class="medium success button">Save</a></li>
       <li><a href="#" id="button-remove-character" class="medium alert button">Remove</a></li>
-      <li><a href="#" data-dropdown="character-list" aria-controls="character-list" aria-expanded="false" class="button dropdown">Choose Character</a><ul id="character-list" data-dropdown-content class="f-dropdown" aria-hidden="true"></ul></li>
+      <li><a href="#" data-dropdown="dropdown-character-list" aria-controls="character-list" aria-expanded="false" class="button dropdown">Choose Character</a><ul id="character-list" data-dropdown-content class="f-dropdown" aria-hidden="true"></ul></li>
     </ul>
     </div>
     <!-- Tab for Selector/Work Area -->
     <div class="right">
 			<ul class="tabs" data-tab>
-        <li class="tab-title active"><a href="#panel-attributes">Character Attributes</a></li>
+        <li id="button-attributes" class="tab-title active"><a href="#panel-attributes">Character Attributes</a></li>
         <li class="tab-title"><a href="#panel-skills">Skills</a></li>
         <li class="tab-title"><a href="#panel-race">Race</a></li>
         <li class="tab-title"><a href="#panel-classes">Classes</a></li>
@@ -101,6 +101,7 @@
     });
     console.log("! Page loaded.");
   </script>
+  <script src="js/jQueryBindings.js"></script>
 
   </body>
 </html>

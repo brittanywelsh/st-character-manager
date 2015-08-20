@@ -1,8 +1,8 @@
 var Attributes = (function () {
 
   /* Local Variables */
-  var attributeList: ["STR", "CON", "DEX", "INT", "WIS", "CHA"];
-  var pointsCost: {
+  var attributeList = ["STR", "CON", "DEX", "INT", "WIS", "CHA"];
+  var pointsCost = {
     "7":-4,
     "8":-2,
     "9":-1,
@@ -14,7 +14,7 @@ var Attributes = (function () {
     "15":7,
     "16":10,
     "17":13,
-    "18":17
+    "18":17,
   };
 
   /* Methods */
@@ -23,7 +23,7 @@ var Attributes = (function () {
   };
 
   var getPointsCost = function(nPoints) {
-    return pointsCost;
+    return pointsCost[nPoints];
   };
 
   /* Public Methods */

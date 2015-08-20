@@ -3,6 +3,10 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## August 17, 2015 (meeting)
+- At end of project, let's re-evaluate whether jQuery actually was useful (did it save us time? memory? was it more elegant, or more readable code?).
+- Figured out a basic responsive input form (to change the character name). Good start!
+
 ## August 5, 2015 (BRITTANY)
 - Finalized CharacterController.js, with methods for adding, removing and
 selecting characters. All works fine.

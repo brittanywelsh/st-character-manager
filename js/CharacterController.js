@@ -91,25 +91,3 @@ var CharacterController = (function () {
   };
 
 })();
-
-/* jQuery Event Hooks */
-
-$(document).ready(function(){ 
-
-  // Adds a new character.
-  $("#button-new-character").on('click', function() {
-    CharacterController.createNewCharacter();
-  });
-
-  // Change selected character.
-  $("#character-list").on('click', 'li', function() {
-    var indexOfNode = HTMLShortcuts.getIndexOfChildNode(this);
-    CharacterController.selectCharacterByIndex(indexOfNode);
-  });
-
-  // Remove selected character from application memory.
-  $("#button-remove-character").on('click', function() {
-    CharacterController.removeSelectedCharacter();
-  });
-
-});

@@ -1,4 +1,5 @@
 function initializeApplication() {
   console.log("Initializing application...");
-  CharacterController.createNewCharacter("Mario", 1, "M", "Good");
+  var newCharacter = CharacterController.createNewCharacter("Mario", 1, "M", "Good");
+  AttributesView.generateViewOfAttributeBuyer( newCharacter );
 }

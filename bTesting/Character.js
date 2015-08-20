@@ -12,7 +12,7 @@ function Character(sName, sLevel, sGender, sAlignment) {
     'STR': {
       Tooltip: 'Strength',
       Primary: 0,
-      AddOns: [],
+      AddOns: [['Race Modifier', '+', 3,],],
     }
   }
   //this.AttributeModifier = new Object(); // this should be a method call. revisit.

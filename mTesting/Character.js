@@ -25,7 +25,30 @@ Character.prototype.AttributeScore = function (sAttributeName){
   return this.Attributes[sAttributeName].BaseValue + //
     this.Attributes[sAttributeName].ModificationValue;
 } 
+
+Character.prototype.StatScore = function(sStatName){
+  var nSum = 0; 
+  var lStatContributors = Object.keys(this.Stats[sStatName]);
+  var self = this;
+  
+  lStatContributors.forEach(function (sContributor){
+    nSum += self.Stats[sStatName][sContributor];
+  });                                            
+  return nSum;
+}
+
+Character.prototype.SkillScore = function(sSkillName){
+  var nSum = 0; 
+  var lSkillContributors = Object.keys(this.Skills[sSkillName]);
+  var self = this;
+  
+  lSkillContributors.forEach(function (sContributor){
+    nSum += self.Skills[sSkillName][sContributor];
+  });                                            
+  return nSum;
+  
+}
   
 Character.prototype.HasClass = function (sClassName){
-  return (sClassName in this.Classes); 
+  return (sClassName in this.Classes);
 }

@@ -22,7 +22,7 @@ var Game = {
   
   StatsList : ["HitDice", "SkillsPerLevel", "Attack",// 
     "Defence", "Initiative", "Charges", "Mutations", "Will",//
-    "Fortitude", "Reflex"],
+    "Fortitude", "Reflexes"],
   StatsInitialScore : 0,
                       
   CreateNewCharacter : function() {
@@ -37,10 +37,7 @@ var Game = {
       
     Game.StatsList.forEach(
       function (sStatName){
-        ret.Stats[sStatName] = {
-        BaseValue: Game.StatsInitialScore,
-        ModificationValue: 0, 
-        }
+        ret.Stats[sStatName] = new Object();
     });
     return ret;      
   },                                                                                               
@@ -92,29 +89,39 @@ var Game = {
       return;
     }
     cCharacter.Classes[sClassName] = sClassName;
-    Game.StatsList.forEach(function(sStat){
-      cCharacter.Stats[sStat] += Game.Classes[sClassName].ClassStats[sStat];
-    });
+    
+    Object.keys(Game.Classes[sClassName].ClassStats).forEach(function(sStat){
+      cCharacter.Stats[sStat][sClassName] = Game.Classes[sClassName].ClassStats[sStat];
+    });                                                            
+      
+    /*
+    Object.keys(Game.Classes[sClassName].ClassSkills).forEach(function(sSkill){
+      cCharacter.Skills[sSkill][sClassName] = Game.Classes[sClassName].ClassSkills[sSkill];
+    });  
+    */
+    
     Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
       function (sModification){ 
         var oModification = Game.Classes[sClassName].OtherModifications[sModification];
         oModification.performModification(cCharacter);
-        //cCharacter[oModification.bin][oModification.target] += oModification.value;
       });
-  },
+  },                                               
+  
   RemoveClassFromChar: function(sClassName, cCharacter){
     if (!cCharacter.HasClass(sClassName)){ 
       return;
     }  
     
-    Game.StatsList.forEach(function(sStat){
-      cCharacter.Stats[sStat] -= Game.Classes[sClassName].ClassStats[sStat];;
+    Object.keys(Game.Classes[sClassName].ClassStats).forEach(function(sStat){
+      delete cCharacter.Stats[sStat][sClassName];
     });
-         
-    Object.getOwnPropertyNames(Game.Classes[sClassName].ClassSkills).forEach(
-      function(sSkillName){
-        cCharacter.Skills[sSkillName] = Game.Classes[sClassName].ClassSkills[sSkillName];
-      });   
+        
+    /* 
+    Object.keys(Game.Classes[sClassName].ClassSkills).forEach(
+      function(sStatName){
+        cCharacter.Stats[sStatName] = Game.Classes[sClassName].ClassStats[sStatName];
+      });                                          
+      */
     
     Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
       function (sModification){

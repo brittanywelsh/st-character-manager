@@ -54,13 +54,14 @@ function BindClassToChar(event){
 
 function UpdateClassStatsTable(){
   var cCurrentCharacter = lCharacters[$("#STR").data("character-index")];
-  Game.StatsList.forEach(function (sStat){
+  Game.StatsList.forEach(function (sStat){                               
+    //console.log(cCurrentCharacter.Stats[sStat], cCurrentCharacter.StatScore[sStat]);
     if (sStat == "HitDice"){ 
-      var nDieValue = 6 + 2*cCurrentCharacter.Stats.HitDice.BaseValue;
+      var nDieValue = 6 + 2*cCurrentCharacter.StatScore(sStat);
       $('#HitDice').text('D' + nDieValue);
     }                                                                              
     else{
-      $('#' + sStat).text(cCurrentCharacter.Stats[sStat].BaseValue); 
+      $('#' + sStat).text(cCurrentCharacter.StatScore(sStat)); 
     } 
   }); 
 }

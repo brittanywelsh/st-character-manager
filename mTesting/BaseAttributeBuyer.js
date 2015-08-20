@@ -75,7 +75,7 @@ function BindCharacterToView(Character){
     
   
   $("#PTS").data("character-index", Character.index);
-  $("#PTS").text(Character.RemainingAttributeBuyPoints);
+  $("#PTS").text(15 - Game.PointsUsed(Character));
   
   //Update Class stats
   UpdateClassStatsTable();
@@ -113,10 +113,14 @@ function ChangeAttributePoints(event){
     Game.BuyAttributePointsForChar(Character, attribute, modifier);
   }
   catch(e){
-    $('#message').text(e.message);  
+    if (e instanceof RangeError){
+      $('#message').text(e.message);
+    } else{
+      throw e;
+    } 
   }                              
   finally{
-    $("#PTS").text(Character.RemainingAttributeBuyPoints);
+    $("#PTS").text(15 - Game.PointsUsed(Character));
     $("#"+attribute).text(Character.AttributeScore(attribute));  
   }
 }

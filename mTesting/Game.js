@@ -2,7 +2,7 @@ var Feats = new Object(); //I don't know where to declare this...
 var Game = {
   AttributeList : ["STR", "CON", "DEX", "INT", "WIS", "CHA"],
   BaseAttributeBuy : {
-      StartingPoints: 15,
+      TotalPoints: 15,
       StartingAttributeScore: 10
   },
   PointsCost : {
@@ -22,50 +22,59 @@ var Game = {
   
   StatsList : ["HitDice", "SkillsPerLevel", "Attack",// 
     "Defence", "Initiative", "Charges", "Mutations", "Will",//
-    "Fortitude", "Reflex"],
+    "Fortitude", "Reflexes"],
   StatsInitialScore : 0,
                       
   CreateNewCharacter : function() {
     var ret = new Character(); 
-    ret.RemainingAttributeBuyPoints = Game.BaseAttributeBuy.StartingPoints;
     Game.AttributeList.forEach(
       function(sAttributeName){
-        ret.BaseAttributeScore[sAttributeName] = Game.BaseAttributeBuy.StartingAttributeScore;
-        ret.AttributeModifier[sAttributeName] = 0;
-      });                  
+        ret.Attributes[sAttributeName] = {
+          BaseValue: Game.BaseAttributeBuy.StartingAttributeScore,
+          ModificationValue: 0,                                    
+          }
+      });                    
+      
     Game.StatsList.forEach(
       function (sStatName){
-        ret.Stats[sStatName] = Game.StatsInitialScore;
-        ret.StatsModifier[sStatName] = 0;
-      }
-    );
+        ret.Stats[sStatName] = new Object();
+    });
     return ret;      
+  },                                                                                               
+  
+  PointsUsed : function(cCharacter){
+    var nSum = 0;
+    Game.AttributeList.forEach(function(sAttributeName){
+      nSum += Game.PointsCost[cCharacter.Attributes[sAttributeName].BaseValue];      
+    });                                                        
+    return nSum;
   },
   
   BuyAttributePointsForChar : function(cCharacter, sAttribute, nPoints) {
-  
-    if (cCharacter.BaseAttributeScore[sAttribute] == 7 && nPoints < 0){
-    throw new Error("Value already at min!");
-    return;
-    }                                
-
-  
-    if (cCharacter.BaseAttributeScore[sAttribute] == 18 && nPoints > 0){
-      throw new Error("Value already at max!");
-      return;
-    }                         
-  
-
-    var pointsNeeded = Game.PointsCost[cCharacter.BaseAttributeScore[sAttribute]//
-      + nPoints] - Game.PointsCost[cCharacter.BaseAttributeScore[sAttribute]];
-    
-    if (pointsNeeded > cCharacter.RemainingAttributeBuyPoints){
-      throw new Error("Not enough points remaining");
+        
+    var nSum = 0;
+    Game.AttributeList.forEach(function(sAttributeName){
+      if (sAttributeName == sAttribute){
+        var nNewBaseAttributeValue = cCharacter.Attributes[sAttributeName].BaseValue + nPoints;
+        if (nNewBaseAttributeValue > 18){
+          throw new RangeError('Value already at max!');
+        } else if (nNewBaseAttributeValue < 7){
+          throw new RangeError('Value already at min!');          
+        } else{
+          nSum += Game.PointsCost[nNewBaseAttributeValue];
+        }
+      } else{
+        nSum += Game.PointsCost[cCharacter.Attributes[sAttributeName].BaseValue];
+      }                       
+    });
+                                       
+    if (nSum > Game.BaseAttributeBuy.TotalPoints){
+      throw new RangeError('Not enough points!');
     }
-    else{                                  
-      cCharacter.RemainingAttributeBuyPoints -= pointsNeeded;
-      cCharacter.BaseAttributeScore[sAttribute] += nPoints;
-    }     
+    else {
+      cCharacter.Attributes[sAttribute].BaseValue += nPoints;
+    }               
+    return nSum;     
   },             
   
   //Class methods    
@@ -80,29 +89,39 @@ var Game = {
       return;
     }
     cCharacter.Classes[sClassName] = sClassName;
-    Game.StatsList.forEach(function(sStat){
-      cCharacter.Stats[sStat] += Game.Classes[sClassName].ClassStats[sStat];
-    });
+    
+    Object.keys(Game.Classes[sClassName].ClassStats).forEach(function(sStat){
+      cCharacter.Stats[sStat][sClassName] = Game.Classes[sClassName].ClassStats[sStat];
+    });                                                            
+      
+    /*
+    Object.keys(Game.Classes[sClassName].ClassSkills).forEach(function(sSkill){
+      cCharacter.Skills[sSkill][sClassName] = Game.Classes[sClassName].ClassSkills[sSkill];
+    });  
+    */
+    
     Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
       function (sModification){ 
         var oModification = Game.Classes[sClassName].OtherModifications[sModification];
         oModification.performModification(cCharacter);
-        //cCharacter[oModification.bin][oModification.target] += oModification.value;
       });
-  },
+  },                                               
+  
   RemoveClassFromChar: function(sClassName, cCharacter){
     if (!cCharacter.HasClass(sClassName)){ 
       return;
     }  
     
-    Game.StatsList.forEach(function(sStat){
-      cCharacter.Stats[sStat] -= Game.Classes[sClassName].ClassStats[sStat];;
+    Object.keys(Game.Classes[sClassName].ClassStats).forEach(function(sStat){
+      delete cCharacter.Stats[sStat][sClassName];
     });
-         
-    Object.getOwnPropertyNames(Game.Classes[sClassName].ClassSkills).forEach(
-      function(sSkillName){
-        cCharacter.Skills[sSkillName] = Game.Classes[sClassName].ClassSkills[sSkillName];
-      });   
+        
+    /* 
+    Object.keys(Game.Classes[sClassName].ClassSkills).forEach(
+      function(sStatName){
+        cCharacter.Stats[sStatName] = Game.Classes[sClassName].ClassStats[sStatName];
+      });                                          
+      */
     
     Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
       function (sModification){

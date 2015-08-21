@@ -15,7 +15,8 @@ function UnitTest(){
       } 
       catch(e){  
         if ( e instanceof Error) TestResults[sTestName] = "Threw exception: " + e.message;
-        else TestResults[sTestName] = "Threw exception: " + e; 
+        else TestResults[sTestName] = "Threw exception: " + e;
+        console.log(e); 
       }
     });
     return TestResults;
@@ -32,7 +33,9 @@ function UnitTest(){
         TestResult = (bOutput) ? "Passed!": "Failed!"; 
       }
     } catch(e){
-        TestResult = "Threw exception: " + e.message; 
+        if ( e instanceof Error) TestResults[sTestName] = "Threw exception: " + e.message;
+        else TestResults[sTestName] = "Threw exception: " + e;
+        console.log(e);  
     }
   return TestResult;
   }

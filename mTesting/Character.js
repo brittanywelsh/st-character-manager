@@ -28,8 +28,14 @@ Character.prototype.AttributeScore = function (sAttributeName){
 
 Character.prototype.StatScore = function(sStatName){
   var nSum = 0; 
-  var lStatContributors = Object.keys(this.Stats[sStatName]);
-  var self = this;
+  var lStatContributors = [];
+  var self = this;                                       
+  
+  if (!this.Stats[sStatName]){
+    return 0;
+  }
+  
+  lStatContributors = Object.keys(this.Stats[sStatName]);
   
   lStatContributors.forEach(function (sContributor){
     nSum += self.Stats[sStatName][sContributor];
@@ -38,9 +44,15 @@ Character.prototype.StatScore = function(sStatName){
 }
 
 Character.prototype.SkillScore = function(sSkillName){
-  var nSum = 0; 
-  var lSkillContributors = Object.keys(this.Skills[sSkillName]);
+  var nSum = 0;
   var self = this;
+  var lSkillContributors = [];         
+  
+  if (!this.Skills[sSkillName]){
+    return 0;
+  }
+                              
+  lSkillContributors = Object.keys(self.Skills[sSkillName]);
   
   lSkillContributors.forEach(function (sContributor){
     nSum += self.Skills[sSkillName][sContributor];

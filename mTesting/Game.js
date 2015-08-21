@@ -24,24 +24,7 @@ var Game = {
     "Defence", "Initiative", "Charges", "Mutations", "Will",//
     "Fortitude", "Reflexes"],
   StatsInitialScore : 0,
-                      
-  CreateNewCharacter : function() {
-    var ret = new Character(); 
-    Game.AttributeList.forEach(
-      function(sAttributeName){
-        ret.Attributes[sAttributeName] = {
-          BaseValue: Game.BaseAttributeBuy.StartingAttributeScore,
-          ModificationValue: 0,                                    
-          }
-      });                    
-      
-    Game.StatsList.forEach(
-      function (sStatName){
-        ret.Stats[sStatName] = new Object();
-    });
-    return ret;      
-  },                                                                                               
-  
+    
   PointsUsed : function(cCharacter){
     var nSum = 0;
     Game.AttributeList.forEach(function(sAttributeName){
@@ -76,59 +59,4 @@ var Game = {
     }               
     return nSum;     
   },             
-  
-  //Class methods    
-  ClassAvailableTo: function(sClassName, cCharacter){
-    //TEMPORARY
-    return !(cCharacter.HasClass(sClassName));
-  },
-  
-  AddClassToChar: function(sClassName, cCharacter){
-    if (!this.ClassAvailableTo(sClassName, cCharacter)){
-      throw new Error("Cannot choose this class!");
-      return;
-    }
-    cCharacter.Classes[sClassName] = sClassName;
-    
-    Object.keys(Game.Classes[sClassName].ClassStats).forEach(function(sStat){
-      cCharacter.Stats[sStat][sClassName] = Game.Classes[sClassName].ClassStats[sStat];
-    });                                                            
-      
-    /*
-    Object.keys(Game.Classes[sClassName].ClassSkills).forEach(function(sSkill){
-      cCharacter.Skills[sSkill][sClassName] = Game.Classes[sClassName].ClassSkills[sSkill];
-    });  
-    */
-    
-    Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
-      function (sModification){ 
-        var oModification = Game.Classes[sClassName].OtherModifications[sModification];
-        oModification.performModification(cCharacter);
-      });
-  },                                               
-  
-  RemoveClassFromChar: function(sClassName, cCharacter){
-    if (!cCharacter.HasClass(sClassName)){ 
-      return;
-    }  
-    
-    Object.keys(Game.Classes[sClassName].ClassStats).forEach(function(sStat){
-      delete cCharacter.Stats[sStat][sClassName];
-    });
-        
-    /* 
-    Object.keys(Game.Classes[sClassName].ClassSkills).forEach(
-      function(sStatName){
-        cCharacter.Stats[sStatName] = Game.Classes[sClassName].ClassStats[sStatName];
-      });                                          
-      */
-    
-    Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
-      function (sModification){
-        var oModification = Game.Classes[sClassName].OtherModifications[sModification];           
-        oModification.undoModification(cCharacter, true);
-        //cCharacter[oModification.bin][oModification.target] -= oModification.value;
-      });
-    delete cCharacter.Classes[sClassName];
-  } 
 };

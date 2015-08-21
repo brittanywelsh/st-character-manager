@@ -4,7 +4,7 @@ Game.Classes = {
     PrimaryAttribute: "WIS", 
     ClassStats:{HitDice: 1, SkillsPerLevel: 1, Charges: 1, Will: 1, Fortitude:1},
     ClassSkills:{Medical: 3}, 
-    Feats:Feats.Medic
+    //Feats:Feats.Medic
   }),  
   Chronographer : new Class({
     Name: "Chronographer",
@@ -24,16 +24,10 @@ Game.Classes = {
     Name: "Supercharger",
     PrimaryAttribute: "WIS",
     ClassStats: {HitDice: 1, Charges: 1, Will: 2, SkillsPerLevel: 1,},
-    ClassSkills: { DisableDevice: 2},
-    OtherModifications: {
-      LightArmourProf: new StatModification(
-        //"ArmourProficiencies",//path
-        "Proficiencies",//path
-        "LightArmour",//target
-        1//modificationValue
-      )
-    },
-  }),
+    ClassSkills: { DisableDevice: 2}, 
+    Proficiencies: { LightArmour: 1}
+  }),                               
+  
   Predator: new Class({
     Name: "Predator",
     PrimaryAttribute: "STR",

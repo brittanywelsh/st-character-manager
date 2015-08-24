@@ -1,11 +1,14 @@
 var cCharacter;
 
 var uTester = new UnitTest();
+var uTester2Classes = new UnitTest();
 
 function resetTestingVariables(){
   cCharacter = null;
   cCharacter = Game.CreateNewCharacter();
 }
+
+uTester.title = "Tests involving one class";
 
 uTester.addTest("Class name added to character's class list", function(){
   resetTestingVariables();
@@ -90,16 +93,16 @@ uTester.addTest("removeClass method removes skills appropriately (single class)"
                                                                                
 });
 
-uTester.addTest("addClass method applies other modifications to character appropriately (single class)", function(){
+uTester.addTest("addClass method applies profiencies to character appropriately (single class)", function(){
   resetTestingVariables();
     
   Game.AddClassToChar("Supercharger", cCharacter); 
           
-  return (cCharacter.Proficiencies.LightArmour == 1);
+  return (cCharacter.ProficiencyScore("LightArmour") == 1);
   
 });
 
-uTester.addTest("removeClass method removes other modifications to character appropriately (single class)", function(){
+uTester.addTest("removeClass method removes proficiencies to character appropriately (single class)", function(){
   resetTestingVariables();                             
   
   Game.AddClassToChar("Supercharger", cCharacter);
@@ -108,14 +111,73 @@ uTester.addTest("removeClass method removes other modifications to character app
   if ("LightArmour" in cCharacter.Proficiencies){
     throw "LightArmour not deleted " + cCharacter.Proficiencies.LightArmour;
   }
+  return cCharacter.ProficiencyScore("LightArmour") == 0;
   
   
 });
 
-uTester.addTest("Test", function(){
+uTester2Classes.title = "Tests involving 2 classes";
 
+uTester2Classes.addTest("Cannot add same class twice", function(){
+  resetTestingVariables();
+  
+  Game.AddClassToChar("Medic", cCharacter);
+  try{
+    Game.AddClassToChar("Medic", cCharacter);
+  } catch (e){
+    if (e.message == "Cannot choose this class!") return true;
+    throw e; 
+  }         
+  return false;
 });
+
+uTester2Classes.addTest("Adding two different classes provides correct list of class names",
+  function(){
+    resetTestingVariables();
+    var bChecksOut = true;
+                                     
+    Game.AddClassToChar("Medic", cCharacter);
+    Game.AddClassToChar("Webmaster", cCharacter);
+    
+    bChecksOut = Object.keys(cCharacter.Classes).length == 2;
+    bChecksOut = bChecksOut && cCharacter.Classes.Medic == "Medic";
+    bChecksOut = bChecksOut && cCharacter.Classes.Webmaster == "Webmaster";
+    
+    return bChecksOut;      
+  }
+);
+
+uTester2Classes.addTest("Adding two different classes provides the correct stat scores",
+  function(){                                                                           
+    resetTestingVariables();
+    var bChecksOut = true;
+    var oExpectedStatValues = {
+      HitDice: 1 + 0,
+      SkillsPerLevel: 1 + 2,      
+      Attack: 0,
+      Defence: 0,
+      Initiative: 0,
+      Charges: 1 + 1,
+      Mutations: 0,
+      Will: 1 + 0,
+      Fortitude: 1 + 0,
+      Reflexes: 0 + 2
+    };
+    
+    Game.AddClassToChar("Medic", cCharacter);
+    Game.AddClassToChar("Webmaster", cCharacter);
+    
+    Game.StatsList.forEach(function (sStatName){
+      bChecksOut = (bChecksOut && cCharacter.StatScore(sStatName) == oExpectedStatValues[sStatName]);       
+      if (cCharacter.StatScore(sStatName) != oExpectedStatValues[sStatName]){
+        console.log(sStatName, "Actual Value:", cCharacter.StatScore(sStatName), "Expected Value:", oExpectedStatValues[sStatName]);
+      }
+    });             
+    return bChecksOut
+  }
+);
 
 window.onload = function(){
-  uTester.runInHTML();
+  uTester.runInHTML();    
+  uTester2Classes.runInHTML();    
 };         

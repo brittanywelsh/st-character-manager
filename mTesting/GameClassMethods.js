@@ -20,7 +20,14 @@ Game.AddClassToChar = function(sClassName, cCharacter){
       cCharacter.Skills[sSkill] = new Object();
     }
     cCharacter.Skills[sSkill][sClassName] = Game.Classes[sClassName].ClassSkills[sSkill];
-  });  
+  });         
+  
+  Object.keys(Game.Classes[sClassName].ClassProficiencies).forEach(function(sProficiency){
+    if (!cCharacter.Proficiencies[sProficiency]){
+      cCharacter.Proficiencies[sProficiency] = new Object();
+    }                                                       
+    cCharacter.Proficiencies[sProficiency][sClassName] = Game.Classes[sClassName].ClassProficiencies[sProficiency];
+  });
     
   Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
     function (sModification){ 
@@ -46,7 +53,11 @@ Game.RemoveClassFromChar = function(sClassName, cCharacter){
         delete cCharacter.Skills[sSkillName];
       }
     }
-  );
+  );                       
+  
+  Object.keys(Game.Classes[sClassName].ClassProficiencies).forEach(function(sProficiencyName){
+    delete cCharacter.Proficiencies[sProficiencyName][sClassName];
+  });
   
   Object.getOwnPropertyNames(Game.Classes[sClassName].OtherModifications).forEach(
     function (sModification){
@@ -55,4 +66,5 @@ Game.RemoveClassFromChar = function(sClassName, cCharacter){
       //cCharacter[oModification.bin][oModification.target] -= oModification.value;
     });
   delete cCharacter.Classes[sClassName];
+  cCharacter.clean();
 } 

@@ -9,6 +9,8 @@ table 100% of the screen width.  This makes it easier to distinguish between
 different groups of tests.
 - Further modified the presentation of the Unit Tests to make the results 
 column dynamically as small as is possible.  Also added headers.
+- I've finished testing the add and remove class methods for single classes.
+- Begun testing the add and remove class methods for two classes.
 
 ## August 17, 2015 (meeting)
 - At end of project, let's re-evaluate whether jQuery actually was useful (did it save us time? memory? was it more elegant, or more readable code?).

@@ -3,6 +3,13 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## August 24, 2015 (MIKE)
+- Modified the UnitTest Class to include a title for the table and to make the 
+table 100% of the screen width.  This makes it easier to distinguish between 
+different groups of tests.
+- Would like to further modify the presentation of the Unit Tests to make the 
+results column dynamically as small as is possible.
+
 ## August 17, 2015 (meeting)
 - At end of project, let's re-evaluate whether jQuery actually was useful (did it save us time? memory? was it more elegant, or more readable code?).
 - Figured out a basic responsive input form (to change the character name). Good start!

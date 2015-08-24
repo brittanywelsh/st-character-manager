@@ -1,4 +1,5 @@
 function UnitTest(){
+  this.title = "Tests";
   var Tests = new Object();  
          
   this.run = function(){ 
@@ -62,8 +63,15 @@ function UnitTest(){
 
 UnitTest.prototype.runInHTML = function(){
   var TestTable = document.createElement('Table');
-  TestTable.border = "1"; 
+  var THead = TestTable.createTHead();
+  var TitleRow = THead.insertRow();
+  var TitleCell = TitleRow.insertCell();
+  TitleCell.colSpan = 2;
+  TitleCell.innerHTML = '<b>' + this.title + '</b>';
+  TestTable.border = "1";             
+  TestTable.width = "100%";
   document.body.appendChild(TestTable);
+  
   var Results = this.run();
   this.getTestNames().forEach(function (sTestName){
     var newRow = TestTable.insertRow();

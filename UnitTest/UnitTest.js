@@ -65,11 +65,21 @@ UnitTest.prototype.runInHTML = function(){
   var TestTable = document.createElement('Table');
   var THead = TestTable.createTHead();
   var TitleRow = THead.insertRow();
-  var TitleCell = TitleRow.insertCell();
+  var TitleCell = TitleRow.insertCell(); 
+  var LabelRow = THead.insertRow();
+  var TestNameCell = LabelRow.insertCell();
+  var ResultNameCell = LabelRow.insertCell();
+  
   TitleCell.colSpan = 2;
   TitleCell.innerHTML = '<b>' + this.title + '</b>';
+  
   TestTable.border = "1";             
   TestTable.width = "100%";
+  
+  TestNameCell.width = "100%";
+  TestNameCell.innerHTML = "<b>Test Name</b>";
+  ResultNameCell.innerHTML = "<b>Result</b>";
+  
   document.body.appendChild(TestTable);
   
   var Results = this.run();

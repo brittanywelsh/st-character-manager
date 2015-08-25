@@ -177,6 +177,63 @@ uTester2Classes.addTest("Adding two different classes provides the correct stat 
   }
 );
 
+uTester2Classes.addTest("Adding two classes provides the correct skills",
+  function(){
+    resetTestingVariables();
+    var bChecksOut = true;
+    var oExpectedSkillScores = {
+      DisableDevice: 2,
+      HandleAnimal: 1,
+      KnowledgeNature: 1,
+      Medical: 0
+    };
+    var lTestSkills = ["DisableDevice", 'HandleAnimal', 'KnowledgeNature', 'Medical'];
+    
+    Game.AddClassToChar("Supercharger", cCharacter);
+    Game.AddClassToChar("Predator", cCharacter);
+    
+    bChecksOut = Object.keys(cCharacter.Skills).length == 3;
+    if (bChecksOut == false) console.log(Object.keys(cCharacter.Skills));
+    
+    lTestSkills.forEach(function(sSkillName){
+      var bSkillScoreMatches = cCharacter.SkillScore(sSkillName) == oExpectedSkillScores[sSkillName];
+      bChecksOut = bChecksOut && bSkillScoreMatches;
+      if (bSkillScoreMatches == false){
+        console.log(sSkillName, 'Expected Value: ', oExpectedSkillScores[sSkillName], 'Actual value: ', cCharacter.SkillScore(sSkillName));
+      }
+    });
+    return bChecksOut;     
+  }
+);
+
+uTester2Classes.addTest("Adding two classes provides correct proficiencies",
+  function(){
+    resetTestingVariables();
+    var bChecksOut = true;
+    var oExpectedProficiencyScores = {
+      LightArmour: 1,
+      Terrorfex: 0,
+    };
+    var lTestProficiencies = Object.keys(oExpectedProficiencyScores);
+    
+    
+    Game.AddClassToChar("Supercharger", cCharacter);
+    Game.AddClassToChar("Predator", cCharacter);
+    
+    bChecksOut = Object.keys(cCharacter.Skills).length == 3;
+    if (bChecksOut == false) console.log(Object.keys(cCharacter.Skills));
+    
+    lTestSkills.forEach(function(sSkillName){
+      var bSkillScoreMatches = cCharacter.SkillScore(sSkillName) == oExpectedSkillScores[sSkillName];
+      bChecksOut = bChecksOut && bSkillScoreMatches;
+      if (bSkillScoreMatches == false){
+        console.log(sSkillName, 'Expected Value: ', oExpectedSkillScores[sSkillName], 'Actual value: ', cCharacter.SkillScore(sSkillName));
+      }
+    });
+    return bChecksOut;     
+  }
+);
+
 window.onload = function(){
   uTester.runInHTML();    
   uTester2Classes.runInHTML();    

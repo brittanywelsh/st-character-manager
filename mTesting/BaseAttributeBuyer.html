@@ -8,8 +8,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
                
   <script src="Character.js"></script>
-  <script src = "Game.js"></script>
-  <script src = "Feat.js"></script>
+  <script src="Game.js"></script>
+  <script src="GameCreateNewCharacter.js"></script>
+  <script src="Feat.js"></script>
   <script src="MedicFeats.js"></script>
   <script src="Class.js"></script>
   <script src="StatModification.js"></script>
@@ -28,7 +29,7 @@
       <!-- This is the table which formats the page -->
       <!-- Title Row -->
       <tr>
-        <th colspan = "4">
+        <th colspan="4">
           Attributes
         </th> 
       </tr>
@@ -36,14 +37,14 @@
       <tr>  
       <!-- Down button-->
       <td>               
-        <button id = "STR-">
+        <button id="STR-">
          -
         </button>
       </td>
       <td>
         Strength:
       </td>
-      <td id = "STR" align = "right">
+      <td id="STR" align="right">
       </td>       
       <!-- Increase Button -->
       <td>
@@ -56,14 +57,14 @@
       <tr>  
       <!-- Down button-->
       <td>               
-        <button id = "DEX-" >
+        <button id="DEX-" >
           -
         </button>
       </td>
       <td>
         Dexterity: 
       </td>
-      <td id = "DEX" align = "right">
+      <td id="DEX" align="right">
       </td>
       <!-- Increase Button -->
       <td>
@@ -76,14 +77,14 @@
       <tr>  
       <!-- Down button-->
       <td>               
-        <button id = "CON-" >
+        <button id="CON-" >
           -
         </button>
      </td>    
       <td>
        Constitution:
      </td>
-      <td id = "CON" align = "right">
+      <td id="CON" align="right">
      </td>
       <!-- Increase Button -->
       <td>
@@ -96,14 +97,14 @@
       <tr>  
       <!-- Down button-->
       <td>               
-        <button id = "WIS-" >
+        <button id="WIS-" >
           -
         </button>
       </td>   
       <td>
         Wisdom:
       </td> 
-      <td id = "WIS" align = "right">  
+      <td id="WIS" align="right">  
       </td>
       <!-- Increase Button -->
       <td>
@@ -116,14 +117,14 @@
       <tr>  
       <!-- Down button-->
       <td>               
-        <button id = "INT-" >
+        <button id="INT-" >
           -
         </button>
       </td>
       <td>
         Intelligence:
       </td>
-      <td id = "INT" align = "right">    
+      <td id="INT" align="right">    
       </td>
       <!-- Increase Button -->
       <td>
@@ -136,14 +137,14 @@
       <tr>  
       <!-- Down button-->
       <td>               
-        <button id = "CHA-" >
+        <button id="CHA-" >
           -
         </button>
       </td>      
       <td>
         Charisma:
       </td>
-      <td id = "CHA" align = "right">    
+      <td id="CHA" align="right">    
       </td>
       <!-- Increase Button -->
       <td>
@@ -159,34 +160,34 @@
         Points Remaining:
       </td>   
       <!-- Points available for buy -->
-      <td id = "PTS" align = "right"> 
+      <td id="PTS" align="right"> 
       </td>    
       <td></td>
     </tr>
       <!-- Message -->
       <tr>
-      <td colspan = "4" id = "message" align = "center"></td>
+      <td colspan="4" id="message" align="center"></td>
     </tr>
     </table>
     </td>
     <td>
-      <button id = "add-char">Add Character</button>
+      <button id="add-char">Add Character</button>
       <table id="char-list">
       </table>
     <td>
     <td>
-      <select id = "class-list-1">
-        <option disabled value = "select"> Select 1st class.</option>
+      <select id="class-list-1">
+        <option disabled value="select"> Select 1st class.</option>
       </select><br><br>
-      <select id = "class-list-2">
-        <option disabled value = "select"> Select 2nd class.</option>
+      <select id="class-list-2">
+        <option disabled value="select"> Select 2nd class.</option>
       </select><br><br>
-      <select id = "class-list-3">
-        <option disabled value = "select"> Select 3rd class.</option>
+      <select id="class-list-3">
+        <option disabled value="select"> Select 3rd class.</option>
       </select>
     </td>
     <td>
-      <table id = "ClassStatsTable" border = "1"></table>
+      <table id="ClassStatsTable" border="1"></table>
     </td>
     </tr>
     </table>

@@ -10,9 +10,8 @@ function Character(sName, sLevel, sGender, sAlignment) {
   // Attribute Properties
   this.Attributes = {
     'STR': {
-      Tooltip: 'Strength',
-      Primary: 0,
-      AddOns: [['Race Modifier', '+', 3,],],
+//      Tooltip: 'Strength',
+      Base: 0,
     }
   }
   //this.AttributeModifier = new Object(); // this should be a method call. revisit.
@@ -39,12 +38,23 @@ function Character(sName, sLevel, sGender, sAlignment) {
   }
 
 };
+
+Character.prototype.statScore = function(sStatName){
+  var nSum = 0; 
+  var lStatContributors = Object.keys(this.Stats[sStatName]);
+  var self = this;
   
-Character.prototype.HasClass = function (sClassName){
+  lStatContributors.forEach(function (sContributor){
+    nSum += self.Stats[sStatName][sContributor];
+  });                                            
+  return nSum;
+}
+
+Character.prototype.hasClass = function (sClassName){
   return (sClassName in this.Classes); 
 };
 
-Character.prototype.AttributeScore = function (sAttributeName){
+Character.prototype.attributeScore = function (sAttributeName){
   return this.BaseAttributeScore[sAttributeName] + //
     this.AttributeModifier[sAttributeName];
 };

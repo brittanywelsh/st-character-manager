@@ -8,6 +8,14 @@ Startraveller is a tabletop RPG created by Alastair Jamieson-Lane and friends.
 
 This project is a collection of tools for use by DMs and players in Startraveller campaigns.
 
+## Dependencies Heirarchy and Design Paradigm
+
+We use an MVC model, implemented as such:
+
+* **Models** are JavaScript objects that encapsulate data associated with the model in question.
+* **Views** are JavaScript methods that generate HTML for viewing.
+* **Controllers** are JavaScript objects that mediate the interplay between models and their corresponding views. The controllers are to be treated as the most "public" interface into each model; i.e. when updating a Character, always update it through the appropriate CharacterController method.
+
 ## Code Ref/Notes
 
 We use the following conventions in our JavaScript:

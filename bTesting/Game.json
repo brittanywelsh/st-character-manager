@@ -1,0 +1,170 @@
+{
+// this is a "map of rules". therefore, many 'traits' are defined 
+  "Character": {
+
+    "Traits": { // i.e. independent, non-numerical data
+      "Name": "The character's name.",
+      "Gender": "The gender identification of the character.",
+      "Alignment": "The character's alignment - totally player-defined.",
+    },
+
+    "Attributes": { // 'raw' or 'innate' numerical traits
+      "STR": { "Name": "Strength", },
+      "DEX": { "Name": "Dexterity", },
+      "CON": { "Name": "Constitution", },
+      "WIS": { "Name": "Wisdom", },
+      "INT": { "Name": "Intelligence", },
+      "CHA": { "Name": "Charisma", },
+      "PointsCost": { // 'index' = "score", i.e. points allotted
+        "7":-4,
+        "8":-2,
+        "9":-1,
+        "10":0,
+        "11":1,
+        "12":2,
+        "13":3,
+        "14":5,
+        "15":7,
+        "16":10,
+        "17":13,
+        "18":17, 
+      },
+      "ModifierValue": {
+        "7":-2,
+        "8":-1,
+        "9":-1,
+        "10":0,
+        "11":0,
+        "12":1,
+        "13":1,
+        "14":2,
+        "15":2,
+        "16":3,
+        "17":3,
+        "18":4, 
+      },
+    },
+
+    "Stats": { // Numerical values that are not attributes or skills.
+      "Base": { // Base stats are only derived from class/race modifiers.
+        "HealthDice": "The dice value this character rolls for health points.",
+        "SkillsPerLevel": "sk per level",
+        "ChargesPerDay": "Charges per day",
+        "Base Mutations": "Mutations per day",
+        "BaseInitiative": "Base Initiative",
+        "BaseAttack": "Base Attack",
+        "BaseDefence": "Base Defence",
+        "BaseFortitude": "Base Fortitude",
+        "BaseReflex": "Base Reflex",
+        "BaseWill": "Base Will",
+      },
+
+      "ItemModifiers": { // These are 'placeholders' for stat modifiers that come from items.
+        "MOD_SHIELDS": "item_shield",
+        "MOD_WEAPON": "item_weapon",
+      },
+
+      "Derivative": { // Derivative stats are generated from base stats + class/race/item modifiers.
+        "INIT": {
+          "Name": "Initiative Bonus",
+          "SumOf": ["BaseInitiative", "DEX"],
+        },
+        "MOVE": {
+          "Name": "Movement Speed",
+          "SumOf": ["6"], // ??? what modifies this? ???????????
+        },
+        "DEF": {
+          "Name": "Defence",
+          "Types": {
+            "NORM": {
+              "Name": "Normal",
+              "SumOf": ["BaseDefence", "DEX", "MOD_SHIELDS"],
+            },
+            "SHLD": {
+              "Name": "Shields Only",
+              "SumOf": ["MOD_SHIELDS",],
+            },
+            "DODG": {
+              "Name": "Dodge Only",
+              "SumOf": ["BaseDefence", "DEX",],
+            },
+          },
+        },
+        "ATK": {
+          "Name": "Attack",
+          "Types": {
+            "MEL": {
+              "Name": "Melee",
+              "SumOf": ["BaseAttack", "STR",],
+            },
+            "RNG": {
+              "Name": "Ranged",
+              "SumOf": ["BaseAttack", "DEX"],
+            },
+            "CMB": {
+              "Name": "Combat Move",
+              "SumOf": ["BaseAttack", "STR",],
+            },
+            "CMD": {
+              "Name": "Combat Move D?",
+              "SumOf": ["BaseAttack", "STR", "DEX",],
+            },
+          },
+        },
+        "FORT": {
+          "Name": "Fortitude",
+          "SumOf": ["BaseFortitude", "CON",],
+        },
+        "REFL": {
+          "Name": "Reflex",
+          "SumOf": ["BaseReflex", "DEX",],
+        },
+        "WILL": {
+          "Name": "Will",
+          "SumOf": ["BaseWill", "WIS",],
+        },
+      },
+    },
+
+    "Skills": { // A specific type of stat, used for 'Skill Checks'. Organized by category.
+      "Knowledge": {
+        "Local": "INT",
+        "Biotech": "INT",
+        "Cybertech": "INT",
+        "Politics": "INT",
+        "Astrography": "INT",
+        "Engineering": "INT",
+        "Nature": "INT",
+        "History": "INT",
+      },
+      "Social": {
+        "Bluff": "CHA",
+        "Diplomacy": "CHA",
+        "Disguise": "CHA",
+        "Intimidate": "STR",
+        "Sense Motive": "WIS",
+        "Slight of Hand": "DEX",
+      },
+      "Logistic": {
+        "Acrobatics": "DEX",
+        "Climb": "STR",
+        "Drive": "DEX",
+        "Fly": "DEX",
+        "Stealth": "DEX",
+        "Swim": "STR",
+        "Zero G": "DEX",
+      },
+      "Practical": {
+        "Disable Device": "INT",
+        "Escape Artist": "DEX",
+        "Handle Animal": "WIS",
+        "Hacking": "INT",
+        "Medical": "WIS",
+        "Perception": "WIS",
+        "Repair": "INT",
+        "Survival": "WIS",
+      },
+    },
+
+  },
+}

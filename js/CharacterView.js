@@ -15,6 +15,10 @@ var CharacterView = (function () {
     characterList.removeChild(characterList.childNodes[characterListIndex]);
   };
 
+  var updateListOfCharacters = function(listOfCharacters) {
+    
+  }
+
   var updateViewOfCharacterSheet = function(character) {
     // Header: name, level, buttons
     var viewName = h.encloseInHeading(character.Name || 'Character ' + character.index);

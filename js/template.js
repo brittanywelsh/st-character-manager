@@ -1,9 +1,15 @@
 var ModuleName = (function () {
 
+  /*******************/
   /* Local Variables */
+  /*******************/
+
   //
 
+  /***********/
   /* Methods */
+  /***********/
+
   var newPrivateMethodName = function() {
     //
   };
@@ -12,7 +18,10 @@ var ModuleName = (function () {
     //
   };
 
+  /******************/
   /* Public Methods */
+  /******************/
+
   return {
     newPublicMethodName: newPublicMethodName,
   };

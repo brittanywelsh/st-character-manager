@@ -1,4 +1,5 @@
 function UnitTest(){
+  this.title = "Tests";
   var Tests = new Object();  
          
   this.run = function(){ 
@@ -15,7 +16,8 @@ function UnitTest(){
       } 
       catch(e){  
         if ( e instanceof Error) TestResults[sTestName] = "Threw exception: " + e.message;
-        else TestResults[sTestName] = "Threw exception: " + e; 
+        else TestResults[sTestName] = "Threw exception: " + e;
+        console.log(e); 
       }
     });
     return TestResults;
@@ -32,7 +34,9 @@ function UnitTest(){
         TestResult = (bOutput) ? "Passed!": "Failed!"; 
       }
     } catch(e){
-        TestResult = "Threw exception: " + e.message; 
+        if ( e instanceof Error) TestResults[sTestName] = "Threw exception: " + e.message;
+        else TestResults[sTestName] = "Threw exception: " + e;
+        console.log(e);  
     }
   return TestResult;
   }
@@ -59,8 +63,25 @@ function UnitTest(){
 
 UnitTest.prototype.runInHTML = function(){
   var TestTable = document.createElement('Table');
-  TestTable.border = "1"; 
+  var THead = TestTable.createTHead();
+  var TitleRow = THead.insertRow();
+  var TitleCell = TitleRow.insertCell(); 
+  var LabelRow = THead.insertRow();
+  var TestNameCell = LabelRow.insertCell();
+  var ResultNameCell = LabelRow.insertCell();
+  
+  TitleCell.colSpan = 2;
+  TitleCell.innerHTML = '<b>' + this.title + '</b>';
+  
+  TestTable.border = "1";             
+  TestTable.width = "100%";
+  
+  TestNameCell.width = "100%";
+  TestNameCell.innerHTML = "<b>Test Name</b>";
+  ResultNameCell.innerHTML = "<b>Result</b>";
+  
   document.body.appendChild(TestTable);
+  
   var Results = this.run();
   this.getTestNames().forEach(function (sTestName){
     var newRow = TestTable.insertRow();

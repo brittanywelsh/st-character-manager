@@ -3,6 +3,31 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## August 25, 2015 (MIKE)
+- Continued TDD on add and remove class methods involving 2 classes.
+- Added all Tech and Skill Classes to GameClasses.js.
+- The OtherModification property of the classes in GameClasses.js illuminates 
+upcoming implementation difficulties.  Most of these involve choices.
+- For the upcoming abstraction process, in line with Brittany's comment on 
+deciding on a 'hierarchy of character properties', I'm thinking the hierarchy 
+should resemble Unalterable properties < Influenced but unchoosable < Choosable
+where:
+  - Unalterable properties: properties which are chosen during character 
+  creation and then never modified (Attributes in our case)
+  - Influenced but unchoosable: Things which are often influenced by other 
+  choices, but are rarely or never chosen directly (Stats in our case)
+  - Choosable: things which are selected directly and frequently, often during 
+  the leveling up process (Skills in our case)
+
+## August 24, 2015 (MIKE)
+- Modified the UnitTest Class to include a title for the table and to make the 
+table 100% of the screen width.  This makes it easier to distinguish between 
+different groups of tests.
+- Further modified the presentation of the Unit Tests to make the results 
+column dynamically as small as is possible.  Also added headers.
+- I've finished testing the add and remove class methods for single classes.
+- Begun testing the add and remove class methods for two classes.
+
 ## August 17, 2015 (meeting)
 - At end of project, let's re-evaluate whether jQuery actually was useful (did it save us time? memory? was it more elegant, or more readable code?).
 - Figured out a basic responsive input form (to change the character name). Good start!

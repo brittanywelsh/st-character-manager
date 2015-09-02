@@ -28,8 +28,14 @@ Character.prototype.AttributeScore = function (sAttributeName){
 
 Character.prototype.StatScore = function(sStatName){
   var nSum = 0; 
-  var lStatContributors = Object.keys(this.Stats[sStatName]);
-  var self = this;
+  var lStatContributors = [];
+  var self = this;                                       
+  
+  if (!this.Stats[sStatName]){
+    return 0;
+  }
+  
+  lStatContributors = Object.keys(this.Stats[sStatName]);
   
   lStatContributors.forEach(function (sContributor){
     nSum += self.Stats[sStatName][sContributor];
@@ -38,15 +44,48 @@ Character.prototype.StatScore = function(sStatName){
 }
 
 Character.prototype.SkillScore = function(sSkillName){
-  var nSum = 0; 
-  var lSkillContributors = Object.keys(this.Skills[sSkillName]);
+  var nSum = 0;
   var self = this;
+  var lSkillContributors = [];         
+  
+  if (!this.Skills[sSkillName]){
+    return 0;
+  }
+                              
+  lSkillContributors = Object.keys(self.Skills[sSkillName]);
   
   lSkillContributors.forEach(function (sContributor){
     nSum += self.Skills[sSkillName][sContributor];
   });                                            
-  return nSum;
+  return nSum; 
+}
+
+Character.prototype.ProficiencyScore = function(sProficiencyName){
+  var nSum = 0;
+  var self = this;
+  var lProficiencyContributors = [];
   
+  if (!this.Proficiencies[sProficiencyName]) return 0;
+  
+  lProficiencyContributors = Object.keys(self.Proficiencies[sProficiencyName]);
+  
+  lProficiencyContributors.forEach(function (sContributor){
+    nSum += self.Proficiencies[sProficiencyName][sContributor];
+  });
+  return nSum;
+}
+
+Character.prototype.clean = function(){
+  var self = this;
+  var lToClean = ["Skills", "Proficiencies"];
+  
+  lToClean.forEach(function(sThingToClean){
+    Object.keys(self[sThingToClean]).forEach(function(sElement){
+      if (Object.keys(self[sThingToClean][sElement]).length == 0){
+        delete self[sThingToClean][sElement];
+      }
+    });
+  });
 }
   
 Character.prototype.HasClass = function (sClassName){

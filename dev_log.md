@@ -3,6 +3,12 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## Sept 2, 2015 (meeting)
+- Major code overhaul and re-structuring. Today's commit provides a BLANK scaffolding
+for future work (some of which will simply be ported over to the new structure, and
+some of which will have to be implemented anew.) Also set up a new (more structured) 
+work flow which eliminates our bifurcating tendencies.
+
 ## August 25, 2015 (MIKE)
 - Continued TDD on add and remove class methods involving 2 classes.
 - Added all Tech and Skill Classes to GameClasses.js.

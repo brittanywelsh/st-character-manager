@@ -3,6 +3,11 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## Sept 3, 2015 (MIKE)
+- Added a GameError class to the project.  This is a new error-type is intended
+to be used for violations of game rules instead of programming errors.
+Documentation provided in GameError.js.
+
 ## Sept 2, 2015 (meeting)
 - Major code overhaul and re-structuring. Today's commit provides a BLANK scaffolding
 for future work (some of which will simply be ported over to the new structure, and

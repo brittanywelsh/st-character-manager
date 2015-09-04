@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AttributeContoller Tests</title>
+    <script src="../js/Character.js"></script>
+    <script>
+        CharacterController = {
+            Initialize: function (cCharacter) {
+                "use strict";
+                Attributes.AttributeList.forEach(function (sAttributeName) {
+                    cCharacter.Attributes[sAttributeName] = {
+                        Base: 10
+                    };
+                });
+            }
+        }
+    </script>
+    <script src="../js/GameError.js"></script>
+    <script src="../js/Attributes.js"></script>
+    <!-- <script src="../js/AttributesView.js"></script> NOTE: THIS MAY NEED TO BE CHANGED LATER-->
+    <script src="../js/AttributesController.js"></script>
+    <script src="../UnitTests/UnitTest.js"></script>
+    
+    
+</head>
+<body>
+
+<h1>AttributeController Tests</h1>
+    
+    <script>
+        cCharacter = new Character();
+        AttributesController.changeAttributePoint
+    </script>
+
+<script src="AttributeControllerTests.js"></script>
+    
+
+</body>
+</html>

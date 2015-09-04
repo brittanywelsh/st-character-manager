@@ -7,6 +7,13 @@ various commits, and track progress.
 - Added a GameError class to the project.  This is a new error-type is intended
 to be used for violations of game rules instead of programming errors.
 Documentation provided in GameError.js.
+- Implemented the changeAttributeForCharacter method of AttributeController. It
+is unclear to me whether what was implemented was what was intended for the
+updateAttributes method in the plan.  Implemention induced a private method 
+called isLegalAttributeBuy, as well as the AttributeList and Buy properties of
+Attribute.js.  Buy includes two properties: 'Wallet' for the available spending
+points, and 'Cost' which contains all the attribute score costs.  Documentation
+provided in the appropriate files.
 
 ## Sept 2, 2015 (meeting)
 - Major code overhaul and re-structuring. Today's commit provides a BLANK scaffolding

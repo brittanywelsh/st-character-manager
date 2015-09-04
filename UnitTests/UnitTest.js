@@ -86,7 +86,7 @@ UnitTest.prototype.runInHTML = function(){
   this.getTestNames().forEach(function (sTestName){
     var newRow = TestTable.insertRow();
     var nameCell = newRow.insertCell();
-    nameCell.innerHTML = sTestName + " result:"
+    nameCell.innerHTML = sTestName;
     var displayCell = newRow.insertCell();
     displayCell.innerHTML = Results[sTestName];
     if (Results[sTestName] == "Passed!") displayCell.style.backgroundColor = 'LightGreen';

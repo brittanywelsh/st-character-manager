@@ -1,7 +1,7 @@
 /*
  *
  *
- *
+ *g
  *  PROPERTY DESCRIPTIONS:
  *      AttributeList: list of the attributes in StarTraveller
  *      Buy: contains all data pertaining to to attribute buying:

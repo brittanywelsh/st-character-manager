@@ -3,16 +3,15 @@
 <head>
 <title>AttributeContoller Tests</title>
     <script src="../js/Character.js"></script>
+    <script src="../js/CharacterController.js"></script>
     <script>
-        CharacterController = {
-            Initialize: function (cCharacter) {
-                "use strict";
-                Attributes.AttributeList.forEach(function (sAttributeName) {
-                    cCharacter.Attributes[sAttributeName] = {
-                        Base: 10
-                    };
-                });
-            }
+        CharacterController.Initialize = function (cCharacter) {
+            "use strict";
+            Attributes.AttributeList.forEach(function (sAttributeName) {
+                cCharacter.Attributes[sAttributeName] = {
+                    Base: 10
+                };
+            });
         }
     </script>
     <script src="../js/GameError.js"></script>

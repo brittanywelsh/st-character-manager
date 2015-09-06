@@ -1,4 +1,4 @@
-/*global Attributes, GameError, CharacterView, AttributesView, console*/
+/*global Attributes, GameError, CharacterView, CharacterController, AttributesView, console*/
 
 /*
  *
@@ -9,6 +9,7 @@
  *              -CharacterView.js
  *              -AttributesView.js
  *              -Attributes.js
+ *              -CharacterController.js
  *
  *      PUBLIC METHODS IMPLEMENTED
  *
@@ -26,12 +27,19 @@
  *               to the user.  In either case, CharacterView is asked to
  *               asked to update the html from the model.
  *
- *  Invokes:    -isLegalAttributeBuy - PRIVATE METHOD - Provides prompts
- *              if necessary.
- *              -AttributesView.Display - UNIMPLEMENTED as of Sept. 3, 2015 - 
- *              To display prompts to the user for bad input.
- *              -CharacterView.Update - UNIMPLEMENTED as of Sept. 3, 2015 -
- *              To update the html from the model.
+ *  Invokes:    -isLegalAttributeBuy - PRIVATE METHOD - 
+ *                  Provides prompts if necessary.
+ *              -AttributesView.display - UNIMPLEMENTED as of Sept. 3, 2015 - 
+ *                  To display prompts to the user for bad input.
+ *              -CharacterView.update - UNIMPLEMENTED as of Sept. 3, 2015 -
+ *                  To update the html from the model.
+ *              -CharacterController.getBaseAttributeScoreFromCurrentCharacter
+ *                  - IMPLEMENTED - Returns the base attribute score of the
+ *                  current character fora specified attribute.
+ *              -CharacterController.incrementBaseAttributeScoreOnCurrentCharacter
+ *                  - IMPLEMENTED - (de/in)crements the base attribute score of
+ *                  the current character for a specified attribute according 
+ *                  to a provided boolean.
  *
  *
  *
@@ -69,7 +77,7 @@ var AttributesController = (function () {
     /* Methods */
     /**********,*/
 
-    var isLegalAttributeBuy = function (oAttributes) {
+    var privateIsLegalAttributeBuy = function (oAttributes) {
             var nSum = 0;
             Attributes.AttributeList.forEach(function (sAttributeName) {
                 if (oAttributes[sAttributeName] > 18) {
@@ -84,23 +92,25 @@ var AttributesController = (function () {
             }
         },
 
-        changeAttributePointForCharacter = function (sAttributeToChange, cCharacter, bIncrease) {
+        publicChangeAttributePointForCharacter = function (sAttributeToChange, cCharacter, bIncrease) {
             var oNewAttributes = {};
             Attributes.AttributeList.forEach(function (sAttributeName) {
-                oNewAttributes[sAttributeName] = cCharacter.Attributes[sAttributeName].Base;
+                //oNewAttributes[sAttributeName] = cCharacter.Attributes[sAttributeName].Base;
+                oNewAttributes[sAttributeName] = CharacterController.getBaseAttributeScoreFromCharacter(sAttributeName, cCharacter);
             });
             oNewAttributes[sAttributeToChange] += (bIncrease) ? 1 : -1;
             try {
-                isLegalAttributeBuy(oNewAttributes);
-                cCharacter.Attributes[sAttributeToChange].Base += (bIncrease) ? 1 : -1;
+                privateIsLegalAttributeBuy(oNewAttributes);
+                //cCharacter.Attributes[sAttributeToChange].Base += (bIncrease) ? 1 : -1;
+                CharacterController.incrementBaseAttributeScoreOnCharacter(sAttributeToChange, cCharacter, bIncrease);
             } catch (e) {
                 if (e instanceof GameError) {
-                    AttributesView.Display(e.message);
+                    AttributesView.display(e.message);
                 } else {
                     throw e;
                 }
             }
-            CharacterView.Update();
+            CharacterView.update();
         },
             
         updateAttributes = function (cCharacter) {
@@ -112,7 +122,7 @@ var AttributesController = (function () {
     /******************/
 
     return {
-        changeAttributePointForCharacter: changeAttributePointForCharacter,
+        changeAttributePointForCharacter: publicChangeAttributePointForCharacter,
         updateAttributes: updateAttributes
     };
 

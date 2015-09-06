@@ -4,13 +4,13 @@
 var uTest = new UnitTest(),
     cCharacter = new Character(),
     AttributesView = {//Testing AttributesView here is unnecessary.
-        Display: function (e) {
+        display: function (e) {
             "use strict";
             throw e;
         }
     },
     CharacterView = {//Testing CharacterView.Update is unnecessary here.
-        Update: function () {
+        update: function () {
             "use strict";
             return true;
         }

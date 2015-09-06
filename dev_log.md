@@ -3,6 +3,12 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## Sept 5, 2015 (MIKE)
+- Implemented (get/increment)baseAttributeScore methods in the character 
+controller module.  This does not accord with our previous discussion regarding
+accessing character objects, but I feel like this is a good idea in case we 
+change the character architecture later.
+
 ## Sept 3, 2015 (MIKE)
 - Added a GameError class to the project.  This is a new error-type is intended
 to be used for violations of game rules instead of programming errors.

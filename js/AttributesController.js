@@ -33,10 +33,10 @@
  *                  To display prompts to the user for bad input.
  *              -CharacterView.update - UNIMPLEMENTED as of Sept. 3, 2015 -
  *                  To update the html from the model.
- *              -CharacterController.getBaseAttributeScoreFromCurrentCharacter
+ *              -CharacterController.getBaseAttributeScoreFromCharacter
  *                  - IMPLEMENTED - Returns the base attribute score of the
  *                  current character fora specified attribute.
- *              -CharacterController.incrementBaseAttributeScoreOnCurrentCharacter
+ *              -CharacterController.incrementBaseAttributeScoreOnCharacter
  *                  - IMPLEMENTED - (de/in)crements the base attribute score of
  *                  the current character for a specified attribute according 
  *                  to a provided boolean.

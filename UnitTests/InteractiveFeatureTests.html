@@ -19,6 +19,9 @@
         <div id="STRdiv" class="display">This is my STR div</div>
         <div id="INTdiv" class="display">This is my INT div</div>
         <div id="DEXdiv" class="display">This is my DEX div</div>
+        <div id="CONdiv" class="display">This is my CON div</div>
+        <div id="WISdiv" class="display">This is my WIS div</div>
+        <div id="CHAdiv" class="display">This is my CHA div</div>
     </div>
     
     <div id="pubDisplay">
@@ -26,7 +29,12 @@
             <input id="channel" form="text" value='channel'></input>
         </div>
         <div id="keywordDiv" class="inputs">
-            <input id="keyword" form="text" value="keyword"></input>
+            <select id="keyword">
+                <option value="SelectOne" selected disabled>Select keyword</option>
+                <option value="update">update</option>
+                <option value="add">add</option>
+                <option value="remove">remove</option>
+            </input>
         </div>
         <div id="targetDiv" class="inputs">
                 <input id="target" form="text" value="target"></input>
@@ -38,7 +46,7 @@
             <input id="origin" form="text" value="origin"></input>
         </div>
     </div>
-    <div><button id="send" value="send">Publish</button></div>
+    <div class="buttonContainer"><button id="send" value="send">Publish</button></div>
     <div id="feed">Publication feed:</div>
 
     <script>

@@ -1,8 +1,10 @@
 .display{
     padding: 10px;
+    border: 20px;
+    border-color: black;
     /*width: 200px;*/
     float: left;
-    width: 16.777%;
+    /*width: 16.665%;*/
 }
 .outputs{
     display:table-row;

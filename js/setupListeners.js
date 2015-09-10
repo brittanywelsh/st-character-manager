@@ -1,12 +1,10 @@
 /*global subscribe, FeatureController, CharacterController */
 
-function Listener(fFeature) {
+function setupListeners(fFeature) {
     "use strict";
-    
-    this.myFeature = fFeature;
-    
+        
     //Listen for other the features on which we depend to update.
-    this.myFeature.dependentOnFeatures.forEach(function (sFeatureName) {
+    fFeature.dependentOnFeatures.forEach(function (sFeatureName) {
         subscribe(this, sFeatureName, function (oData) {
             
             if (oData.keyword === "update") {
@@ -16,7 +14,7 @@ function Listener(fFeature) {
     });
 
     //Listen to your own channel for instructions
-    subscribe(this, this.myFeature.name, function relayInstruction(oData) {
+    subscribe(fFeature.name, function relayInstruction(oData) {
         var fFeature = FeatureController.getFeature(oData.target),
             vNewDisplay;
 
@@ -37,6 +35,6 @@ function Listener(fFeature) {
             
         }
         */
-        FeatureController.update(this.myFeature);
+        FeatureController.update(fFeature);
     });
 }

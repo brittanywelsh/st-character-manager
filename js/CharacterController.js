@@ -81,11 +81,13 @@ var CharacterController = (function () {
         }
         cCurrentCharacter[sCategoryName][fFeature.name][oData.origin]
             = oData.value;
+        FeatureController.update(fFeature, oData.origin);
     }
     function publicRemoveContributors(oData) {
         var fFeature = FeatureController.getFeature(oData.target),
             sCategoryName = fFeature.containerName;
         delete cCurrentCharacter[sCategoryName][fFeature.name][oData.origin];
+        FeatureController.update(fFeature, oData.origin);
     }
     function publicSetDisplay(fFeature, vValue) {
         var sCategoryName = fFeature.containerName;

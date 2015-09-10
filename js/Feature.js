@@ -6,6 +6,8 @@ function Feature(oConfig) {
     
     //The container name in Character in which this can be found.
     this.containerName = oConfig.containerName;
+    //In case there is a subcontainer.  Requires implementations.
+    //this.subContainerName = oConfig.subContainerName;
     
     //List of other features needed to compute this feature's score.
     this.dependentOnFeatures = oConfig.dependentOnFeatures || [];
@@ -21,6 +23,13 @@ function Feature(oConfig) {
     this.contributions = oConfig.contributions || {};
     
     //Table which converts a score to display information.  Use 'active' and 'inactive' for features that can be removed from characters.
-    //'default' refers to anything not covered.
+    //'notFound' refers to anything not covered.
     this.displayTable = oConfig.displayTable;
+}
+
+function CharacterFeature(vDisplay) {
+    "use strict";
+    
+    this.display = vDisplay;
+    this.contributors = {};
 }

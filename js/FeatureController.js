@@ -9,7 +9,7 @@ var FeatureController = (function () {
         
         fFeature.dependentOnFeatures.forEach(
             function (sFeatureName) {
-                nSum += CharacterController.getDisplay(fFeature);
+                nSum += CharacterController.getDisplay(sFeatureName);
             }
         );
         if (fFeature.dependenciesOnly === true) {

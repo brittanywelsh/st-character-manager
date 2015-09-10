@@ -4,8 +4,8 @@ function Feature(oConfig) {
     //The name of this feature.
     this.name = oConfig.name;
     
-    //The category to which this feature belongs.
-    //this.parentCategory = oConfig.parentCategory;
+    //The container name in Character in which this can be found.
+    this.containerName = oConfig.containerName;
     
     //List of other features needed to compute this feature's score.
     this.dependentOnFeatures = oConfig.dependentOnFeatures || [];

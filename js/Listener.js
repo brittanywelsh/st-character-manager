@@ -23,20 +23,20 @@ function Listener(fFeature) {
         /*
          *Adds the contributor to the appropriate bin
         */
-        if (oData.keyword === 'add') {
-            CharacterController.addContributorTo(oData);
+        if (oData.keyword === 'add' || oData.keyword === 'replace') {
+            CharacterController.addContributorTo(oData);//will do what replace does
         } else if (oData.keyword === 'remove') {
             CharacterController.removeContributorFrom(oData);
-        } else if (oData.keyword === 'replace') {
+        }  /*
+        else if (oData.keyword === 'replace') {
             CharacterController.replaceContributorValue(oData);
-            /*or:
-             *
-             *oData.suppressPublication = true;
+            oData.suppressPublication = true;
              *CharacterController.removeContributorFrom(oData);
              *oData.suppressPublication = false;
              *CharacterController.addContributorTo(oData);
-            */
+            
         }
+        */
         FeatureController.update(this.myFeature);
     });
 }

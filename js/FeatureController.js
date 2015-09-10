@@ -1,15 +1,15 @@
-/*global CharacterController, publish */
+/*global CharacterController, publish, Game */
 
 var FeatureController = (function () {
     "use strict";
     
     var privateGetScore = function (fFeature) {
         var nSum = 0,
-            oContributors = CharacterController.getContributors(fFeature.name);
+            oContributors = CharacterController.getContributors(fFeature);
         
         fFeature.dependentOnFeatures.forEach(
             function (sFeatureName) {
-                nSum += CharacterController.getDisplay(sFeatureName);
+                nSum += CharacterController.getDisplay(fFeature);
             }
         );
         if (fFeature.dependenciesOnly === true) {
@@ -67,10 +67,14 @@ var FeatureController = (function () {
                     );
                 }
             }
+        },
+        publicGetFeature = function (sFeatureName) {
+            return Game.Features[sFeatureName];
         };
     
     return {
         getDisplay: publicGetDisplay,
-        update: publicUpdate
+        update: publicUpdate,
+        getFeature: publicGetFeature
     };
 }());

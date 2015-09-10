@@ -36,6 +36,7 @@
  *
  */
 
+/*global Character, FeatureController */
 
 var CharacterController = (function () {
     "use strict";
@@ -43,7 +44,7 @@ var CharacterController = (function () {
     /* Local Variables */
     /*******************/
 
-    //
+    var cCurrentCharacter = new Character();
 
     /***********/
     /* Methods */
@@ -57,6 +58,42 @@ var CharacterController = (function () {
     function publicIncrementBaseAttributeScoreOnCharacter(sAttributeName, cCharacter, bIncrement) {
         cCharacter.Attributes[sAttributeName].Base += (bIncrement) ? 1 : -1;
     }
+    
+    function publicGetCurrentCharacter() {
+        return cCurrentCharacter;
+    }
+    
+    function publicGetContributors(fFeature) {
+        var sCategoryName = fFeature.containerName,
+            oRet = cCurrentCharacter[sCategoryName][fFeature.name];
+        return (oRet === undefined) ? oRet : {};
+    }
+    function publicGetDisplay(fFeature) {
+        var sCategoryName = fFeature.container,
+            oRet = cCurrentCharacter[sCategoryName][fFeature.name];
+        return (oRet === undefined) ? oRet.display : fFeature.displayTayble.notFound;
+    }
+    function publicAddContributors(oData) {
+        var fFeature = FeatureController.getFeature(oData.target),
+            sCategoryName = fFeature.containerName;
+        if (!cCurrentCharacter[sCategoryName][fFeature.name]) {
+            cCurrentCharacter[sCategoryName][fFeature.name] = {};
+        }
+        cCurrentCharacter[sCategoryName][fFeature.name][oData.origin]
+            = oData.value;
+    }
+    function publicRemoveContributors(oData) {
+        var fFeature = FeatureController.getFeature(oData.target),
+            sCategoryName = fFeature.containerName;
+        delete cCurrentCharacter[sCategoryName][fFeature.name][oData.origin];
+    }
+    function publicSetDisplay(fFeature, vValue) {
+        var sCategoryName = fFeature.containerName;
+        if (!cCurrentCharacter[sCategoryName][fFeature.name]) {
+            cCurrentCharacter[sCategoryName][fFeature.name] = {};
+        }
+        cCurrentCharacter[sCategoryName][fFeature.name].display = vValue;
+    }
 
     /******************/
     /* Public Methods */
@@ -64,7 +101,13 @@ var CharacterController = (function () {
 
     return {
         getBaseAttributeScoreFromCharacter: publicGetBaseAttributeScoreFromCharacter,
-        incrementBaseAttributeScoreOnCharacter: publicIncrementBaseAttributeScoreOnCharacter
+        incrementBaseAttributeScoreOnCharacter: publicIncrementBaseAttributeScoreOnCharacter,
+        getCurrentCharacter: publicGetCurrentCharacter,
+        getContributors: publicGetContributors,
+        getDisplay: publicGetDisplay,
+        addContributors: publicAddContributors,
+        removeContributors: publicRemoveContributors,
+        setDisplay: publicSetDisplay
     };
 
 }());

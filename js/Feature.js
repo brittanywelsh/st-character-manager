@@ -14,6 +14,7 @@ function Feature(oConfig) {
     //this.dependenciesOnly =  oConfig.dependenciesOnly || false;
     
     //List of 'unexpected' contributors to this feature's score.
+    //THIS SHOULD EXIST ON A CHARACTER, NOT THE FEATURE
     this.contributors = oConfig.contributors || {};
     
     //List of instructions to publish, indexed by display

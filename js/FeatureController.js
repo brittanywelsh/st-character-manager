@@ -27,6 +27,10 @@ var FeatureController = (function () {
         publicGetDisplay = function (fFeature) {
             var nScore = privateGetScore(fFeature),
                 vDisplay = fFeature.displayTable[nScore];
+            
+            if (!fFeature.displayTable) {
+                return nScore;
+            }
 
             if (vDisplay !== undefined) {
                 return vDisplay;

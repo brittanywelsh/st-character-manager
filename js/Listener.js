@@ -27,6 +27,15 @@ function Listener(fFeature) {
             CharacterController.addContributorTo(oData);
         } else if (oData.keyword === 'remove') {
             CharacterController.removeContributorFrom(oData);
+        } else if (oData.keyword === 'replace') {
+            CharacterController.replaceContributorValue(oData);
+            /*or:
+             *
+             *oData.suppressPublication = true;
+             *CharacterController.removeContributorFrom(oData);
+             *oData.suppressPublication = false;
+             *CharacterController.addContributorTo(oData);
+            */
         }
         FeatureController.update(this.myFeature);
     });

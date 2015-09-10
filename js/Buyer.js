@@ -54,7 +54,7 @@ function Buyer(oConfig) {
         });
         if (nSum <= this.wallet) {
             Object.keys(oDesiredPurchase).forEach(function (sOptionName) {
-                publish(this.name, {
+                publish(sOptionName, {
                     keyword: "replace",
                     target: sOptionName,
                     value: oDesiredPurchase[sOptionName],

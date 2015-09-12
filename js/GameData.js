@@ -9,5 +9,6 @@ Attributes.Data = {
             'Wisdom',
             'Constitution',
             'Charisma'
-        ]
+        ],
+    Bought: true
 };

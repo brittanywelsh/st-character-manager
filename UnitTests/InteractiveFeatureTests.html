@@ -5,35 +5,32 @@
     <title>Interactive Feature Tests</title>
     <link rel="stylesheet" type="text/css" href="css/InteractiveFeatureTesting.css">
     
-
     <!--
     <script src="../js/Listener.js"></script>
     <script src="InteractiveFeatureTests.js"></script>
     -->
     <script src="../js/Feature.js"></script>
     <script src="../js/pubsub.js"></script>
-
 </head>
 <body>
     <div class="outputs">
-        <div id="STRdiv" class="display">This is my STR div</div>
-        <div id="INTdiv" class="display">This is my INT div</div>
-        <div id="DEXdiv" class="display">This is my DEX div</div>
-        <div id="CONdiv" class="display">This is my CON div</div>
-        <div id="WISdiv" class="display">This is my WIS div</div>
-        <div id="CHAdiv" class="display">This is my CHA div</div>
+        <div id="STRdiv" class="display">This is my Strength div</div>
+        <div id="INTdiv" class="display">This is my Intelligence div</div>
+        <div id="DEXdiv" class="display">This is my Dexterity div</div>
+        <div id="CONdiv" class="display">This is my Constitution div</div>
+        <div id="WISdiv" class="display">This is my Wisdom div</div>
+        <div id="CHAdiv" class="display">This is my Charisma div</div>
     </div>
     
     <div id="pubDisplay">
         <div id="channelDiv" class="inputs">
-            <input id="channel" form="text" value='channel'></input>
+            <select id="channel">
+                <option value="none" disabled>Choose a channel</option>
+            </select>
         </div>
         <div id="keywordDiv" class="inputs">
             <select id="keyword">
-                <option value="SelectOne" selected disabled>Select keyword</option>
-                <option value="update">update</option>
-                <option value="add">add</option>
-                <option value="remove">remove</option>
+                <option value="none" selected disabled>Select keyword</option>
             </input>
         </div>
         <div id="targetDiv" class="inputs">
@@ -50,35 +47,107 @@
     <div id="feed">Publication feed:</div>
 
     <script>
-        var STR = new Feature({name: 'Strength'});
-        STR.update = function() {
+        function publishToFeed(channel, data) {
+            var sDataString = "";
+            if (data.keyword === "investigate") return;
+            Object.keys(data).forEach(function (sPropertyName) {
+                sDataString += " " + sPropertyName + ': <font color="white">' + data[sPropertyName] + '</font>';
+            });
+            feed.innerHTML = feed.innerHTML + '<br>channel: <font color="white">' + channel + "</font>. data: " + sDataString;
+        }
+        function updateAttribute(sAttributeCode) {
             var nSum = 0;
             Object.keys(STR.contributors).forEach(function (sContributor) {
                  nSum += STR.contributors[sContributor];
             });
-            document.getElementById("STRdiv").innerHTML = nSum;
-        };
-        pubsub.subscribe('Strength', function(channel, data) {
-            if (data.keyword === "add") {
-                STR.contributors[data.origin] = Number(data.value);
-            } else if (data.keyword === "remove") {
-                delete STR.contributors[data.origin];
+        }
+        var AttributeList = [
+            'STR.Strength',
+            'INT.Intelligence',
+            'WIS.Wisdom',
+            'CON.Constitution',
+            'DEX.Dexterity',
+            'CHA.Charisma'
+        ],
+            keywordList = [
+                "add",
+                "remove",
+                "update",
+                "investigate"
+                ]
+        keywordList.forEach(function (sKeywordName) {
+            oNewOption = document.createElement("option");
+            oNewOption.innerHTML = sKeywordName;
+            oNewOption.value = sKeywordName;
+            document.getElementById("keyword").appendChild(oNewOption);
+            if (sKeywordName === "update") {
+                oNewOption.disabled = true;
             }
-            STR.update();
-            console.log(STR.contributors);
-            pubsub.publish('channel', data);
         });
-        pubsub.subscribe('channel', function(channel, data) {
-            feed.innerHTML = feed.innerHTML + '<br>' + "channel: " + channel + ". data: " + Object.keys(data);
+        AttributeList.forEach(function (sAttribute) {
+            var sAttributeDOMCode = sAttribute.substring(0, 3),
+                sAttributeName = sAttribute.substr(4),
+                fNewFeature = new Feature({name: sAttributeName,}),
+                oNewOption;
+            
+            fNewFeature.update = function() {
+                var nSum = 0;
+                Object.keys(fNewFeature.contributors).forEach(
+                    function (sContributor) {
+                     nSum += fNewFeature.contributors[sContributor];
+                });
+                document.getElementById(sAttributeDOMCode + "div").innerHTML = fNewFeature.name + ' score: ' + nSum;
+            }
+            
+            pubsub.subscribe(fNewFeature.name, function(channel, data) {
+                var sInvestigationString = "",
+                    lInvistigationList;
+                if (data.keyword === "add") {
+                    if (!(data.value == 0 || data.value > 0 || data.value < 0)) {
+                        alert("'value' must be a  number for keyword 'add'");
+                        return;
+                    }
+                    fNewFeature.contributors[data.origin] = data.value;
+                } else if (data.keyword === "remove") {
+                    delete fNewFeature.contributors[data.origin];
+                } else if (data.keyword === "investigate") {
+                    lInvistigationList = Object.keys(fNewFeature.contributors);
+                    if (lInvistigationList.length === 0) {
+                        sInvestigationString = fNewFeature.name +
+                            " has nothing contributing to its score.";
+                    } else { lInvistigationList.forEach(
+                        function (sContributor) {
+                            sInvestigationString +=  "<br>" + sContributor +
+                                " is contributing " +
+                                fNewFeature.contributors[sContributor];
+                        });
+                    }
+                    publishToFeed(channel, {Results: sInvestigationString});
+                }
+                fNewFeature.update();
+            });
+            pubsub.subscribe(fNewFeature.name, publishToFeed);
+            oNewOption = document.createElement('option');
+            oNewOption.value = fNewFeature.name;
+            oNewOption.innerHTML = fNewFeature.name;
+            document.getElementById('channel').appendChild(oNewOption)
         });
-        
+                
         document.getElementById("send").addEventListener('click', function() {
             var channel = document.getElementById('channel').value,
                 keyword = document.getElementById('keyword').value,
                 target = document.getElementById('target').value,
-                value = document.getElementById('value').value,
+                value = Number(document.getElementById('value').value),
                 origin = document.getElementById('origin').value,
                 data = {keyword: keyword, target: target, value: value, origin: origin};
+            if (channel === "none") {
+                    alert("Choose a channel.");
+                    return;
+                }
+            if (keyword === "none") {
+                alert("Choose a keyword.");
+                return;
+            }
             pubsub.publish(channel, data);
         });
     </script>

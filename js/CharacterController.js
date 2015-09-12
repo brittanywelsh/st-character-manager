@@ -68,11 +68,6 @@ var CharacterController = (function () {
             oRet = cCurrentCharacter[sCategoryName][fFeature.name];
         return (oRet === undefined) ? oRet : {};
     }
-    function publicGetDisplay(fFeature) {
-        var sCategoryName = fFeature.container,
-            oRet = cCurrentCharacter[sCategoryName][fFeature.name];
-        return (oRet === undefined) ? oRet.display : fFeature.displayTayble.notFound;
-    }
     function publicAddContributors(oData) {
         var fFeature = FeatureController.getFeature(oData.target),
             sCategoryName = fFeature.containerName;
@@ -88,6 +83,11 @@ var CharacterController = (function () {
             sCategoryName = fFeature.containerName;
         delete cCurrentCharacter[sCategoryName][fFeature.name][oData.origin];
         FeatureController.update(fFeature, oData.origin);
+    }
+    function publicGetDisplay(fFeature) {
+        var sCategoryName = fFeature.container,
+            oRet = cCurrentCharacter[sCategoryName][fFeature.name];
+        return (oRet === undefined) ? oRet.display : fFeature.displayTayble.notFound;
     }
     function publicSetDisplay(fFeature, vValue) {
         var sCategoryName = fFeature.containerName;

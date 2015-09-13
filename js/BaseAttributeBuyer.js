@@ -1,9 +1,10 @@
-/*global Game, Buyer, CharacterController, publish*/
+/*global Game, Buyer, CharacterController, publish, oAttributeBuyerOptions*/
 
-Game.BaseAttributeBuyer = new Buyer({
+//Game.
+var BaseAttributeBuyer = new Buyer({
     name: 'Base Attribute Buyer',
     //options: Game.Features.BaseAttributes,
-    options: 
+    options: oAttributeBuyerOptions,
     defaultBuy: {
         BaseStrength: 10,
         BaseDexterity: 10,

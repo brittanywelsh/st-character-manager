@@ -1,4 +1,4 @@
-/*global CharacterController, publish, Game */
+/*global CharacterController, pubsub, Game, console */
 
 var FeatureController = (function () {
     "use strict";
@@ -6,6 +6,7 @@ var FeatureController = (function () {
     var privateGetScore = function (fFeature) {
         var nSum = 0,
             oContributors = CharacterController.getContributors(fFeature);
+        console.log(oContributors);
         
         fFeature.dependentOnFeatures.forEach(
             function (sFeatureName) {
@@ -26,11 +27,13 @@ var FeatureController = (function () {
     
         publicGetDisplay = function (fFeature) {
             var nScore = privateGetScore(fFeature),
-                vDisplay = fFeature.displayTable[nScore];
+                vDisplay;
             
             if (!fFeature.displayTable) {
                 return nScore;
             }
+            
+            vDisplay = fFeature.displayTable[nScore];
 
             if (vDisplay !== undefined) {
                 return vDisplay;
@@ -39,7 +42,7 @@ var FeatureController = (function () {
         },
         
         publicUpdate = function (fFeature, sOrigin) {
-            var oldDisplay = CharacterController.getDisplay(fFeature.name),
+            var oldDisplay = CharacterController.getDisplay(fFeature),
                 newDisplay = publicGetDisplay(fFeature);
             
             if (typeof sOrigin !== 'string') {
@@ -48,9 +51,9 @@ var FeatureController = (function () {
             
             //PROBLEM: The following line of code forces displays to be litterals
             if (oldDisplay !== newDisplay) {
-                CharacterController.setDisplay(fFeature.name, newDisplay);
-                publish(
-                    fFeature.parentCategory.name,
+                CharacterController.setDisplay(fFeature, newDisplay);
+                pubsub.publish(
+                    fFeature.name,
                     {
                         keyword: 'update',
                         target: fFeature.name,
@@ -62,7 +65,7 @@ var FeatureController = (function () {
                     fFeature.contributions[newDisplay].forEach(
                         function (sInstructionLabel) {
                             var oInstruction = fFeature.contributions[newDisplay][sInstructionLabel];
-                            publish(oInstruction.channel, oInstruction);
+                            pubsub.publish(oInstruction.channel, oInstruction);
                         }
                     );
                 }

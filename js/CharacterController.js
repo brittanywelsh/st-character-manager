@@ -36,7 +36,7 @@
  *
  */
 
-/*global Character, FeatureController */
+/*global Character, FeatureController, console */
 
 var CharacterController = (function () {
     "use strict";
@@ -65,16 +65,21 @@ var CharacterController = (function () {
     
     function publicGetContributors(fFeature) {
         var sCategoryName = fFeature.containerName,
-            oRet = cCurrentCharacter[sCategoryName][fFeature.name];
-        return (oRet === undefined) ? oRet : {};
+            oRet = cCurrentCharacter[sCategoryName][fFeature.name].contributors;
+        console.log(oRet);
+        //return (oRet === undefined) ? oRet : {};
+        return oRet;
     }
     function publicAddContributors(oData) {
         var fFeature = FeatureController.getFeature(oData.target),
             sCategoryName = fFeature.containerName;
         if (!cCurrentCharacter[sCategoryName][fFeature.name]) {
-            cCurrentCharacter[sCategoryName][fFeature.name] = {};
+            cCurrentCharacter[sCategoryName][fFeature.name] = {
+                display: 0,
+                contributors: {}
+            };
         }
-        cCurrentCharacter[sCategoryName][fFeature.name][oData.origin]
+        cCurrentCharacter[sCategoryName][fFeature.name].contributors[oData.origin]
             = oData.value;
         FeatureController.update(fFeature, oData.origin);
     }
@@ -85,9 +90,13 @@ var CharacterController = (function () {
         FeatureController.update(fFeature, oData.origin);
     }
     function publicGetDisplay(fFeature) {
-        var sCategoryName = fFeature.container,
-            oRet = cCurrentCharacter[sCategoryName][fFeature.name];
-        return (oRet === undefined) ? oRet.display : fFeature.displayTayble.notFound;
+        var sCategoryName = fFeature.containerName,
+            oRet;
+        
+        console.log(cCurrentCharacter);
+        oRet = cCurrentCharacter[sCategoryName][fFeature.name];
+        //return (oRet === undefined) ? oRet.display : fFeature.displayTable.notFound;
+        return oRet.display;
     }
     function publicSetDisplay(fFeature, vValue) {
         var sCategoryName = fFeature.containerName;

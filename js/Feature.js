@@ -17,7 +17,7 @@ function Feature(oConfig) {
     
     //List of 'unexpected' contributors to this feature's score.
     //THIS SHOULD EXIST ON A CHARACTER, NOT THE FEATURE
-    this.contributors = oConfig.contributors || {};
+    //this.contributors = oConfig.contributors || {};
     
     //List of instructions to publish, indexed by display
     this.contributions = oConfig.contributions || {};

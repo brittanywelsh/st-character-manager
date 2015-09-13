@@ -13,6 +13,7 @@ var Character = function (sName, nLevel, sGender, sAlignment) {
     // Rule-Based Data || Trait containers
     this.Stats = {};
     this.Attributes = {};
+    this.AttributeModifiers = {};
     this.Skills = {};
     this.Race = {};
     this.Schools = {};

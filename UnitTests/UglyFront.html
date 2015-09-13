@@ -78,6 +78,23 @@
             document.getElementById("channel").appendChild(oNewOption);
             
             pubsub.subscribe(sAttributeName, publishToFeed);
+            pubsub.subscribe(sAttributeName, function(channel, data) {
+                "use strict";
+                var sInvestigationString = "",
+                    oContributors;
+                if (data.keyword === "investigate") {
+                    oContributors = CharacterController.getContributors(FeatureController.getFeature(channel));
+                    Object.keys(oContributors).forEach(function (sContributor) {
+                        sInvestigationString +='<br>' + sContributor + ': ' + oContributors[sContributor];
+                    });
+                    if (sInvestigationString === "") {
+                        sInvestigationString = "<br>Nothing contributing to " + channel + " score."
+                    } else {
+                        sInvestigationString = "<br>Contributions to " + channel + " score:" + sInvestigationString;
+                    }
+                    document.getElementById("feed").innerHTML+=sInvestigationString;
+                }
+            });
         });
         
         document.getElementById("send").addEventListener('click', function() {

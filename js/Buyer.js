@@ -21,7 +21,7 @@ function Buyer(oConfig) {
     this.isLegalBuy = oConfig.isLegalBuy;
         
     this.makeBuy = function (oDesiredPurchase) {
-        this.options.forEach(function (sOptionName) {
+        Object.keys(this.options).forEach(function (sOptionName) {
             if (!oDesiredPurchase[sOptionName]) {
                 if (!CharacterController.getDisplay(this.options[sOptionName])) {
                     oDesiredPurchase[sOptionName] = this.defaultBuy[sOptionName];

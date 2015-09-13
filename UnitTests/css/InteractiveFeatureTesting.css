@@ -27,6 +27,7 @@
 #feed{
     background-color: black;
     color: greenyellow;
-    min-height: 200px;
+    height: 200px;
     width: 700px;
+    overflow: auto;
 }

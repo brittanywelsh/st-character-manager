@@ -4,13 +4,13 @@ var FeatureController = (function () {
     "use strict";
     
     var privateGetScore = function (fFeature) {
+        //console.log("FeatureController.getScore called on", fFeature.name);
         var nSum = 0,
             oContributors = CharacterController.getContributors(fFeature);
-        console.log(oContributors);
         
-        fFeature.dependentOnFeatures.forEach(
+        Object.keys(fFeature.dependentOnFeatures).forEach(
             function (sFeatureName) {
-                nSum += CharacterController.getDisplay(sFeatureName);
+                nSum += CharacterController.getDisplay(fFeature.dependentOnFeatures[sFeatureName]);
             }
         );
         if (fFeature.dependenciesOnly === true) {
@@ -26,7 +26,9 @@ var FeatureController = (function () {
     },
     
         publicGetDisplay = function (fFeature) {
-            var nScore = privateGetScore(fFeature),
+            //console.log("FeatureController.getDisplay called on argument", fFeature.name);
+
+            var nScore = privateGetScore(fFeature),//
                 vDisplay;
             
             if (!fFeature.displayTable) {
@@ -42,9 +44,11 @@ var FeatureController = (function () {
         },
         
         publicUpdate = function (fFeature, sOrigin) {
-            var oldDisplay = CharacterController.getDisplay(fFeature),
-                newDisplay = publicGetDisplay(fFeature);
-            
+            //console.log("FeatureController.update called on arguments", fFeature.name);
+
+            var oldDisplay = CharacterController.getDisplay(fFeature),//undefined
+                newDisplay = publicGetDisplay(fFeature);//
+                        
             if (typeof sOrigin !== 'string') {
                 sOrigin = "update";
             }
@@ -64,6 +68,7 @@ var FeatureController = (function () {
                 if (fFeature.contributions[newDisplay]) {
                     fFeature.contributions[newDisplay].forEach(
                         function (sInstructionLabel) {
+                            //console.log("Instructions are being passed!");
                             var oInstruction = fFeature.contributions[newDisplay][sInstructionLabel];
                             pubsub.publish(oInstruction.channel, oInstruction);
                         }
@@ -72,7 +77,9 @@ var FeatureController = (function () {
             }
         },
         publicGetFeature = function (sFeatureName) {
-            return Game.Features[sFeatureName];
+            //console.log("FeatureController.getFeature called on", sFeatureName);
+
+            return Game.Features[sFeatureName];//Make this internal
         };
     
     return {

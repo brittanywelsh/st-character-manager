@@ -150,12 +150,13 @@ AttributeList.forEach(function (sAttributeName) {
             containerName: 'Attributes'
         }
     ),
-        
-        fNewAttributeModifier = new Feature(
+        dependencies = {};
+    dependencies[sAttributeName] = fNewAttribute;
+    var fNewAttributeModifier = new Feature(
             {
                 name: sAttributeName + 'Modifier',
                 containerName: 'AttributeModifiers',
-                dependentOnFeatures: [fNewAttribute],
+                dependentOnFeatures: dependencies,
                 displayTable: AttributeModifierDisplayTable
             }
         );
@@ -192,7 +193,7 @@ AttributeList.forEach(function (sAttributeName) {
     });
     pubsub.subscribe(sAttributeName + 'Modifier', function (channel, data) {
         if (data.keyword === "update") {
-            document.getElementById(sAttributeName + 'Modifier' + 'Score').innerHTML = data.value;
+            document.getElementById(sAttributeName + 'Modifier').innerHTML = data.value;
         }
     });
 });

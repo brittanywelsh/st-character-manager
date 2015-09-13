@@ -35,7 +35,7 @@ var BaseAttributeBuyer = new Buyer({
             nDisplay,
             nSum = 0;
         
-        this.options.forEach(function (sOptionName) {
+        Object.keys(this.options).forEach(function (sOptionName) {
             nDisplay = oDesiredPurchase[sOptionName] ||
                 CharacterController.getDisplay[sOptionName];
             if (nDisplay < this.min || nDisplay > this.max) {

@@ -99,7 +99,7 @@
                         sInvestigationString = "<br>Contributions to " + channel + " score:" + sInvestigationString;
                     }
                     document.getElementById("feed").innerHTML+=sInvestigationString;
-                    document.getElementById("feed").scrollIntoView(false);
+                    document.getElementById("feed").scrollTop = feed.scrollHeight;
                 }
             });
         });

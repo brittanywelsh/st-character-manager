@@ -105,6 +105,21 @@
         });
         
         BaseAttributeBuyer.makeBuy({});
+        
+        pubsub.subscribe("Game Logic Errors", function (channel, error) {
+            var message;
+            
+            if (error.message) {
+                message = error.message;
+            } else if (typeof error === 'string') {
+                message = error;
+            } else {
+                console.log(error);
+                alert("Got a strange error-something.  Check the console.");
+            }
+            feed.innerHTML += '<br>Game Logic Error:<font color=white>' + message;
+            document.getElementById("feed").scrollTop = feed.scrollHeight;
+        });
 
                 
         document.getElementById("send").addEventListener('click', function() {

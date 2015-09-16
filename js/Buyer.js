@@ -15,7 +15,7 @@ function Buyer(oConfig) {
      *
     */
 
-    
+    this.name = oConfig.name;
     this.options = oConfig.options;//object of features
     this.origin = oConfig.origin;
     this.defaultBuy = oConfig.defaultBuy || {};

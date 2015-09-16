@@ -1,4 +1,5 @@
-/*global Game, Buyer, CharacterController, pubsub, oAttributeBuyerOptions*/
+/*global Game, Buyer, CharacterController, pubsub, oAttributeBuyerOptions,
+FeatureController, console*/
 
 //Game.
 var BaseAttributeBuyer = new Buyer({
@@ -35,14 +36,21 @@ var BaseAttributeBuyer = new Buyer({
             max = 18,
             nDisplay,
             nSum = 0,
-            self = this;
+            self = this,
+            lOptionsList = Object.keys(this.options),
+            nIndex,
+            sOptionName,
+            messageEnd;
 
-        Object.keys(this.options).forEach(function (sOptionName) {
+        //Object.keys(this.options).forEach(function (sOptionName) {
+        for (nIndex = 0; nIndex < lOptionsList.length; nIndex += 1) {
+            sOptionName = lOptionsList[nIndex];
             nDisplay = oDesiredPurchase[sOptionName] ||
                 CharacterController.getDisplay(FeatureController.getFeature(sOptionName)) ||
                 self.defaultBuy[sOptionName];
             if (nDisplay < min || nDisplay > max) {
-                var messageEnd = (nDisplay > max) ? 'high.' : 'low.';
+                console.log(nDisplay > max, max);
+                messageEnd = (nDisplay > max) ? 'high.' : 'low.';
                 pubsub.publish('Game Logic Errors',
                         self.name + ': tried to buy ' + nDisplay + ' for ' +//
                         sOptionName + '. This is too ' + messageEnd);
@@ -50,9 +58,9 @@ var BaseAttributeBuyer = new Buyer({
             } else {
                 nSum += costs[nDisplay];
             }
-        });
+        }
         if (nSum > wallet) {
-            pubsub.publish('Game Logic Errors', 'Base Attribute Buyer: purchase failed due to insufficient funds.');
+            pubsub.publish('Game Logic Errors', this.name + ': purchase failed due to insufficient funds.');
         }
         return (nSum <= wallet);
     }

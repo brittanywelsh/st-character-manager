@@ -3,6 +3,10 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## Sept 9, 2015 (MIKE)
+- Created a new branch of the project, FeatureBranch, where I'm testing a few
+ideas.
+
 ## Sept 5, 2015 (MIKE)
 - Implemented (get/increment)baseAttributeScore methods in the character 
 controller module.  This does not accord with our previous discussion regarding

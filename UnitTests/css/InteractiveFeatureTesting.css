@@ -1,0 +1,33 @@
+.display{
+    padding: 10px;
+    border: 1px solid black;
+    /*width: 200px;*/
+    float: left;
+    /*width: 16.665%;*/
+}
+.outputs{
+    display:table-row;
+    background-color: antiquewhite;
+}
+.inputs{
+    float: left
+}
+#STRdiv{
+    background-color: red;
+}
+#INTdiv{
+    background-color: green;
+}
+#DEXdiv{
+    background-color: skyblue
+}
+#pubDisplay{
+    display: table-row;
+}
+#feed{
+    background-color: black;
+    color: greenyellow;
+    height: 200px;
+    width: 700px;
+    overflow: auto;
+}

@@ -13,7 +13,9 @@ var pubsub = {};
     // with a specific topic name and arguments
     // such as the data to pass along
     myObject.publish = function( topic, args ) {
- 
+
+        console.log(topic, args);
+
         if ( !topics[topic] ) {
             return false;
         }
@@ -62,4 +64,5 @@ var pubsub = {};
         }
         return this;
     };
+
 }( pubsub ));

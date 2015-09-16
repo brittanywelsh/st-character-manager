@@ -1,25 +1,32 @@
-var Character = function(sName,nLevel,sGender,sAlignment) {
+/*global CharacterFeature */
 
-  this.Level = nLevel || 1;
+var Character = function (sName, nLevel, sGender, sAlignment) {
+    "use strict";
 
-  // Personal Info
-  this.Name = sName || "New Character";
-  this.Gender = sGender || "Queer";
-  this.Alignment = sAlignment || "Neutral";
+    this.Level = nLevel || 1;
 
-  // Rule-Based Data
-  this.Stats = new Object();
-  this.Attributes = new Object();
-  this.Skills = new Object();
-  this.Race = new Object();
-  this.Schools = new Object();
-  this.Feats = new Object();
+    // Personal Info
+    this.Name = sName || "New Character";
+    this.Gender = sGender || "Queer";
+    this.Alignment = sAlignment || "Neutral";
 
-  // Independent Data
-  this.Abilities = new Object();
-  this.Proficiencies = new Object(); 
-  this.Resistance = new Object();
-  this.CombatNotes = new Object();
-  //this.Items -- for adding in future?
+    // Rule-Based Data || Trait containers
+    this.Stats = {};
+    this.Attributes = {};
+    this.AttributeModifiers = {};
+    this.Skills = {};
+    this.Race = {};
+    this.Schools = {};
+    this.Feats = {};
 
-}
+    // Independent Data || External feature containers
+    this.Abilities = {};
+    this.Proficiencies = {};
+    this.Resistance = {};
+    this.CombatNotes = {};
+    //this.Items -- for adding in future?
+
+    //
+    this.OtherBuys = {};
+    this.OtherChoices = {};
+};

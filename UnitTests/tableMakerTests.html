@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <script src="tableMakerTests.js"></script>
+</head>
+<body>
+    
+    <table id="test" border="1"></table>
+
+    <script>
+        var myTable = document.createElement('table');
+        myTable.border = "1";
+        document.body.appendChild(myTable);
+        setViewBinRowSpan(viewStructure);
+        altTableMaker(viewStructure, {table: myTable});
+    </script>
+
+</body>
+</html>

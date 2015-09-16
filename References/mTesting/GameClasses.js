@@ -53,7 +53,7 @@ Game.Classes = {
 	Macabre: new Class({
 		Name: "Macabre",
 		PrimaryAttribute: "DEX",
-		ClassStats: {SkillsPerLevel: 1, Attack: 1, Reflex: 1, Mutations: 1}, 
+		ClassStats: {SkillsPerLevel: 1, Attack: 1, Reflexes: 1, Mutations: 1}, 
 		ClassSkills: {Dodge: 1, SleightOfHand: 3},
 		ClassProficiencies: {Knives: 1, Daggers: 1} 
 	}),

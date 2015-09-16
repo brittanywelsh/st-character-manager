@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ugly Implementation Test Front</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/InteractiveFeatureTesting.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    
+    <script src="../js/tableMaker.js"></script>
+    
+    <script src="../js/pubsub.js"></script>
+    
+    <script src="../js/Character.js"></script>
+    <script src="../js/CharacterController.js"></script>
+    
+    <script src="../js/Feature.js"></script>
+    <script src="../js/Buyer.js"></script>
+    <script src="../js/setupListeners.js"></script>
+    <script src="../js/UglyImplementation.js"></script>
+    <script src="../js/FeatureController.js"></script>
+    <script src="../js/BaseAttributeBuyer.js"></script>
+</head>
+<body>
+    <table id="attributeTable" border = "1"></table>
+    <div id="pubDisplay">
+    <div id="channelDiv" class="inputs">
+        <select id="channel">
+            <option value="none" disabled>Choose a channel</option>
+        </select>
+    </div>
+    <div id="keywordDiv" class="inputs">
+        <select id="keyword">
+            <option value="none" selected disabled>Select keyword</option>
+        </input>
+    </div>
+    <div id="targetDiv" class="inputs">
+            <input id="target" form="text" value="target"></input>
+    </div>
+    <div id="valueDiv" class="inputs">
+        <input  id="value" form="text" value="value"></input>
+    </div>
+    <div id="originDiv" class="inputs">
+        <input id="origin" form="text" value="origin"></input>
+    </div>
+    </div>
+    <div class="buttonContainer"><button id="send" value="send">Publish</button></div>
+    <div id="feed">Publication feed:</div>
+
+    <script>
+        function publishToFeed(channel, data) {
+            var sDataString = "";
+            if (data.keyword === "investigate") return;
+            Object.keys(data).forEach(function (sPropertyName) {
+                sDataString += " " + sPropertyName + ': <font color="white">' + data[sPropertyName] + '</font>';
+            });
+            feed.innerHTML = feed.innerHTML + '<br>channel: <font color="white">' + channel + "</font>. data: " + sDataString;
+            document.getElementById("feed").scrollTop = feed.scrollHeight;
+        }
+
+
+        var myTable = document.getElementById('attributeTable');
+        altTableMaker(viewStructure, {table: myTable});
+        
+        var keywordList = [
+                "add",
+                "remove",
+                "update",
+                "investigate"
+                ];
+        keywordList.forEach(function (sKeywordName) {
+            var oNewOption = document.createElement("option");
+            oNewOption.innerHTML = sKeywordName;
+            oNewOption.value = sKeywordName;
+            document.getElementById("keyword").appendChild(oNewOption);
+        });
+        AttributeList.forEach(function (sAttributeName) {
+            var oNewOption = document.createElement('option');
+            
+            oNewOption.innerHTML = sAttributeName;
+            oNewOption.value = sAttributeName;
+            document.getElementById("channel").appendChild(oNewOption);
+            
+            pubsub.subscribe(sAttributeName, publishToFeed);
+            pubsub.subscribe(sAttributeName, function(channel, data) {
+                "use strict";
+                var sInvestigationString = "",
+                    oContributors;
+                if (data.keyword === "investigate") {
+                    oContributors = CharacterController.getContributors(FeatureController.getFeature(channel));
+                    Object.keys(oContributors).forEach(function (sContributor) {
+                        sInvestigationString +='<br>' + sContributor + ': ' + oContributors[sContributor];
+                    });
+                    if (sInvestigationString === "") {
+                        sInvestigationString = "<br>Nothing contributing to " + channel + " score."
+                    } else {
+                        sInvestigationString = "<br>Contributions to " + channel + " score:" + sInvestigationString;
+                    }
+                    document.getElementById("feed").innerHTML+=sInvestigationString;
+                    document.getElementById("feed").scrollIntoView(false);
+                }
+            });
+        });
+        
+        BaseAttributeBuyer.makeBuy({});
+
+                
+        document.getElementById("send").addEventListener('click', function() {
+        var channel = document.getElementById('channel').value,
+            keyword = document.getElementById('keyword').value,
+            target = document.getElementById('target').value,
+            value = Number(document.getElementById('value').value),
+            origin = document.getElementById('origin').value,
+            data;
+            if (keyword === 'add' || keyword === 'remove') {
+                target = channel;
+            }
+            data = {keyword: keyword, target: target, value: value, origin: origin};
+        if (channel === "none") {
+                alert("Choose a channel.");
+                return;
+            }
+        if (keyword === "none") {
+            alert("Choose a keyword.");
+            return;
+        }
+        pubsub.publish(channel, data);
+    });
+    </script>
+</body>
+</html>

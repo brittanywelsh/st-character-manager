@@ -3,6 +3,15 @@
 This log is a tool for the collaborators to make notes, expand on details for
 various commits, and track progress.
 
+## Sept 15, 2015 (MIKE)
+- FeatureBranch has been merged with master.  Each 'feature' of the character
+is now a 'Feature', and each Feature has a corresponding bin on the character
+object.  The Feature object keeps track of what the feature's value is based
+on known dependencies, and the bin on the character keeps track of other
+contributors and their values.  The idea here is that, once fully implemented
+adding house rules or making this system useable for another RPG will involve
+a simple, if prolonged, act of data entry.
+
 ## Sept 9, 2015 (MIKE)
 - Created a new branch of the project, FeatureBranch, where I'm testing a few
 ideas.

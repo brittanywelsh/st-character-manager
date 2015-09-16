@@ -1,4 +1,4 @@
-/*global Feature, CharacterController, publish */
+/*global Feature, CharacterController, pubsub */
 
 function Buyer(oConfig) {
     "use strict";
@@ -16,28 +16,30 @@ function Buyer(oConfig) {
     */
 
     
-    this.options = oConfig.options;//listOfFeatures
+    this.options = oConfig.options;//object of features
+    this.origin = oConfig.origin;
     this.defaultBuy = oConfig.defaultBuy || {};
     this.isLegalBuy = oConfig.isLegalBuy;
         
     this.makeBuy = function (oDesiredPurchase) {
+        var self = this;
         Object.keys(this.options).forEach(function (sOptionName) {
             if (!oDesiredPurchase[sOptionName]) {
-                if (!CharacterController.getDisplay(this.options[sOptionName])) {
-                    oDesiredPurchase[sOptionName] = this.defaultBuy[sOptionName];
+                if (!CharacterController.getDisplay(self.options[sOptionName])) {
+                    oDesiredPurchase[sOptionName] = self.defaultBuy[sOptionName];
                 } else {
-                    oDesiredPurchase[sOptionName] = CharacterController.getDisplay(this.options[sOptionName]);
+                    oDesiredPurchase[sOptionName] = CharacterController.getDisplay(self.options[sOptionName]);
                 }
             }
         });
 
         if (this.isLegalBuy(oDesiredPurchase)) {
             Object.keys(oDesiredPurchase).forEach(function (sOptionName) {
-                publish(sOptionName, {
+                pubsub.publish(sOptionName, {
                     keyword: "add",
                     target: sOptionName,
                     value: oDesiredPurchase[sOptionName],
-                    origin: this.name
+                    origin: self.origin + sOptionName
                 });
             });
         }

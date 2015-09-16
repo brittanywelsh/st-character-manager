@@ -6,6 +6,9 @@
     
     <link rel="stylesheet" type="text/css" href="css/InteractiveFeatureTesting.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    
     <script src="../js/tableMaker.js"></script>
     
     <script src="../js/pubsub.js"></script>
@@ -54,8 +57,10 @@
                 sDataString += " " + sPropertyName + ': <font color="white">' + data[sPropertyName] + '</font>';
             });
             feed.innerHTML = feed.innerHTML + '<br>channel: <font color="white">' + channel + "</font>. data: " + sDataString;
+            document.getElementById("feed").scrollTop = feed.scrollHeight;
         }
-        
+
+
         var myTable = document.getElementById('attributeTable');
         altTableMaker(viewStructure, {table: myTable});
         
@@ -94,10 +99,14 @@
                         sInvestigationString = "<br>Contributions to " + channel + " score:" + sInvestigationString;
                     }
                     document.getElementById("feed").innerHTML+=sInvestigationString;
+                    document.getElementById("feed").scrollIntoView(false);
                 }
             });
         });
         
+        BaseAttributeBuyer.makeBuy({});
+
+                
         document.getElementById("send").addEventListener('click', function() {
         var channel = document.getElementById('channel').value,
             keyword = document.getElementById('keyword').value,

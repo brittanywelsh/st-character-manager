@@ -80,7 +80,7 @@ var CharacterController = (function () {
             sCategoryName = fFeature.containerName;
         if (!cCurrentCharacter[sCategoryName][fFeature.name]) {
             cCurrentCharacter[sCategoryName][fFeature.name] = {
-                display: 0,//This will be problematic at some point
+                display: undefined,
                 contributors: {}
             };
         }

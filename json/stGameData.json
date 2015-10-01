@@ -1,0 +1,216 @@
+{
+    "GameData": {
+        "Features": {
+            "AttributePattern": {
+                "Base #": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Purchase",
+                    "Buyer": "BaseAttributeBuyer"
+                },
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computation",
+                    "DependsOn": ["Base#"],
+                    "Computation": "Sum"
+                },
+                "# Modifier": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computation",
+                    "DependsOn": ["#"],
+                    "Computation": "MinusConstantHalfRoundedDown",
+                    "ComputationConstant": 10
+                },
+                "Names": [
+                    "Strength",
+                    "Intelligence",
+                    "Dexterity",
+                    "Constitution",
+                    "Wisdom",
+                    "Charisma"
+                    ]
+            },
+            "Race": {
+                "DisplayType": "String",
+                "DeterminedBy": "Choice",
+                "Selector": "RaceSelector"
+            },
+            "Schools": {
+                "DisplayType": "Object",
+                "DeterminedBy": "Choice",
+                "Selector": "SchoolSelector"
+            },
+            "Feats": {
+                "DisplayType": "String",
+                "DeterminedBy": "Orders"
+            },
+            "HitDice": {
+                "DisplayType": "String",
+                "DeterminedBy": "Computed",
+                "Computation": "SumAndLookupList",
+                "LookupTable": ["D6", "D8", "D10", "D12"]
+            },
+            "BaseStatsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computed",
+                    "Computation": "Sum"
+                },
+                "Names": [
+                    "Skills per level",
+                    "Base Attack",
+                    "Base Defence",
+                    "Base Initiative",
+                    "Charges",
+                    "Base Mutations",
+                    "Base Will",
+                    "Base Fortitude",
+                    "Base Reflex"
+                    ]
+            },
+            "Proficiencies": {
+                "DisplayType": "Object",
+                "DeterminedBy": "Orders"
+            },
+            "STRSkillsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computated",
+                    "DependsOn": "Strength Modifier",
+                    "Computation": "Sum"
+                },
+                "Names": [
+                    "Intimidate",
+                    "Climb",
+                    "Swim"
+                ]
+            },
+            "INTSkillsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computated",
+                    "DependsOn": "Intelligence Modifier",
+                    "Computation": "Sum"
+                },
+                "Names": [
+                    "Science",
+                    "Biotech",
+                    "Cybertech",
+                    "Politics",
+                    "Astrography",
+                    "Engineering",
+                    "Nature",
+                    "History",
+                    "Appraise",
+                    "Disable Device",
+                    "Hacking",
+                    "Repair"
+                ]
+            },
+            "DEXSkillsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computated",
+                    "DependsOn": "Dexterity Modifier",
+                    "Computation": "Sum"
+                },
+                "Names": [
+                    "Slight of hand",
+                    "Acrobatics",
+                    "Drive",
+                    "Fly",
+                    "Stealth",
+                    "Zero G",
+                    "Escape Artist"
+                ]
+            },
+            "WISSkillsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computated",
+                    "DependsOn": "Wisdom Modifier",
+                    "Computation": "Sum"
+                },
+                "Names": [
+                    "Sense Motive",
+                    "Handle Animal",
+                    "Medical",
+                    "Perception",
+                    "Survival"
+                ]
+            },
+            "CHASkillsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computated",
+                    "DependsOn": "Charisma Modifier",
+                    "Computation": "Sum"
+                },
+                "Names": [
+                    "Bluff",
+                    "Diplomacy",
+                    "Disguise"
+                ]
+            },
+            "Movement": {
+                "Display": "Number",
+                "DeterminedBy": "DefaultOrOrders",
+                "Default": 6
+            },
+            "STRStatsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computation",
+                    "DependsOn": ["Base #", "Strength Modifier"],
+                    "Compuatation": "Sum"
+                },
+                "Names": [
+                    "*Melee* Attack",
+                    "*CMB* @Attack@"
+                    ]
+            },
+            "DEXStatsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computation",
+                    "DependsOn": ["Base #", "Dexterity Modifier"],
+                    "Compuatation": "Sum"
+                },
+                "Names": [
+                    "Initiative",
+                    "*Ranged* Attack",
+                    "Defence",
+                    "*Dodge* @Defence@",
+                    "Reflex"
+                    ]
+            },
+            "CONStatsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computation",
+                    "DependsOn": ["Base #", "Constutution Modifier"],
+                    "Compuatation": "Sum"
+                },
+                "Names": [
+                    "Fortitude"
+                    ]
+            },
+            "WISStatsPattern": {
+                "#": {
+                    "DisplayType": "Number",
+                    "DeterminedBy": "Computation",
+                    "DependsOn": ["Base #", "Dexterity Modifier"],
+                    "Compuatation": "Sum"
+                },
+                "Names": [
+                    "Will"
+                    ]
+            },
+            "CMD": {
+                "DisplayType": "Number",
+                "DeterminedBy": "Computation",
+                "DependsOn": ["Base Attack", "Strength Modifier", "Dexterity Modifier"],
+                "Computation": "Sum"
+            }
+        }
+    }
+}
